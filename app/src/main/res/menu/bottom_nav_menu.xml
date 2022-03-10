@@ -9,16 +9,16 @@
         android:title="Search"
         android:icon="@drawable/search_icons"/>
 
-    <item android:id="@+id/miChat"
-        android:title="Chat Room"
-        android:icon="@drawable/chat_icons"/>
+    <item android:id="@+id/miadd"
+        android:icon="@drawable/add_icons"
+        android:title="Add" />
+
+    <item android:id="@+id/miNotifications"
+        android:title="Notifications"
+        android:icon="@drawable/notifications"/>
 
     <item android:id="@+id/miProfile"
         android:title="Profile"
         android:icon="@drawable/profile_icons"/>
-
-    <item android:id="@+id/miadd"
-        android:icon="@drawable/add_icons"
-        android:title="Add" />
 
 </menu>

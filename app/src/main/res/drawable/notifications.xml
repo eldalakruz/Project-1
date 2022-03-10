@@ -3,10 +3,11 @@
 
     <item
         android:state_checked="true"
-        android:drawable="@drawable/iconchat"/>
+        android:drawable="@drawable/iconnotifications"/>
 
     <item
         android:state_checked="false"
-        android:drawable="@drawable/iconchat_clicked"/>
+        android:drawable="@drawable/iconnotifications_clicked"/>
+
 
 </selector>

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val homeFragment = HomeFragment()
-        val chatFragment = ChatFragment()
+        val notificationsFragment = NotificationsFragment()
         val addFragment = AddFragment()
         val profileFragment = ProfileFragment()
         val searchFragment = SearchFragment()
@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.miHome ->{
                     setThatFragment(homeFragment)
                 }
-                R.id.miChat ->{
-                    setThatFragment(chatFragment)
+                R.id.miNotifications ->{
+                    setThatFragment(notificationsFragment)
                 }
                 R.id.miadd ->{
                     setThatFragment(addFragment)
