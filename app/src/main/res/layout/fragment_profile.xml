@@ -22,15 +22,15 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/profile_fragment_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/profile_fragment_username"
-                    android:text="username"
-                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
                     android:maxLines="1"
-                    android:textStyle="bold"
+                    android:text="username"
                     android:textColor="@color/black"
-                    android:layout_centerVertical="true"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/options_view"
