@@ -62,10 +62,10 @@ class SignUpActivity : AppCompatActivity() {
         val passwordSignUp = passwordsignup.text.toString()
 
         when{
-            TextUtils.isEmpty(fullName) -> Toast.makeText(this,"Full Name is required",Toast.LENGTH_LONG)
-            TextUtils.isEmpty(userName) -> Toast.makeText(this,"User Name is required",Toast.LENGTH_LONG)
-            TextUtils.isEmpty(emailSignUp) -> Toast.makeText(this,"Email is required",Toast.LENGTH_LONG)
-            TextUtils.isEmpty(passwordSignUp) -> Toast.makeText(this,"Password is required",Toast.LENGTH_LONG)
+            TextUtils.isEmpty(fullName) -> Toast.makeText(this,"Full Name is required",Toast.LENGTH_LONG).show()
+            TextUtils.isEmpty(userName) -> Toast.makeText(this,"User Name is required",Toast.LENGTH_LONG).show()
+            TextUtils.isEmpty(emailSignUp) -> Toast.makeText(this,"Email is required",Toast.LENGTH_LONG).show()
+            TextUtils.isEmpty(passwordSignUp) -> Toast.makeText(this,"Password is required",Toast.LENGTH_LONG).show()
 
             else -> {
                 val progressDialog = ProgressDialog(this@SignUpActivity)
@@ -129,15 +129,13 @@ class SignUpActivity : AppCompatActivity() {
                     Log.w(TAG," A_LOG  i am in IF case")
 
                     progressDialog.dismiss()
-                    Toast.makeText(this,"Account has been created successfully.",Toast.LENGTH_LONG)
+                    Toast.makeText(this,"Account has been created successfully.",Toast.LENGTH_LONG).show()
 
 
                     FirebaseDatabase.getInstance().reference
                         .child("Follow").child(currentUserID)
                         .child("Following").child(currentUserID)
                         .setValue(true)
-
-
 
                     val intent = Intent(this@SignUpActivity, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

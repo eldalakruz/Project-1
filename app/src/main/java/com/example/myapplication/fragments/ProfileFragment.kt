@@ -197,12 +197,8 @@ class ProfileFragment : Fragment() {
 
         usersRef.addValueEventListener(object : ValueEventListener
         {
-            override fun onDataChange(snapshot: DataSnapshot) {
-//                if (context != null)
-//                {
-//                    return
-//                }
-
+            override fun onDataChange(snapshot: DataSnapshot)
+            {
                 if (snapshot.exists())
                 {
                     val user = snapshot.getValue<User>(User::class.java)
