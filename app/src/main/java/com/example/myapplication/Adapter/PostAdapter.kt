@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
@@ -40,6 +41,13 @@ class PostAdapter(private val mContext: Context,
         var comment: TextView
 
 
+        //
+        var tvquestion : TextView
+        var tvoption1 : TextView
+        var tvoption2 : TextView
+        //
+
+
         init {
             profileImage = itemView.findViewById(R.id.user_profile_image_post)
             postImage =  itemView.findViewById(R.id.post_image_home)
@@ -51,6 +59,12 @@ class PostAdapter(private val mContext: Context,
             publisher = itemView.findViewById(R.id.publisher)
             description = itemView.findViewById(R.id.description)
             comment = itemView.findViewById(R.id.comments)
+
+            //
+            tvquestion = itemView.findViewById(R.id.tv_question)
+            tvoption1 = itemView.findViewById(R.id.tv_option1)
+            tvoption2 = itemView.findViewById(R.id.tv_option2)
+            //
         }
     }
 

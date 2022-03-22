@@ -31,12 +31,25 @@ class AddPostActivity : AppCompatActivity() {
     private lateinit var imagepost: ImageView
     private lateinit var descriptionpost: EditText
 
+    //
+    private lateinit var pollquestion : EditText
+    private lateinit var contestantone : EditText
+    private lateinit var contestanttwo : EditText
+    //
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
 
         descriptionpost = findViewById(R.id.description_post)
         savenewpostbtn = findViewById(R.id.save_new_post_btn)
+
+        //
+        pollquestion = findViewById(R.id.poll_question)
+        contestantone = findViewById(R.id.contestant_one)
+        contestanttwo = findViewById(R.id.contestant_two)
+        //
 
         storagePostPicRef = FirebaseStorage.getInstance().reference.child("posts Pictures")
 
@@ -53,6 +66,11 @@ class AddPostActivity : AppCompatActivity() {
         imageUri == null -> Toast.makeText(this,"Please select image first.", Toast.LENGTH_LONG).show()
         TextUtils.isEmpty(descriptionpost.text.toString()) -> Toast.makeText(this, "please write full name first", Toast.LENGTH_LONG).show()
 
+        //
+        TextUtils.isEmpty(pollquestion.text.toString()) -> Toast.makeText(this, "please write full name first", Toast.LENGTH_LONG).show()
+        TextUtils.isEmpty(contestantone.text.toString()) -> Toast.makeText(this, "please write full name first", Toast.LENGTH_LONG).show()
+        TextUtils.isEmpty(contestanttwo.text.toString()) -> Toast.makeText(this, "please write full name first", Toast.LENGTH_LONG).show()
+        //
         else -> {
 
             val progressDialog = ProgressDialog(this)
@@ -89,6 +107,12 @@ class AddPostActivity : AppCompatActivity() {
                         postMap["description"] = descriptionpost.text.toString().toLowerCase()
                         postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
                         postMap["postimage"] = myUrl
+
+                        //
+                        postMap["pollquestion"] = pollquestion.text.toString().toLowerCase()
+                        postMap["contestantone"] = contestantone.text.toString().toLowerCase()
+                        postMap["contestanttwo"] = contestanttwo.text.toString().toLowerCase()
+                        //
 
                         ref.child(postId).updateChildren(postMap)
 

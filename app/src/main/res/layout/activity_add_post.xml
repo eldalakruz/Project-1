@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".AddPostActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -62,8 +62,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:hint="say anything about your post...."
+            android:hint="Say Anything About Your Poll...."
             android:maxLines="6" />
+
+        <EditText
+            android:id="@+id/poll_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Polling_Question....."
+            android:maxLines="2" />
+        <EditText
+            android:id="@+id/contestant_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Contestant One Name..." />
+        <EditText
+            android:id="@+id/contestant_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Contestant Two Name..."/>
 
     </LinearLayout>
 
