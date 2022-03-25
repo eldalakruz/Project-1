@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.CommentsActivity
+import com.example.myapplication.MainActivity
 import com.example.myapplication.Model.Post
 import com.example.myapplication.Model.User
 import com.example.myapplication.R
@@ -38,14 +41,13 @@ class PostAdapter(private val mContext: Context,
         var likes: TextView
         var publisher: TextView
         var description: TextView
-        var comment: TextView
+        var comments: TextView
 
 
-        //
-        var tvquestion : TextView
-        var tvoption1 : TextView
-        var tvoption2 : TextView
-        //
+        var pollquestion : TextView
+        var contestantone : TextView
+        var contestanttwo : TextView
+
 
 
         init {
@@ -58,13 +60,12 @@ class PostAdapter(private val mContext: Context,
             likes = itemView.findViewById(R.id.likes)
             publisher = itemView.findViewById(R.id.publisher)
             description = itemView.findViewById(R.id.description)
-            comment = itemView.findViewById(R.id.comments)
+            comments = itemView.findViewById(R.id.comments)
 
-            //
-            tvquestion = itemView.findViewById(R.id.tv_question)
-            tvoption1 = itemView.findViewById(R.id.tv_option1)
-            tvoption2 = itemView.findViewById(R.id.tv_option2)
-            //
+            pollquestion = itemView.findViewById(R.id.tv_question)
+            contestantone = itemView.findViewById(R.id.tv_option1)
+            contestanttwo = itemView.findViewById(R.id.tv_option2)
+
         }
     }
 
@@ -81,7 +82,189 @@ class PostAdapter(private val mContext: Context,
 
         Picasso.get().load(post.getPostimage()).into(holder.postImage)
 
+        //description
+        if (post.getDescription().equals(""))
+        {
+            holder.description.visibility = View.GONE
+
+        }
+        else
+        {
+            holder.description.visibility = View.VISIBLE
+            holder.description.setText(post.getDescription())
+        }
+
+//        // 1
+//        if (post.getTvoption1().equals(""))
+//        {
+//            holder.contestantone.visibility = View.GONE
+//
+//        }
+//        else
+//        {
+//            holder.contestantone.visibility = View.VISIBLE
+//            holder.contestantone.setText(post.getTvoption1())
+//        }
+//
+//        //2
+//        if (post.getTvoption2().equals(""))
+//        {
+//            holder.contestanttwo.visibility = View.GONE
+//
+//        }
+//        else
+//        {
+//            holder.contestanttwo.visibility = View.VISIBLE
+//            holder.contestanttwo.setText(post.getTvoption2())
+//        }
+//
+//        //3
+//        if (post.getTvquestion().equals(""))
+//        {
+//            holder.pollquestion.visibility = View.GONE
+//
+//        }
+//        else
+//        {
+//            holder.pollquestion.visibility = View.VISIBLE
+//            holder.pollquestion.setText(post.getTvquestion())
+//        }
+
+        //
+
+
         publisherInfo(holder.profileImage, holder.userName, holder.publisher, post.getPublisher())
+        isLikes(post.getPostid(), holder.likeButton)
+
+        numberOfLikes(holder.likes, post.getPostid())
+
+        getTotalComments(holder.comments, post.getPostid())
+
+        holder.likeButton.setOnClickListener {
+            if (holder.likeButton.tag == "Like")
+            {
+                FirebaseDatabase.getInstance().reference
+                    .child("Likes")
+                    .child(post.getPostid())
+                    .child(firebaseUser!!.uid)
+                    .setValue(true)
+            }
+            else
+            {
+                FirebaseDatabase.getInstance().reference
+                    .child("Likes")
+                    .child(post.getPostid())
+                    .child(firebaseUser!!.uid)
+                    .removeValue()
+
+
+                val intent = Intent(mContext, MainActivity::class.java)
+                mContext.startActivity(intent)
+            }
+        }
+
+        holder.commentButton.setOnClickListener {
+
+            val intentComment = Intent(mContext, CommentsActivity::class.java)
+            intentComment.putExtra("postId", post.getPostid())
+            intentComment.putExtra("publisherId", post.getPublisher())
+            mContext.startActivity(intentComment)
+        }
+
+
+        holder.comments.setOnClickListener {
+
+            val intentComment = Intent(mContext, CommentsActivity::class.java)
+            intentComment.putExtra("postId", post.getPostid())
+            intentComment.putExtra("publisherId", post.getPublisher())
+            mContext.startActivity(intentComment)
+        }
+
+
+
+
+
+
+    }
+
+    private fun numberOfLikes(likes: TextView, postid: String)
+    {
+     val LikesRef = FirebaseDatabase.getInstance().reference
+         .child("Likes").child(postid)
+
+        LikesRef.addValueEventListener(object : ValueEventListener
+        {
+            override fun onDataChange(pO: DataSnapshot) {
+                if (pO.exists())
+                {
+                    likes.text = pO.childrenCount.toString() + " likes"
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
+
+    private fun getTotalComments(comments: TextView, postid: String)
+    {
+        val commentsRef = FirebaseDatabase.getInstance().reference
+            .child("Comments").child(postid)
+
+        commentsRef.addValueEventListener(object : ValueEventListener
+        {
+            override fun onDataChange(pO: DataSnapshot) {
+                if (pO.exists())
+                {
+                    comments.text = "view all " + pO.childrenCount.toString() + " comments"
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
+
+
+
+
+
+    private fun isLikes(postid: String, likeButton: ImageView)
+    {
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+        val LikesRef = FirebaseDatabase.getInstance().reference
+            .child("Likes")
+            .child(postid)
+
+        LikesRef.addValueEventListener(object : ValueEventListener
+        {
+            override fun onDataChange(pO: DataSnapshot) {
+                if (pO.child(firebaseUser!!.uid).exists())
+                {
+                    likeButton.setImageResource(R.drawable.heart_clicked)
+                    likeButton.tag = "Liked"
+                }
+                else
+                {
+                    likeButton.setImageResource(R.drawable.heart_not_clicked)
+                    likeButton.tag = "Like"
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
     override fun getItemCount(): Int {
@@ -102,6 +285,7 @@ class PostAdapter(private val mContext: Context,
                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
                    userName.text = user!!.getUsername()
                    publisher.text = user!!.getFullname()
+
                }
             }
 
