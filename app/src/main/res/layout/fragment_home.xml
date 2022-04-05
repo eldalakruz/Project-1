@@ -24,9 +24,16 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:src="@drawable/ic_send"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="45dp"
+                    android:src="@drawable/iconadd" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_send" />
 
             </RelativeLayout>
 
@@ -39,8 +46,7 @@
         android:id="@+id/recycler_view_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar_layout"
-        tools:listitem="@layout/posts_layout">
+        android:layout_below="@+id/app_bar_layout">
 
     </androidx.recyclerview.widget.RecyclerView>
 

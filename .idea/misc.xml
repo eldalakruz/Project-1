@@ -28,20 +28,23 @@
         <entry key="..\:/Project-1.2/app/src/main/res/layout/activity_add_post.xml" value="0.25" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/activity_comments.xml" value="0.1675929884566054" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/activity_main.xml" value="0.1675929884566054" />
+        <entry key="..\:/Project-1.2/app/src/main/res/layout/activity_sheet_bottom_item.xml" value="0.1675929884566054" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/activity_sign_up.xml" value="0.20416666666666666" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/comments_item_layout.xml" value="0.25" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/fragment_add.xml" value="0.1675929884566054" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/fragment_chat.xml" value="0.20416666666666666" />
-        <entry key="..\:/Project-1.2/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Project-1.2/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/fragment_notifications.xml" value="0.20416666666666666" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/fragment_post_details.xml" value="0.1675929884566054" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/fragment_search.xml" value="0.2" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/images_item_layout.xml" value="0.1675929884566054" />
+        <entry key="..\:/Project-1.2/app/src/main/res/layout/item_bottom_sheet.xml" value="0.33" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/posts_layout.xml" value="0.25" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/user_item_layout.xml" value="0.25" />
         <entry key="..\:/Project-1.2/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-1.2/app/src/main/res/menu/home_page_tool_bar.xml" value="0.1675929884566054" />
       </map>
     </option>
   </component>

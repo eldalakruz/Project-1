@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SheetBottomItem"
+            android:exported="false" />
+        <activity
             android:name=".CommentsActivity"
             android:exported="false" />
         <activity

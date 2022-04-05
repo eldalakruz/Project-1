@@ -1,12 +1,19 @@
 package com.example.myapplication.Adapter
 
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.nfc.Tag
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
@@ -43,10 +50,15 @@ class PostAdapter(private val mContext: Context,
         var description: TextView
         var comments: TextView
 
-
         var pollquestion : TextView
         var contestantone : TextView
         var contestanttwo : TextView
+
+         var seekBar1 : SeekBar
+         var seekBar2 : SeekBar
+         var tvPercent1 : TextView
+         var tvPercent2 : TextView
+
 
 
 
@@ -66,7 +78,14 @@ class PostAdapter(private val mContext: Context,
             contestantone = itemView.findViewById(R.id.tv_option1)
             contestanttwo = itemView.findViewById(R.id.tv_option2)
 
+            seekBar1 = itemView.findViewById(R.id.seek_bar1)
+            seekBar2 = itemView.findViewById(R.id.seek_bar2)
+            tvPercent1 = itemView.findViewById(R.id.tv_percent1)
+            tvPercent2 = itemView.findViewById(R.id.tv_percent2)
+
+
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
@@ -75,6 +94,7 @@ class PostAdapter(private val mContext: Context,
         return  ViewHolder(view)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
@@ -94,50 +114,107 @@ class PostAdapter(private val mContext: Context,
             holder.description.setText(post.getDescription())
         }
 
-//        // 1
-//        if (post.getTvoption1().equals(""))
-//        {
-//            holder.contestantone.visibility = View.GONE
-//
-//        }
-//        else
-//        {
-//            holder.contestantone.visibility = View.VISIBLE
-//            holder.contestantone.setText(post.getTvoption1())
-//        }
-//
-//        //2
-//        if (post.getTvoption2().equals(""))
-//        {
-//            holder.contestanttwo.visibility = View.GONE
-//
-//        }
-//        else
-//        {
-//            holder.contestanttwo.visibility = View.VISIBLE
-//            holder.contestanttwo.setText(post.getTvoption2())
-//        }
-//
-//        //3
-//        if (post.getTvquestion().equals(""))
-//        {
-//            holder.pollquestion.visibility = View.GONE
-//
-//        }
-//        else
-//        {
-//            holder.pollquestion.visibility = View.VISIBLE
-//            holder.pollquestion.setText(post.getTvquestion())
-//        }
+        // 1
+       if (post.getPollquestion().equals(""))
+       {
+           holder.pollquestion.visibility = View.GONE
+
+        }
+       else
+      {
+            holder.pollquestion.visibility = View.VISIBLE
+            holder.pollquestion.setText(post.getPollquestion())
+       }
+
+        //2
+        if (post.getContestantone().equals(""))
+        {
+           holder.contestantone.visibility = View.GONE
+
+        }
+        else
+        {
+            holder.contestantone.visibility = View.VISIBLE
+            holder.contestantone.setText(post.getContestantone())
+        }
+
+        //3
+        if (post.getContestanttwo().equals(""))
+        {
+            holder.contestanttwo.visibility = View.GONE
+
+        }
+        else
+        {
+            holder.contestanttwo.visibility = View.VISIBLE
+            holder.contestanttwo.setText(post.getContestanttwo())
+        }
 
         //
-
-
         publisherInfo(holder.profileImage, holder.userName, holder.publisher, post.getPublisher())
         isLikes(post.getPostid(), holder.likeButton)
         numberOfLikes(holder.likes, post.getPostid())
         getTotalComments(holder.comments, post.getPostid())
         checkSavedStatus(post.getPostid(), holder.saveButton)
+        calculatePecent(holder.tvPercent1, holder.tvPercent2)
+
+        //
+
+//        holder.seekBar1.setOnTouchListener(object : View.OnTouchListener {
+//            override fun onTouch(v: View?) {Log.e(TAG,"seekbar 1")
+       // })
+        holder.contestantone.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+
+                var count1 = 1
+                var count2 = 1
+                var flag1 = true
+                var flag2 = true
+
+                Log.e(TAG,"seekbar 1 clicked")
+
+                if (flag2)
+                {
+                    // when flag two is true
+                    count1 = 1
+                    count2++
+                    flag1 = true
+                    flag2 = false
+
+                    // calculate percentage
+                    calculatePecent(holder.tvPercent1, holder.tvPercent2)
+                }
+            }
+        })
+
+        holder.seekBar2.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean { return  true }
+        })
+
+        holder.contestanttwo.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+
+                var count1 = 1
+                var count2 = 1
+                var flag1 = true
+                var flag2 = true
+
+                if (flag1)
+                {
+                    // when flag two is true
+                    count1++
+                    count2 = 1
+
+                    flag1 = false
+                    flag2 = true
+
+                    // calculate percentage
+                    calculatePecent(holder.tvPercent1, holder.tvPercent2)
+                }
+            }
+        })
+
+        //
 
         holder.likeButton.setOnClickListener {
             if (holder.likeButton.tag == "Like")
@@ -196,6 +273,27 @@ class PostAdapter(private val mContext: Context,
 
         }
 
+    }
+
+
+    private fun calculatePecent(tvPercent1 : TextView, tvPercent2 : TextView) {
+
+        var count1 = 1
+        var count2 = 1
+        // calculate total
+        val total = (count1 + count2).toDouble()
+
+        // Calculate percentage for all options
+        val percent1 = count1 / total * 100
+        val percent2 = count2 / total * 100
+
+        // set percent on text view
+        tvPercent1.text = String.format("%.0f%%", percent1)
+        // Set progress on seekbar
+         // seekBar1.progress = percent1.toInt()
+
+        tvPercent2.text = String.format("%.0f%%", percent2)
+        //   seekBar2.progress = percent2.toInt()
 
     }
 
@@ -211,13 +309,9 @@ class PostAdapter(private val mContext: Context,
                 {
                     likes.text = pO.childrenCount.toString() + " likes"
                 }
-
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
-
         })
     }
 
@@ -242,11 +336,8 @@ class PostAdapter(private val mContext: Context,
             }
 
         })
+
     }
-
-
-
-
 
 
     private fun isLikes(postid: String, likeButton: ImageView)
@@ -338,14 +429,6 @@ class PostAdapter(private val mContext: Context,
     }
 
 }
-
-
-
-
-
-
-
-
 
 
 
