@@ -1,17 +1,13 @@
 package com.example.myapplication.Adapter
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import android.nfc.Tag
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
@@ -24,18 +20,26 @@ import com.example.myapplication.Model.User
 import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class PostAdapter(private val mContext: Context,
+class PostAdapter(private val mContext: Context, 
                   private val mPost: List<Post>) : RecyclerView.Adapter<PostAdapter.ViewHolder>()
+
 
 {
     private var firebaseUser: FirebaseUser? = null
+
+    @SuppressLint("ClickableViewAccessibility")
+    private var count1 = 1
+    private var count2 = 1
+    private var flag1 = true
+    private var flag2 = true
+    lateinit var seekBar1 : SeekBar
+    lateinit var seekBar2 : SeekBar
+    lateinit var tvPercent1 : TextView
+    lateinit var tvPercent2 : TextView
 
     inner class  ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView)
     {
@@ -53,14 +57,6 @@ class PostAdapter(private val mContext: Context,
         var pollquestion : TextView
         var contestantone : TextView
         var contestanttwo : TextView
-
-         var seekBar1 : SeekBar
-         var seekBar2 : SeekBar
-         var tvPercent1 : TextView
-         var tvPercent2 : TextView
-
-
-
 
         init {
             profileImage = itemView.findViewById(R.id.user_profile_image_post)
@@ -83,37 +79,42 @@ class PostAdapter(private val mContext: Context,
             tvPercent1 = itemView.findViewById(R.id.tv_percent1)
             tvPercent2 = itemView.findViewById(R.id.tv_percent2)
 
-
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
     {
+        Log.e("PostAdapter","check 6")
         val view = LayoutInflater.from(mContext).inflate(R.layout.posts_layout, parent, false)
         return  ViewHolder(view)
+
+
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        Log.e("PostAdapter","check 7")
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
         val post = mPost[position]
 
         Picasso.get().load(post.getPostimage()).into(holder.postImage)
-
+        Log.e("PostAdapter","check 8")
         //description
         if (post.getDescription().equals(""))
         {
             holder.description.visibility = View.GONE
-
+            Log.e("PostAdapter","check 9")
         }
         else
         {
             holder.description.visibility = View.VISIBLE
             holder.description.setText(post.getDescription())
-        }
 
+            Log.e("PostAdapter","check 10")
+        }
         // 1
        if (post.getPollquestion().equals(""))
        {
@@ -151,111 +152,68 @@ class PostAdapter(private val mContext: Context,
         }
 
         //
+
+        Log.e("PostAdapter","check 10a")
         publisherInfo(holder.profileImage, holder.userName, holder.publisher, post.getPublisher())
+        Log.e("PostAdapter","check 10")
         isLikes(post.getPostid(), holder.likeButton)
+        Log.e("PostAdapter","check 11")
         numberOfLikes(holder.likes, post.getPostid())
+        Log.e("PostAdapter","check 12")
         getTotalComments(holder.comments, post.getPostid())
+        Log.e("PostAdapter","check 13")
         checkSavedStatus(post.getPostid(), holder.saveButton)
-        calculatePecent(holder.tvPercent1, holder.tvPercent2)
+        Log.e("PostAdapter","check 14")
+        getTotalPolling(post.getPostid(), tvPercent1, tvPercent2)
+        Log.e("PostAdapter","check 15")
 
-        //
 
-//        holder.seekBar1.setOnTouchListener(object : View.OnTouchListener {
-//            override fun onTouch(v: View?) {Log.e(TAG,"seekbar 1")
-       // })
-        holder.contestantone.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-
-                var count1 = 1
-                var count2 = 1
-                var flag1 = true
-                var flag2 = true
-
-                Log.e(TAG,"seekbar 1 clicked")
-
-                if (flag2)
-                {
-                    // when flag two is true
-                    count1 = 1
-                    count2++
-                    flag1 = true
-                    flag2 = false
-
-                    // calculate percentage
-                    calculatePecent(holder.tvPercent1, holder.tvPercent2)
-                }
-            }
-        })
-
-        holder.seekBar2.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean { return  true }
-        })
-
-        holder.contestanttwo.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-
-                var count1 = 1
-                var count2 = 1
-                var flag1 = true
-                var flag2 = true
-
-                if (flag1)
-                {
-                    // when flag two is true
-                    count1++
-                    count2 = 1
-
-                    flag1 = false
-                    flag2 = true
-
-                    // calculate percentage
-                    calculatePecent(holder.tvPercent1, holder.tvPercent2)
-                }
-            }
-        })
-
-        //
-
+        Log.e("PostAdapter","check 16")
         holder.likeButton.setOnClickListener {
+            Log.e("PostAdapter","check 17")
             if (holder.likeButton.tag == "Like")
             {
+                Log.e("PostAdapter","check 18")
                 FirebaseDatabase.getInstance().reference
                     .child("Likes")
                     .child(post.getPostid())
                     .child(firebaseUser!!.uid)
                     .setValue(true)
+                Log.e("PostAdapter","check 19")
             }
             else
             {
+                Log.e("PostAdapter","check 20")
                 FirebaseDatabase.getInstance().reference
                     .child("Likes")
                     .child(post.getPostid())
                     .child(firebaseUser!!.uid)
                     .removeValue()
-
+                Log.e("PostAdapter","check 21")
 
                 val intent = Intent(mContext, MainActivity::class.java)
                 mContext.startActivity(intent)
             }
         }
-
+        Log.e("PostAdapter","check 22")
         holder.commentButton.setOnClickListener {
-
+            Log.e("PostAdapter","check 23")
             val intentComment = Intent(mContext, CommentsActivity::class.java)
             intentComment.putExtra("postId", post.getPostid())
             intentComment.putExtra("publisherId", post.getPublisher())
             mContext.startActivity(intentComment)
+            Log.e("PostAdapter","check 24")
         }
 
-
+        Log.e("PostAdapter","check 25")
         holder.comments.setOnClickListener {
-
+            Log.e("PostAdapter","check 26")
             val intentComment = Intent(mContext, CommentsActivity::class.java)
             intentComment.putExtra("postId", post.getPostid())
             intentComment.putExtra("publisherId", post.getPublisher())
             mContext.startActivity(intentComment)
+            Log.e("PostAdapter","check 27")
         }
-
 
         holder.saveButton.setOnClickListener {
             if (holder.saveButton.tag == "Save")
@@ -273,13 +231,56 @@ class PostAdapter(private val mContext: Context,
 
         }
 
+        seekBar1.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean { return  true }
+        })
+        Log.e("PostAdapter","check 28")
+        holder.contestantone.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+
+                if (flag2)
+                {
+                    // when flag two is true
+                    count1 = 1
+                    count2++
+                    flag1 = true
+                    flag2 = false
+                    // calculate percentage
+                    Log.e("PostAdapter","check 29")
+                    calculatePecent()
+                    Log.e("PostAdapter","check 30")
+                    PollingSaveData(post.getPostid())
+                }
+
+            }
+        })
+
+        seekBar2.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean { return  true }
+        })
+
+        holder.contestanttwo.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+
+                if (flag1)
+                {
+                    // when flag two is true
+                    count1++
+                    count2 = 1
+                    flag1 = false
+                    flag2 = true
+                    // calculate percentage
+
+                    calculatePecent()
+                    PollingSaveData(post.getPostid())
+
+                }
+            }
+        })
+
     }
-
-
-    private fun calculatePecent(tvPercent1 : TextView, tvPercent2 : TextView) {
-
-        var count1 = 1
-        var count2 = 1
+    private fun calculatePecent() {
+        Log.e("PostAdapter","check 31")
         // calculate total
         val total = (count1 + count2).toDouble()
 
@@ -290,15 +291,32 @@ class PostAdapter(private val mContext: Context,
         // set percent on text view
         tvPercent1.text = String.format("%.0f%%", percent1)
         // Set progress on seekbar
-         // seekBar1.progress = percent1.toInt()
+          seekBar1.progress = percent1.toInt()
 
         tvPercent2.text = String.format("%.0f%%", percent2)
-        //   seekBar2.progress = percent2.toInt()
+           seekBar2.progress = percent2.toInt()
 
+        Log.e("PostAdapter","check 32")
+    }
+
+    private fun PollingSaveData(postid: String )
+    {
+        Log.e("PostAdapter","check 33")
+        val commentsRef = FirebaseDatabase.getInstance().reference
+            .child("Polling")
+            .child(postid)
+        val commentsMap = HashMap<String, Any>()
+
+        commentsMap["tvPercent1"] = tvPercent1!!.text.toString()
+        commentsMap["tvPercent2"] = tvPercent2!!.text.toString()
+
+        commentsRef.child(firebaseUser!!.uid).updateChildren(commentsMap)
+        Log.e("PostAdapter","check 34")
     }
 
     private fun numberOfLikes(likes: TextView, postid: String)
     {
+        Log.e("PostAdapter","check 35")
      val LikesRef = FirebaseDatabase.getInstance().reference
          .child("Likes").child(postid)
 
@@ -315,9 +333,38 @@ class PostAdapter(private val mContext: Context,
         })
     }
 
+      private fun getTotalPolling(postid: String, tvPercent1: TextView, tvPercent2: TextView)
+    {
+        Log.e("PostAdapter","check 36")
+        val pollingRef = FirebaseDatabase.getInstance().reference
+            .child("Polling")
+            .child(postid)
+        
+        pollingRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(pO: DataSnapshot)
+            {
+               if (pO.exists())
+                {
+
+                    tvPercent1.text = pO
+                        .child(firebaseUser!!.uid)
+                        .child("tvPercent1").getValue().toString()
+
+                    tvPercent2.text = pO
+                        .child(firebaseUser!!.uid)
+                        .child("tvPercent2").getValue().toString()
+
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
 
     private fun getTotalComments(comments: TextView, postid: String)
     {
+        Log.e("PostAdapter","check 37")
         val commentsRef = FirebaseDatabase.getInstance().reference
             .child("Comments").child(postid)
 
@@ -334,20 +381,16 @@ class PostAdapter(private val mContext: Context,
             override fun onCancelled(error: DatabaseError) {
 
             }
-
         })
-
     }
-
 
     private fun isLikes(postid: String, likeButton: ImageView)
     {
+        Log.e("PostAdapter","check 38")
         val firebaseUser = FirebaseAuth.getInstance().currentUser
-
         val LikesRef = FirebaseDatabase.getInstance().reference
             .child("Likes")
             .child(postid)
-
         LikesRef.addValueEventListener(object : ValueEventListener
         {
             override fun onDataChange(pO: DataSnapshot) {
@@ -364,9 +407,7 @@ class PostAdapter(private val mContext: Context,
             }
 
             override fun onCancelled(error: DatabaseError) {
-
             }
-
         })
     }
 
@@ -376,6 +417,7 @@ class PostAdapter(private val mContext: Context,
 
     private fun publisherInfo(profileImage: CircleImageView, userName: TextView, publisher: TextView, publisherID: String)
     {
+        Log.e("PostAdapter","check 39")
         val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherID)
 
         userRef.addValueEventListener(object  : ValueEventListener {
@@ -398,9 +440,11 @@ class PostAdapter(private val mContext: Context,
         })
     }
 
-
     private fun checkSavedStatus(postid: String, imageView: ImageView)
     {
+
+        Log.e("PostAdapter","check 40")
+
         val saveRef = FirebaseDatabase.getInstance().reference
             .child("Saves")
             .child(firebaseUser!!.uid)
@@ -427,9 +471,5 @@ class PostAdapter(private val mContext: Context,
         })
 
     }
-
 }
-
-
-
 

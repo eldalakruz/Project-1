@@ -22,9 +22,8 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
 class UserAdapter (private var mContext: Context,
-
-private var mUser: List<User>,
-private var isFragment: Boolean = false) : RecyclerView.Adapter<UserAdapter.ViewHolder>()
+                   private var mUser: List<User>,
+                   private var isFragment: Boolean = false) : RecyclerView.Adapter<UserAdapter.ViewHolder>()
 
 {
     private val firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
@@ -50,6 +49,7 @@ private var isFragment: Boolean = false) : RecyclerView.Adapter<UserAdapter.View
 
             (mContext as FragmentActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, ProfileFragment()).commit()
+
         })
 
         holder.followButton.setOnClickListener{
@@ -103,7 +103,7 @@ private var isFragment: Boolean = false) : RecyclerView.Adapter<UserAdapter.View
         return mUser.size
     }
 
-    class ViewHolder (@NonNull itemView: View): RecyclerView.ViewHolder(itemView)
+    class ViewHolder (@NonNull itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         var userNameTextView: TextView = itemView.findViewById(R.id.user_name_search)
         var userfullNameTextView: TextView = itemView.findViewById(R.id.user_full_name_search)
