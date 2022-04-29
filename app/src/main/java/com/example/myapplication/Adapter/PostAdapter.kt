@@ -2,19 +2,18 @@ package com.example.myapplication.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.CommentsActivity
-import com.example.myapplication.MainActivity
+import com.example.myapplication.*
 import com.example.myapplication.Model.Post
 import com.example.myapplication.Model.User
-import com.example.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -42,6 +41,7 @@ class PostAdapter(private val mContext: Context,
         var publisher: TextView
         var description: TextView
         var comments: TextView
+        var campaign_btn: Button
 
 
         var pollquestion : TextView
@@ -61,6 +61,7 @@ class PostAdapter(private val mContext: Context,
             publisher = itemView.findViewById(R.id.publisher)
             description = itemView.findViewById(R.id.description)
             comments = itemView.findViewById(R.id.comments)
+            campaign_btn = itemView.findViewById(R.id.campaign_btn)
 
             pollquestion = itemView.findViewById(R.id.tv_question)
             contestantone = itemView.findViewById(R.id.tv_option1)
@@ -79,6 +80,8 @@ class PostAdapter(private val mContext: Context,
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
         val post = mPost[position]
+
+       // val modelVideo = videoArrayList!![position]
 
         Picasso.get().load(post.getPostimage()).into(holder.postImage)
 
@@ -139,6 +142,7 @@ class PostAdapter(private val mContext: Context,
         getTotalComments(holder.comments, post.getPostid())
         checkSavedStatus(post.getPostid(), holder.saveButton)
 
+
         holder.likeButton.setOnClickListener {
             if (holder.likeButton.tag == "Like")
             {
@@ -170,6 +174,21 @@ class PostAdapter(private val mContext: Context,
             mContext.startActivity(intentComment)
         }
 
+        holder.campaign_btn.setOnClickListener {
+            val intent = Intent(mContext, CompaignPage::class.java)
+            intent.putExtra("postId", post.getPostid())
+            intent.putExtra("publisherId", post.getPublisher())
+            intent.putExtra("contestantone", post.getContestantone())
+            Log.e("sample","test")
+
+            intent.putExtra("contestanttwo",post.getContestanttwo())
+
+            Log.e("sample","test")
+
+            mContext.startActivity(intent)
+
+        }
+
 
         holder.comments.setOnClickListener {
 
@@ -198,6 +217,7 @@ class PostAdapter(private val mContext: Context,
 
 
     }
+
 
     private fun numberOfLikes(likes: TextView, postid: String)
     {
