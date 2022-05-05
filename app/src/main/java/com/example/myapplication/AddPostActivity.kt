@@ -42,9 +42,9 @@ class AddPostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
-
-        descriptionpost = findViewById(R.id.description_post)
         savenewpostbtn = findViewById(R.id.save_new_post_btn)
+        descriptionpost = findViewById(R.id.description_post)
+
 
         //
         pollquestion = findViewById(R.id.poll_question)
