@@ -37,6 +37,7 @@ class PostDetailsFragment : Fragment() {
          postId = preferences.getString("postId", "none").toString()
         }
 
+
         var recyclerView : RecyclerView
         recyclerView = view.findViewById(R.id.recycler_view_post_details)
         recyclerView.setHasFixedSize(true)

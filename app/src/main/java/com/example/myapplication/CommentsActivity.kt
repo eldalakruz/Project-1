@@ -77,7 +77,7 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun addComment()
     {
-        val commentsRef = FirebaseDatabase.getInstance().getReference()
+        val commentsRef = FirebaseDatabase.getInstance().reference
             .child("Comments")
             .child(postId!!)
 
@@ -93,7 +93,7 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun userInfo()
     {
-        val usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser!!.uid)
+        val usersRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
 
         usersRef.addValueEventListener(object : ValueEventListener
         {
