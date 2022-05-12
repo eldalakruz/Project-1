@@ -54,7 +54,7 @@ class person1 : Fragment() {
         addVideoFab = view.findViewById(R.id.addVideoFab)
 
             addVideoFab.setOnClickListener {
-            val intent = Intent(this@person1.requireContext(), AddVideoActivity::class.java)
+            val intent = Intent(this.requireContext(), AddVideoActivity::class.java)
             intent.putExtra("publishId", publisherId).toString()
             startActivity(intent)
         }
@@ -96,14 +96,9 @@ class person1 : Fragment() {
                     videoArrayList.add(modelVideo!!)
                 }
                 //setup adapter
-               Log.e("sample","before adapter")
-
                 adapterVideo = AdapterVideo(this@person1.requireContext(), videoArrayList)
-
-               Log.e("sample","after adapter")
                 //set adapter to recyclerview
                 videosRv = view!!.findViewById(R.id.videosRv) as RecyclerView
-               Log.e("sample","after videoRv")
                 videosRv.adapter = adapterVideo
 
             }
