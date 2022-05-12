@@ -175,7 +175,7 @@ class PostAdapter(private val mContext: Context,
         }
 
         holder.campaign_btn.setOnClickListener {
-            val intent = Intent(mContext, CompaignPage::class.java)
+            val intent = Intent(mContext, sample::class.java)
             intent.putExtra("postId", post.getPostid())
             intent.putExtra("publisherId", post.getPublisher())
             intent.putExtra("contestantone", post.getContestantone())

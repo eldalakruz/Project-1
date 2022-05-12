@@ -51,8 +51,6 @@
     </ImageView>
 
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_comments"
         android:layout_width="match_parent"

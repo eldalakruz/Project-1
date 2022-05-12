@@ -51,10 +51,10 @@ class User
     {
         return image
     }
-    fun setImage(image: String)
-    {
-        this.image = image
-    }
+//    fun setImage(image: String)
+//    {
+//        this.image = image
+//    }
 
     fun getUID() : String
     {
