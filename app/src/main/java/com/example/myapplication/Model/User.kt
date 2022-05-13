@@ -11,7 +11,6 @@ class User
 
     constructor()
 
-
     constructor(username: String, fullname: String, uid: String, bio: String, image: String)
     {
         this.username = username
@@ -51,10 +50,10 @@ class User
     {
         return image
     }
-    fun setImage(image: String)
-    {
-        this.image = image
-    }
+//    fun setImage(image: String)
+//    {
+//        this.image = image
+//    }
 
     fun getUID() : String
     {

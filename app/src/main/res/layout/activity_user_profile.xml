@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProfileFragment">
+    tools:context=".UserProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/app_bar_layout_profile_frag">
+        android:id="@+id/app_bar_layout_user_profile_frag">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/profile_toolbar"
+            android:id="@+id/user_profile_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
@@ -22,7 +23,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/profile_fragment_username"
+                    android:id="@+id/user_profile_activity_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -33,7 +34,7 @@
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/options_view"
+                    android:id="@+id/User_Profile_options_view"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
@@ -50,7 +51,7 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar_layout_profile_frag">
+        android:layout_below="@+id/app_bar_layout_user_profile_frag">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,14 +59,14 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/top_bar"
+                android:id="@+id/User_Profile_top_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/pro_image_profile_frag"
+                    android:id="@+id/image_user_profile_activity"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:src="@drawable/ic_profile" />
@@ -98,7 +99,7 @@
                                 android:textColor="@color/black"/>
 
                             <TextView
-                                android:id="@+id/total_posts"
+                                android:id="@+id/user_profile_total_posts"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -124,7 +125,7 @@
                                 android:textColor="@color/black"/>
 
                             <TextView
-                                android:id="@+id/total_followers"
+                                android:id="@+id/user_profile_total_followers"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -151,7 +152,7 @@
                                 android:textColor="@color/black"/>
 
                             <TextView
-                                android:id="@+id/total_following"
+                                android:id="@+id/user_profile_total_following"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -164,10 +165,10 @@
                     </LinearLayout>
 
                     <Button
-                        android:id="@+id/edit_account_settings_btn"
+                        android:id="@+id/user_account_settings_btn"
                         android:layout_width="170dp"
                         android:layout_height="35dp"
-                        android:text="Edit Profile"
+                        android:text="Follow"
                         android:textAllCaps="false"
                         android:layout_marginTop="2dp"
                         android:layout_marginLeft="10dp"/>
@@ -177,14 +178,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/mid_bar"
+                android:id="@+id/user_profile_mid_bar"
                 android:padding="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/full_name_profile_frag"
+                    android:id="@+id/user_profile_full_name_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Full name"
@@ -193,7 +194,7 @@
                     android:textColor="@color/black"/>
 
                 <TextView
-                    android:id="@+id/bio_profile_frag"
+                    android:id="@+id/user_profile_bio_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bio"
@@ -211,7 +212,7 @@
                 android:layout_marginRight="5dp">
 
                 <ImageButton
-                    android:id="@+id/image_grid_view_btn"
+                    android:id="@+id/user_profile_image_grid_view_btn"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/grid"
@@ -219,7 +220,7 @@
                     style="?android:attr/buttonBarButtonStyle"/>
 
                 <ImageButton
-                    android:id="@+id/image_grid_save_btn"
+                    android:id="@+id/user_profile_image_grid_save_btn"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/save_large_icon"
@@ -228,25 +229,24 @@
 
             </LinearLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_upload_pic"
+                android:id="@+id/user_profile_recycler_view_upload_pic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
             </androidx.recyclerview.widget.RecyclerView>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_saved_pic"
+                android:id="@+id/user_profile_recycler_view_saved_pic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone">
 
             </androidx.recyclerview.widget.RecyclerView>
 
-
         </LinearLayout>
 
     </RelativeLayout>
+
 
 </RelativeLayout>

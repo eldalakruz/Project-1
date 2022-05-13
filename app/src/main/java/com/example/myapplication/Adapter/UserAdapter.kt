@@ -1,17 +1,23 @@
 package com.example.myapplication.Adapter
 
 import android.content.Context
+import android.content.Intent
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.CommentsActivity
 import com.example.myapplication.Model.User
 import com.example.myapplication.R
+import com.example.myapplication.UserProfileActivity
 import com.example.myapplication.fragments.ProfileFragment
+import com.example.myapplication.fragments.SearchUserFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -22,9 +28,8 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
 class UserAdapter (private var mContext: Context,
-
-private var mUser: List<User>,
-private var isFragment: Boolean = false) : RecyclerView.Adapter<UserAdapter.ViewHolder>()
+                   private var mUser: List<User>,
+                   private var isFragment: Boolean = false) : RecyclerView.Adapter<UserAdapter.ViewHolder>()
 
 {
     private val firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
@@ -43,14 +48,26 @@ private var isFragment: Boolean = false) : RecyclerView.Adapter<UserAdapter.View
 
         checkFollowingStatus(user.getUID(),holder.followButton)
 
-        holder.itemView.setOnClickListener(View.OnClickListener {
-            val pref = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit()
-            pref.putString("profileId", user.getUID())
-            pref.apply()
 
-            (mContext as FragmentActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ProfileFragment()).commit()
-        })
+        holder.itemView.setOnClickListener {
+            val intent = Intent(mContext, UserProfileActivity::class.java)
+            intent.putExtra("publisherId", user.getUID())
+            mContext.startActivity(intent)
+        }
+
+//        holder.itemView.setOnClickListener(View.OnClickListener {
+//            val pref = mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit()
+//            pref.putString("profileId", user.getUID())
+//            pref.apply()
+//
+//            (mContext as FragmentActivity).supportFragmentManager.beginTransaction()
+//                .replace(R.id.fragment_container, SearchUserFragment()).commit()
+//        })
+
+//        holder.userNameTextView.setOnClickListener {
+//            val intentComment = Intent(mContext, ProfileFragment::class.java)
+//            mContext.startActivity(intentComment)
+//        }
 
         holder.followButton.setOnClickListener{
             if(holder.followButton.text.toString() == "Follow") {
@@ -103,12 +120,13 @@ private var isFragment: Boolean = false) : RecyclerView.Adapter<UserAdapter.View
         return mUser.size
     }
 
-    class ViewHolder (@NonNull itemView: View): RecyclerView.ViewHolder(itemView)
+    class ViewHolder (@NonNull itemView: View) : RecyclerView.ViewHolder(itemView)
     {
         var userNameTextView: TextView = itemView.findViewById(R.id.user_name_search)
         var userfullNameTextView: TextView = itemView.findViewById(R.id.user_full_name_search)
         var userProfileImage: CircleImageView = itemView.findViewById(R.id.user_profile_image_search)
         var followButton: Button = itemView.findViewById(R.id.follow_btn_search)
+
     }
 
     private fun checkFollowingStatus(uid: String, followButton: Button)
@@ -132,13 +150,9 @@ private var isFragment: Boolean = false) : RecyclerView.Adapter<UserAdapter.View
                     followButton.text = "Follow"
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
-
-
     }
-
 }

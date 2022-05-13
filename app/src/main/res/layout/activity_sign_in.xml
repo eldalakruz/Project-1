@@ -44,6 +44,20 @@
         android:textColor="@color/white"
         android:textSize="17sp" />
 
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_btn"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:text="Forgot Password?"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+
     <Button
         android:id="@+id/signup_link_btn"
         android:layout_width="match_parent"
@@ -51,8 +65,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="6dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
         android:text="Need New Account? sign Up"
         android:textAllCaps="false"
         android:textColor="@color/white"

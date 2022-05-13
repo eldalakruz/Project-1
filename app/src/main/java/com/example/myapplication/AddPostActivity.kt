@@ -60,6 +60,7 @@ class AddPostActivity : AppCompatActivity() {
            CropImage.activity()
           .setAspectRatio(2,1)
           .start(this@AddPostActivity)
+
     }
 
     private fun uploadImage()

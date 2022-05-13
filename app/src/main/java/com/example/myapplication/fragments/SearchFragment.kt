@@ -30,7 +30,9 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_search, container, false)
 
@@ -43,10 +45,14 @@ class SearchFragment : Fragment() {
         userAdapter = context?.let { UserAdapter(it, mUser as ArrayList<User>, true)  }
         recyclerView?.adapter = userAdapter
 
-
         searchedittext = view.findViewById(R.id.search_edit_text)
         searchedittext.addTextChangedListener( object: TextWatcher
         {
+            override fun afterTextChanged(s: Editable?)
+            {
+
+            }
+
             override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -64,17 +70,15 @@ class SearchFragment : Fragment() {
                     searchUser(s.toString().toLowerCase())
                 }
             }
-            override fun afterTextChanged(s: Editable?)
-            {
 
-            }
+
         })
         return view
     }
 
     private fun searchUser(input: String)
     {
-        val query = FirebaseDatabase.getInstance().getReference()
+        val query = FirebaseDatabase.getInstance().reference
             .child("Users")
             .orderByChild("fullname")
             .startAt(input)
@@ -93,6 +97,7 @@ class SearchFragment : Fragment() {
                     {
                         mUser?.add(user)
                     }
+
                 }
                 userAdapter?.notifyDataSetChanged()
             }
@@ -106,7 +111,7 @@ class SearchFragment : Fragment() {
 
     private fun retrieveUsers()
     {
-      val usersRef = FirebaseDatabase.getInstance().getReference().child("Users")
+      val usersRef = FirebaseDatabase.getInstance().reference.child("Users")
       usersRef.addValueEventListener(object : ValueEventListener
       {
           override fun onDataChange(dataSnapshot: DataSnapshot)

@@ -7,17 +7,21 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 
-private lateinit var signuplinkbtn : Button
-private lateinit var loginbtn : Button
-private lateinit var emaillogin : EditText
-private lateinit var passwordlogin : EditText
+
 
 class SignInActivity : AppCompatActivity() {
+
+    private lateinit var signuplinkbtn : Button
+    private lateinit var loginbtn : Button
+    private lateinit var emaillogin : EditText
+    private lateinit var passwordlogin : EditText
+    private lateinit var forgotpassword : TextView
 
     lateinit var binding : ActivitySignInBinding
 
@@ -25,6 +29,13 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        forgotpassword = findViewById(R.id.forgot_password)
+        forgotpassword.setOnClickListener {
+            startActivity(Intent(this,ForgotPasswordActivity::class.java))
+        }
+
 
         signuplinkbtn = findViewById(R.id.signup_link_btn)
         signuplinkbtn.setOnClickListener {

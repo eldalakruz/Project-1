@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProfileFragment">
+    tools:context=".fragments.SearchUserFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -228,13 +228,15 @@
 
             </LinearLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_upload_pic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
             </androidx.recyclerview.widget.RecyclerView>
+
+
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_saved_pic"

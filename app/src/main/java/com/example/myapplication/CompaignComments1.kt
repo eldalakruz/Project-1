@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
-class CommentsActivity : AppCompatActivity() {
+class CompaignComments1 : AppCompatActivity() {
 
     private var postId = ""
     private var publisherId = ""
@@ -29,16 +29,16 @@ class CommentsActivity : AppCompatActivity() {
     private var commentAdapter : CommentAdapter? = null
     private var commentList : MutableList<Comment>? = null
 
-    private lateinit var postimagecomment : ImageView
-
+    private lateinit var postimagecomment : VideoView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_comments)
+        setContentView(R.layout.activity_compaign_comments1)
 
         addcomment = findViewById(R.id.add_comment)
 
+
         val intent = intent
-        postId = intent.getStringExtra("postId").toString()
+        postId = intent.getStringExtra("id").toString()
         publisherId = intent.getStringExtra("publisherId").toString()
 
 
@@ -61,24 +61,26 @@ class CommentsActivity : AppCompatActivity() {
         readComments()
         getPostImage()
 
+
+
         postcomment = findViewById(R.id.post_comment)
         postcomment.setOnClickListener(View.OnClickListener {
             if (addcomment!!.text.toString() == "")
             {
-                Toast.makeText(this@CommentsActivity, "Please write comment first...", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@CompaignComments1, "Please write comment first...", Toast.LENGTH_LONG).show()
             }
             else
             {
                 addComment()
             }
         })
-
     }
+
 
     private fun addComment()
     {
-        val commentsRef = FirebaseDatabase.getInstance().reference
-            .child("Comments")
+        val commentsRef = FirebaseDatabase.getInstance().getReference()
+            .child("CompaignComments1")
             .child(postId!!)
 
         val commentsMap = HashMap<String, Any>()
@@ -93,7 +95,7 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun userInfo()
     {
-        val usersRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
+        val usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser!!.uid)
 
         usersRef.addValueEventListener(object : ValueEventListener
         {
@@ -106,6 +108,8 @@ class CommentsActivity : AppCompatActivity() {
                     profileimagecomment = findViewById(R.id.profile_image_comment)
 
                     Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimagecomment)
+
+
 
                 }
             }
@@ -130,8 +134,8 @@ class CommentsActivity : AppCompatActivity() {
                 {
                     val image = snapshot.value.toString()
 
-                    postimagecomment = findViewById<ImageView>(R.id.post_image_comment)
-                    Picasso.get().load(image).placeholder(R.drawable.profile).into(postimagecomment)
+                  //  postimagecomment = findViewById<ImageView>(R.id.post_image_comment)
+                  //  Picasso.get().load(image).placeholder(R.drawable.profile).into(postimagecomment)
 
                 }
             }
@@ -145,26 +149,33 @@ class CommentsActivity : AppCompatActivity() {
     private fun readComments()
     {
         val commentRef = FirebaseDatabase.getInstance()
-            .reference.child("Comments")
+            .reference.child("CompaignComments1")
             .child(postId)
 
-        commentRef.addValueEventListener(object : ValueEventListener{
+        commentRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(pO: DataSnapshot)
             {
-            if (pO.exists())
-            {
-                commentList!!.clear()
-
-                for (snapshot in pO.children)
+                if (pO.exists())
                 {
-                    val comment = snapshot.getValue(Comment::class.java)
-                    commentList!!.add(comment!!)
+                    commentList!!.clear()
+
+                    for (snapshot in pO.children)
+                    {
+                        val comment = snapshot.getValue(Comment::class.java)
+                        commentList!!.add(comment!!)
+                    }
+
+                    commentAdapter!!.notifyDataSetChanged()
                 }
-                commentAdapter!!.notifyDataSetChanged()
             }
-            }
+
             override fun onCancelled(error: DatabaseError) {
+
             }
+
         })
+
+
     }
+
 }
