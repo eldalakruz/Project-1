@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@color/colorGray"
     tools:context=".AddVideoActivity">
 
     <EditText
@@ -32,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/videoView"
         android:layout_marginTop="5dp"
-        android:backgroundTint="@color/pinkeygreen"
         android:text="Upload Video"
         android:textColor="@color/black" />
 
@@ -44,7 +42,6 @@
         android:layout_alignParentBottom="true"
         android:contentDescription="TODO"
         android:src="@drawable/ic_video_library_white"
-        app:backgroundTint="@color/milkgreen"
         tools:ignore="RelativeOverlap" />
 
 

@@ -22,21 +22,14 @@ import com.google.firebase.database.ValueEventListener
 
 class NewpostFragment : Fragment() {
 
-
     private companion object{
         //TAG for debugging
         private const val TAG = "NATIVE_AD_TAG"
     }
-
     //UI view
-
-
       var newpostAdapter : NewpostAdapter? = null
         var postList: MutableList<Newpost>? = null
          var followingList: MutableList<Newpost>? = null
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,9 +49,7 @@ class NewpostFragment : Fragment() {
         newpostAdapter = context?.let { NewpostAdapter(it, postList as ArrayList<Newpost>) }
         recyclerView.adapter = newpostAdapter
 
-     //   checkFollowings()
-
-
+        checkFollowings()
 
         MobileAds.initialize(context){
 
@@ -77,7 +68,7 @@ class NewpostFragment : Fragment() {
      return  view
     }
 
-  /*  private fun checkFollowings() {
+    private fun checkFollowings() {
         followingList = ArrayList()
 
         val followingRef = FirebaseDatabase.getInstance().reference
@@ -112,9 +103,9 @@ class NewpostFragment : Fragment() {
             }
         })
 
-    }*/
+    }
 
-  /*  private fun retrieveNewpost() {
+    private fun retrieveNewpost() {
         val postsRef = FirebaseDatabase.getInstance().reference.child("NewPost")
         postsRef.addValueEventListener(object  : ValueEventListener{
             override fun onDataChange(pO: DataSnapshot) {
@@ -142,8 +133,7 @@ class NewpostFragment : Fragment() {
         })
 
 
-    }*/
-
+    }
 
 }
 
