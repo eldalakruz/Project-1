@@ -5,16 +5,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
     app:cardElevation="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:id="@+id/linear1"
@@ -74,8 +71,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginStart="258dp"
-                android:layout_marginTop="5dp"
                 android:layout_toStartOf="@+id/post_save_comment_btn"
                 android:text="Campaign Page" />
 
@@ -220,6 +215,10 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
     </LinearLayout>
 

@@ -13,8 +13,6 @@ import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 
-
-
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var signuplinkbtn : Button
@@ -30,12 +28,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        forgotpassword = findViewById(R.id.forgot_password)
-        forgotpassword.setOnClickListener {
-            startActivity(Intent(this,ForgotPasswordActivity::class.java))
-        }
-
+        supportActionBar?.hide()
 
         signuplinkbtn = findViewById(R.id.signup_link_btn)
         signuplinkbtn.setOnClickListener {
@@ -46,6 +39,12 @@ class SignInActivity : AppCompatActivity() {
         loginbtn.setOnClickListener {
             loginUser()
         }
+
+        forgotpassword = findViewById(R.id.forgot_password)
+        forgotpassword.setOnClickListener {
+            startActivity(Intent(this,ForgotPasswordActivity::class.java))
+        }
+
 
     }
 

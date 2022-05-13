@@ -325,11 +325,11 @@ class PostAdapter(private val mContext: Context,
 
                     tvPercent1.text = pO
                         .child(firebaseUser!!.uid)
-                        .child("tvPercent1").getValue().toString()
+                        .child("tvPercent1").value.toString()
 
                     tvPercent2.text = pO
                         .child(firebaseUser!!.uid)
-                        .child("tvPercent2").getValue().toString()
+                        .child("tvPercent2").value.toString()
 
                 }
             }

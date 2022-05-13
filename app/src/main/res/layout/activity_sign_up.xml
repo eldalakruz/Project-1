@@ -13,6 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:background="@drawable/searchview_backgound"
         android:hint="Full Name....."
         android:inputType="textEmailAddress"
         android:padding="10dp" />
@@ -25,6 +26,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:background="@drawable/searchview_backgound"
+        android:layout_marginTop="5dp"
         android:hint="User Name......"
         android:inputType="textEmailAddress"
         android:padding="10dp" />
@@ -38,6 +41,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:background="@drawable/searchview_backgound"
+        android:layout_marginTop="5dp"
         android:hint="Email......"
         android:inputType="textEmailAddress"
         android:padding="10dp" />
@@ -49,8 +54,9 @@
         android:layout_below="@+id/email_signup"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
+        android:background="@drawable/searchview_backgound"
         android:hint="Password......"
         android:inputType="textPassword"
         android:padding="10dp" />

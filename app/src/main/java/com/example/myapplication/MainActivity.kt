@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -15,9 +16,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity() {
 
-
     private lateinit var bottomNavView : BottomNavigationView
     lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         bottomNavView = binding.bottomNavView
-
 
         val homeFragment = HomeFragment()
         val notificationsFragment = NotificationsFragment()
@@ -69,8 +69,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
 
     }
 

@@ -42,6 +42,7 @@ class AddPostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
+        supportActionBar?.hide()
 
         descriptionpost = findViewById(R.id.description_post)
         savenewpostbtn = findViewById(R.id.save_new_post_btn)
@@ -55,7 +56,6 @@ class AddPostActivity : AppCompatActivity() {
         storagePostPicRef = FirebaseStorage.getInstance().reference.child("posts Pictures")
 
         savenewpostbtn.setOnClickListener { uploadImage() }
-
 
            CropImage.activity()
           .setAspectRatio(2,1)

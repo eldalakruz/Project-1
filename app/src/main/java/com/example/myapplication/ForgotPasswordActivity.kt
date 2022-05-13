@@ -16,6 +16,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
 
+        supportActionBar?.hide()
+
         forgotpassword = findViewById(R.id.forgot_password)
         submitbtn = findViewById(R.id.submit_btn)
         submitbtn.setOnClickListener {

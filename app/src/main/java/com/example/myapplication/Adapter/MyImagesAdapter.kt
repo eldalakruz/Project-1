@@ -27,7 +27,6 @@ class MyImagesAdapter(private val mContext : Context, mPost : List<Post>)
        }
 
 
-
         inner class ViewHolder(@NonNull itemView: View)
             : RecyclerView.ViewHolder(itemView)
         {

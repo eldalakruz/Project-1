@@ -46,7 +46,7 @@ class UserAdapter (private var mContext: Context,
         holder.userfullNameTextView.text = user.getFullname()
         Picasso.get().load(user.getImage()).placeholder(R.drawable.ic_profile).into(holder.userProfileImage)
 
-        checkFollowingStatus(user.getUID(),holder.followButton)
+  //      checkFollowingStatus(user.getUID(),holder.followButton)
 
 
         holder.itemView.setOnClickListener {
@@ -69,7 +69,7 @@ class UserAdapter (private var mContext: Context,
 //            mContext.startActivity(intentComment)
 //        }
 
-        holder.followButton.setOnClickListener{
+     /*   holder.followButton.setOnClickListener{
             if(holder.followButton.text.toString() == "Follow") {
                 firebaseUser?.uid.let { it1 ->
                     FirebaseDatabase.getInstance().reference
@@ -113,7 +113,8 @@ class UserAdapter (private var mContext: Context,
                         }
                 }
             }
-        }
+        }      */
+
     }
 
     override fun getItemCount(): Int {
@@ -125,7 +126,7 @@ class UserAdapter (private var mContext: Context,
         var userNameTextView: TextView = itemView.findViewById(R.id.user_name_search)
         var userfullNameTextView: TextView = itemView.findViewById(R.id.user_full_name_search)
         var userProfileImage: CircleImageView = itemView.findViewById(R.id.user_profile_image_search)
-        var followButton: Button = itemView.findViewById(R.id.follow_btn_search)
+//        var followButton: Button = itemView.findViewById(R.id.follow_btn_search)
 
     }
 
