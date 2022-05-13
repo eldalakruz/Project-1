@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val homeFragment = HomeFragment()
- //       val notificationsFragment = NotificationsFragment()
+        val newpostFragment = NewpostFragment()
         val addFragment = AddFragment()
         val profileFragment = ProfileFragment()
         val searchFragment = SearchFragment()
@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.miHome ->{
                     setThatFragment(homeFragment)
-//                }
-//                R.id.miNotifications ->{
-//                    setThatFragment(notificationsFragment)
+                }
+                R.id.miPost ->{
+                    setThatFragment(newpostFragment)
                 }
                 R.id.miadd ->{
                     it.isChecked = false
@@ -53,6 +53,12 @@ class MainActivity : AppCompatActivity() {
                   //      Toast.makeText(this,"you pressed on button", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@MainActivity, AddPostActivity::class.java))
                     }
+
+                    val btnpost = view.findViewById<TextView>(R.id.item_2)
+                    btnpost.setOnClickListener {
+                        startActivity(Intent(this@MainActivity, PostActivity::class.java))
+                    }
+
                     dialog.setContentView(view)
                     dialog.show()
 

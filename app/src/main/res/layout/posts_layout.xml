@@ -69,6 +69,7 @@
                 android:src="@drawable/comment" />
 
             <Button
+                android:id="@+id/campaign_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_toStartOf="@+id/post_save_comment_btn"
@@ -213,17 +214,6 @@
                 android:paddingEnd="32dp"
                 android:text="0%"
                 app:layout_constraintEnd_toEndOf="parent" />
-
-
-            <Button
-                android:id="@+id/campaign_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_percent2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:text="Campaign" />
-
 
         </RelativeLayout>
 

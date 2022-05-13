@@ -35,7 +35,7 @@ class NewpostAdapter(
     val context: Context,
     val Post: ArrayList<Newpost>): RecyclerView.Adapter<RecyclerView.ViewHolder>()
 {
-//private var firebaseUser:FirebaseUser? =null
+    private var firebaseUser:FirebaseUser? =null
 
     companion object{
         //TAG
@@ -46,10 +46,7 @@ class NewpostAdapter(
         private const val VIEW_TYPE_CONTENT =0
         private const val VIEW_TYPE_AD=1
 
-
     }
-
-
 
 
 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder
@@ -57,11 +54,7 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.V
 
     val view :View
 
-    view = LayoutInflater.from(context).inflate(R.layout.row_native_ad,parent,false)
-    return HolderNativeAd(view)
-
-
-   /*   if (viewType == VIEW_TYPE_CONTENT){
+      if (viewType == VIEW_TYPE_CONTENT){
         view = LayoutInflater.from(context).inflate(R.layout.new_post,parent,false)
           return HolderProduct(view)
       }
@@ -71,17 +64,16 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.V
           view = LayoutInflater.from(context).inflate(R.layout.row_native_ad,parent,false)
          return HolderNativeAd(view)
 
-      }*/
-
+      }
 
 }
 
 
-
 override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
- // firebaseUser = FirebaseAuth.getInstance().currentUser
 
-    /*  if (getItemViewType(position)== VIEW_TYPE_CONTENT) {
+    firebaseUser = FirebaseAuth.getInstance().currentUser
+
+      if (getItemViewType(position)== VIEW_TYPE_CONTENT) {
 
            val post = Post[position]
 
@@ -96,11 +88,7 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
                     post.getPublisher()
             )
 
-
-
-
-
-        }*/
+        }
 
           if (getItemViewType(position)== VIEW_TYPE_AD) {
 
@@ -158,10 +146,7 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
 
 
-
-
-
-  /*  private fun publisherInfo(profileImage: CircleImageView, userName: TextView, publisher: TextView, publisherID: String) {
+    private fun publisherInfo(profileImage: CircleImageView, userName: TextView, publisher: TextView, publisherID: String) {
       val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherID)
         userRef.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot)
@@ -185,7 +170,7 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             }
 
         })
-    }*/
+    }
 
     private fun displayNativeAd(holderNativeAd: NewpostAdapter.HolderNativeAd, nativeAd: NativeAd) {
         /*------Get Ad assets from the NativeAd Object-----*/
@@ -316,7 +301,7 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     return  Post.size
 }
 
-   /* override fun getItemViewType(position: Int): Int {
+    override fun getItemViewType(position: Int): Int {
         //logic to display Native Ad between content
         if (position % 5 == 0){
             //after 5 items .show native ad
@@ -327,11 +312,11 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             return  VIEW_TYPE_CONTENT
         }
 
-    }*/
+    }
 
 
 
-  /*  inner class HolderProduct( itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class HolderProduct( itemView: View): RecyclerView.ViewHolder(itemView) {
 
 
        val profileImage: CircleImageView
@@ -340,7 +325,7 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
        val commentButton: ImageView
        val saveButton: ImageView
        val userName: TextView
-      val likesuser: TextView
+       val likesuser: TextView
        val publisheruser: TextView
        val descriptionuser: TextView
        val commentsuser: TextView
@@ -359,7 +344,7 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
        }
 
 
-   }*/
+   }
     //ViewHolder class for row_native_ad.xml
 
     inner class HolderNativeAd(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -373,10 +358,8 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val ad_price:TextView=itemView.findViewById(R.id.ad_price)
         val ad_store:TextView=itemView.findViewById(R.id.ad_store)
         val ad_call_to_action: Button =itemView.findViewById(R.id.ad_call_to_action)
-        val native_Ad_View: NativeAdView =itemView.findViewById(R.id.native_Ad_View)
+        val native_Ad_View: NativeAdView =itemView.findViewById(R.id.nativeAdView)
 
     }
-
-
 
 }

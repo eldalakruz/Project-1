@@ -31,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/videoView2"
         android:layout_marginTop="5dp"
-        android:backgroundTint="@color/pinkeygreen"
         android:text="Upload Video"
         android:textColor="@color/black" />
 
@@ -42,7 +41,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:contentDescription="TODO"
-        app:backgroundTint="@color/milkgreen"
         android:src="@drawable/ic_video_library_white"
         tools:ignore="RelativeOverlap" />
 
