@@ -138,7 +138,14 @@ class HomeFragment : Fragment() {
                 Log.e("retrievePostsHomeFragment","check 21")
             }
         })
+
+
     }
+
+
+
+
+}
 
  //..............................................................................................................
 
@@ -172,3 +179,4 @@ class HomeFragment : Fragment() {
         })
     }
 }
+

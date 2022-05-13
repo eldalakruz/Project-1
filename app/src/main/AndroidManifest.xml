@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -15,9 +16,52 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
         <activity
+
+            android:name=".VideoPostAnswer"
+            android:exported="false" />
+        <activity
+            android:name=".ImagePostAnswer"
+            android:exported="false" />
+        <activity
+            android:name=".newTry"
+            android:exported="false" />
+        <activity
+            android:name=".Add_answer"
+            android:exported="false" />
+        <activity
+            android:name=".Answer"
+            android:exported="false" />
+        <activity
+            android:name=".Add_questiom"
+            android:exported="false" />
+        <activity
+            android:name=".sample"
+            android:exported="false" />
+        <activity
+            android:name=".Sample"
+            android:exported="false" />
+        <activity
+            android:name=".CompaignComments2"
+            android:exported="false" />
+        <activity
+            android:name=".CompaignComments1"
+            android:exported="false" />
+        <activity
+            android:name=".AddVideoActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".AddVideoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CompaignPage"
+            android:exported="false"
+            android:noHistory="false" />
+        <activity
+
             android:name=".UserProfileActivity"
             android:exported="false" />
         <activity
+
             android:name=".CommentsActivity"
             android:exported="false" />
         <activity
