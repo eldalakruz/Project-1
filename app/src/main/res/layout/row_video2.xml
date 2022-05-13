@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginTop="12dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    app:cardMaxElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/liner2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_image2"
+                android:layout_width="46dp"
+                android:layout_height="60dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_person_black" />
+
+            <TextView
+                android:id="@+id/user_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@color/black">
+
+
+            <VideoView
+                android:id="@+id/videoView2"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/titleTv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-condensed"
+                android:shadowColor="@color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:layout_above="@+id/timeTv2"
+                android:text="The title of the video"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/timeTv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:shadowRadius="2"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowColor="@color/black"
+                android:textColor="@color/white"
+                android:text="dd/MM/yyyy hh:mm"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:id="@+id/like_btn2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/heart_not_click" />
+
+            <ImageView
+                android:id="@+id/comment_btn2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/like_btn2"
+                android:src="@drawable/ic_comment" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/like_count2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/publisher2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/comment_count2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textSize="16dp"
+            android:layout_marginBottom="5dp"
+            android:text=""
+            android:textColor="@color/black"/>
+
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+
