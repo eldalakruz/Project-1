@@ -16,6 +16,7 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
         <activity
+
             android:name=".VideoPostAnswer"
             android:exported="false" />
         <activity
@@ -56,6 +57,11 @@
             android:exported="false"
             android:noHistory="false" />
         <activity
+
+            android:name=".UserProfileActivity"
+            android:exported="false" />
+        <activity
+
             android:name=".CommentsActivity"
             android:exported="false" />
         <activity

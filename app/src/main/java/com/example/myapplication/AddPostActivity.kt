@@ -10,6 +10,7 @@ import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.myapplication.fragments.AddFragment
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -55,9 +56,10 @@ class AddPostActivity : AppCompatActivity() {
 
         savenewpostbtn.setOnClickListener { uploadImage() }
 
-        CropImage.activity()
-            .setAspectRatio(2,1)
-            .start(this@AddPostActivity)
+
+           CropImage.activity()
+          .setAspectRatio(2,1)
+          .start(this@AddPostActivity)
 
     }
 

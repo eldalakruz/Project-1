@@ -37,7 +37,6 @@ class CommentsActivity : AppCompatActivity() {
 
         addcomment = findViewById(R.id.add_comment)
 
-
         val intent = intent
         postId = intent.getStringExtra("postId").toString()
         publisherId = intent.getStringExtra("publisherId").toString()
@@ -62,8 +61,6 @@ class CommentsActivity : AppCompatActivity() {
         readComments()
         getPostImage()
 
-
-
         postcomment = findViewById(R.id.post_comment)
         postcomment.setOnClickListener(View.OnClickListener {
             if (addcomment!!.text.toString() == "")
@@ -76,17 +73,13 @@ class CommentsActivity : AppCompatActivity() {
             }
         })
 
-
-
     }
 
     private fun addComment()
     {
-        val commentsRef = FirebaseDatabase.getInstance().getReference()
+        val commentsRef = FirebaseDatabase.getInstance().reference
             .child("Comments")
             .child(postId!!)
-
-
 
         val commentsMap = HashMap<String, Any>()
         commentsMap["comment"] = addcomment!!.text.toString()
@@ -100,7 +93,7 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun userInfo()
     {
-        val usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser!!.uid)
+        val usersRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
 
         usersRef.addValueEventListener(object : ValueEventListener
         {
@@ -114,8 +107,6 @@ class CommentsActivity : AppCompatActivity() {
 
                     Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimagecomment)
 
-
-
                 }
             }
 
@@ -124,8 +115,6 @@ class CommentsActivity : AppCompatActivity() {
             }
         })
     }
-
-
 
     private fun getPostImage()
     {
@@ -144,8 +133,6 @@ class CommentsActivity : AppCompatActivity() {
                     postimagecomment = findViewById<ImageView>(R.id.post_image_comment)
                     Picasso.get().load(image).placeholder(R.drawable.profile).into(postimagecomment)
 
-
-
                 }
             }
 
@@ -154,11 +141,6 @@ class CommentsActivity : AppCompatActivity() {
             }
         })
     }
-
-
-
-
-
 
     private fun readComments()
     {
@@ -178,18 +160,11 @@ class CommentsActivity : AppCompatActivity() {
                     val comment = snapshot.getValue(Comment::class.java)
                     commentList!!.add(comment!!)
                 }
-
                 commentAdapter!!.notifyDataSetChanged()
             }
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
-
         })
-
-
     }
-
 }

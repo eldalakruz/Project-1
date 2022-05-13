@@ -11,9 +11,7 @@ class Post {
     private var contestantone : String = ""
     private var contestanttwo : String = ""
 
-
     constructor()
-
 
     constructor(
         postid: String,
@@ -23,6 +21,7 @@ class Post {
         pollquestion: String,
         contestantone: String,
         contestanttwo: String
+
     )
 
     {
@@ -33,6 +32,7 @@ class Post {
         this.pollquestion = pollquestion
         this.contestantone = contestantone
         this.contestanttwo = contestanttwo
+
     }
 
     fun getPostid() : String{
@@ -63,7 +63,6 @@ class Post {
         return contestanttwo
     }
 
-
     fun setPostid(postid: String){
         this.postid = postid
     }
@@ -80,7 +79,6 @@ class Post {
         this.description = description
     }
 
-
     fun setPollquestion(pollquestion: String){
         this.pollquestion = pollquestion
     }
@@ -92,5 +90,4 @@ class Post {
     fun setContestanttwo(contestanttwo: String){
         this.contestanttwo = contestanttwo
     }
-
 }

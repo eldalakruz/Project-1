@@ -1,33 +1,54 @@
 package com.example.myapplication.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+
 import android.widget.Button
+
+
 import android.widget.ImageView
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+
 import com.example.myapplication.*
 import com.example.myapplication.Model.Post
 import com.example.myapplication.Model.User
+
+import com.example.myapplication.CommentsActivity
+import com.example.myapplication.Model.Post
+import com.example.myapplication.Model.User
+import com.example.myapplication.R
+import com.example.myapplication.UserProfileActivity
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class PostAdapter(private val mContext: Context,
+class PostAdapter(private val mContext: Context, 
                   private val mPost: List<Post>) : RecyclerView.Adapter<PostAdapter.ViewHolder>()
 
 {
     private var firebaseUser: FirebaseUser? = null
+
+    @SuppressLint("ClickableViewAccessibility")
+    private var count1 = 1
+    private var count2 = 1
+    private var flag1 = true
+    private var flag2 = true
+    lateinit var seekBar1 : SeekBar
+    lateinit var seekBar2 : SeekBar
+    lateinit var tvPercent1 : TextView
+    lateinit var tvPercent2 : TextView
 
     inner class  ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView)
     {
@@ -43,12 +64,9 @@ class PostAdapter(private val mContext: Context,
         var comments: TextView
         var campaign_btn: Button
 
-
         var pollquestion : TextView
         var contestantone : TextView
         var contestanttwo : TextView
-
-
 
         init {
             profileImage = itemView.findViewById(R.id.user_profile_image_post)
@@ -67,16 +85,24 @@ class PostAdapter(private val mContext: Context,
             contestantone = itemView.findViewById(R.id.tv_option1)
             contestanttwo = itemView.findViewById(R.id.tv_option2)
 
+            seekBar1 = itemView.findViewById(R.id.seek_bar1)
+            seekBar2 = itemView.findViewById(R.id.seek_bar2)
+            tvPercent1 = itemView.findViewById(R.id.tv_percent1)
+            tvPercent2 = itemView.findViewById(R.id.tv_percent2)
+
         }
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
+    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): ViewHolder
     {
         val view = LayoutInflater.from(mContext).inflate(R.layout.posts_layout, parent, false)
         return  ViewHolder(view)
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
         val post = mPost[position]
@@ -95,55 +121,57 @@ class PostAdapter(private val mContext: Context,
         {
             holder.description.visibility = View.VISIBLE
             holder.description.setText(post.getDescription())
+
+        }
+        // 1
+       if (post.getPollquestion().equals(""))
+       {
+           holder.pollquestion.visibility = View.GONE
+
+        }
+       else
+      {
+            holder.pollquestion.visibility = View.VISIBLE
+            holder.pollquestion.setText(post.getPollquestion())
+       }
+
+        //2
+        if (post.getContestantone().equals(""))
+        {
+           holder.contestantone.visibility = View.GONE
+
+        }
+        else
+        {
+            holder.contestantone.visibility = View.VISIBLE
+            holder.contestantone.setText(post.getContestantone())
         }
 
-//        // 1
-//        if (post.getTvoption1().equals(""))
-//        {
-//            holder.contestantone.visibility = View.GONE
-//
-//        }
-//        else
-//        {
-//            holder.contestantone.visibility = View.VISIBLE
-//            holder.contestantone.setText(post.getTvoption1())
-//        }
-//
-//        //2
-//        if (post.getTvoption2().equals(""))
-//        {
-//            holder.contestanttwo.visibility = View.GONE
-//
-//        }
-//        else
-//        {
-//            holder.contestanttwo.visibility = View.VISIBLE
-//            holder.contestanttwo.setText(post.getTvoption2())
-//        }
-//
-//        //3
-//        if (post.getTvquestion().equals(""))
-//        {
-//            holder.pollquestion.visibility = View.GONE
-//
-//        }
-//        else
-//        {
-//            holder.pollquestion.visibility = View.VISIBLE
-//            holder.pollquestion.setText(post.getTvquestion())
-//        }
+        //3
+        if (post.getContestanttwo().equals(""))
+        {
+            holder.contestanttwo.visibility = View.GONE
+
+        }
+        else
+        {
+            holder.contestanttwo.visibility = View.VISIBLE
+            holder.contestanttwo.setText(post.getContestanttwo())
+        }
 
         //
-
 
         publisherInfo(holder.profileImage, holder.userName, holder.publisher, post.getPublisher())
         isLikes(post.getPostid(), holder.likeButton)
         numberOfLikes(holder.likes, post.getPostid())
         getTotalComments(holder.comments, post.getPostid())
         checkSavedStatus(post.getPostid(), holder.saveButton)
+        getTotalPolling(post.getPostid(), tvPercent1, tvPercent2)
+
 
 
         holder.likeButton.setOnClickListener {
+
             if (holder.likeButton.tag == "Like")
             {
                 FirebaseDatabase.getInstance().reference
@@ -160,19 +188,17 @@ class PostAdapter(private val mContext: Context,
                     .child(firebaseUser!!.uid)
                     .removeValue()
 
-
-                val intent = Intent(mContext, MainActivity::class.java)
-                mContext.startActivity(intent)
+//                val intent = Intent(mContext, MainActivity::class.java)
+//                mContext.startActivity(intent)
             }
         }
-
         holder.commentButton.setOnClickListener {
-
             val intentComment = Intent(mContext, CommentsActivity::class.java)
             intentComment.putExtra("postId", post.getPostid())
             intentComment.putExtra("publisherId", post.getPublisher())
             mContext.startActivity(intentComment)
         }
+
 
         holder.campaign_btn.setOnClickListener {
             val intent = Intent(mContext, sample::class.java)
@@ -190,14 +216,19 @@ class PostAdapter(private val mContext: Context,
         }
 
 
-        holder.comments.setOnClickListener {
 
+        holder.comments.setOnClickListener {
             val intentComment = Intent(mContext, CommentsActivity::class.java)
             intentComment.putExtra("postId", post.getPostid())
             intentComment.putExtra("publisherId", post.getPublisher())
             mContext.startActivity(intentComment)
         }
 
+        holder.userName.setOnClickListener {
+            val intent = Intent(mContext, UserProfileActivity::class.java)
+            intent.putExtra("publisherId", post.getPublisher())
+            mContext.startActivity(intent)
+        }
 
         holder.saveButton.setOnClickListener {
             if (holder.saveButton.tag == "Save")
@@ -212,9 +243,83 @@ class PostAdapter(private val mContext: Context,
                     .child("Saves").child(firebaseUser!!.uid)
                     .child(post.getPostid()).removeValue()
             }
-
         }
 
+        seekBar1.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean { return  true }
+        })
+
+        holder.contestantone.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+
+                if (flag2)
+                {
+                    // when flag two is true
+                    count1 = 1
+                    count2++
+                    flag1 = true
+                    flag2 = false
+                    // calculate percentage
+                    calculatePecent()
+                    PollingSaveData(post.getPostid())
+                }
+
+            }
+        })
+
+        seekBar2.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean { return  true }
+        })
+
+        holder.contestanttwo.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+
+                if (flag1)
+                {
+                    // when flag two is true
+                    count1++
+                    count2 = 1
+                    flag1 = false
+                    flag2 = true
+                    // calculate percentage
+
+                    calculatePecent()
+                    PollingSaveData(post.getPostid())
+
+                }
+            }
+        })
+
+    }
+    private fun calculatePecent() {
+        // calculate total
+        val total = (count1 + count2).toDouble()
+
+        // Calculate percentage for all options
+        val percent1 = count1 / total * 100
+        val percent2 = count2 / total * 100
+
+        // set percent on text view
+        tvPercent1.text = String.format("%.0f%%", percent1)
+        // Set progress on seekbar
+          seekBar1.progress = percent1.toInt()
+
+        tvPercent2.text = String.format("%.0f%%", percent2)
+           seekBar2.progress = percent2.toInt()
+
+    }
+
+    private fun PollingSaveData(postid: String )
+    {
+        val commentsRef = FirebaseDatabase.getInstance().reference
+            .child("Polling")
+            .child(postid)
+        val commentsMap = HashMap<String, Any>()
+
+        commentsMap["tvPercent1"] = tvPercent1!!.text.toString()
+        commentsMap["tvPercent2"] = tvPercent2!!.text.toString()
+
+        commentsRef.child(firebaseUser!!.uid).updateChildren(commentsMap)
 
     }
 
@@ -231,13 +336,40 @@ class PostAdapter(private val mContext: Context,
                 {
                     likes.text = pO.childrenCount.toString() + " likes"
                 }
-
+                else
+                {
+                    likes.text = pO.childrenCount.toString() + " likes"
+                }
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
+        })
+    }
 
+      private fun getTotalPolling(postid: String, tvPercent1: TextView, tvPercent2: TextView)
+    {
+        val pollingRef = FirebaseDatabase.getInstance().reference
+            .child("Polling")
+            .child(postid)
+        
+        pollingRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(pO: DataSnapshot)
+            {
+               if (pO.exists())
+                {
+
+                    tvPercent1.text = pO
+                        .child(firebaseUser!!.uid)
+                        .child("tvPercent1").getValue().toString()
+
+                    tvPercent2.text = pO
+                        .child(firebaseUser!!.uid)
+                        .child("tvPercent2").getValue().toString()
+
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
         })
     }
 
@@ -260,23 +392,15 @@ class PostAdapter(private val mContext: Context,
             override fun onCancelled(error: DatabaseError) {
 
             }
-
         })
     }
-
-
-
-
-
 
     private fun isLikes(postid: String, likeButton: ImageView)
     {
         val firebaseUser = FirebaseAuth.getInstance().currentUser
-
         val LikesRef = FirebaseDatabase.getInstance().reference
             .child("Likes")
             .child(postid)
-
         LikesRef.addValueEventListener(object : ValueEventListener
         {
             override fun onDataChange(pO: DataSnapshot) {
@@ -293,9 +417,7 @@ class PostAdapter(private val mContext: Context,
             }
 
             override fun onCancelled(error: DatabaseError) {
-
             }
-
         })
     }
 
@@ -327,7 +449,6 @@ class PostAdapter(private val mContext: Context,
         })
     }
 
-
     private fun checkSavedStatus(postid: String, imageView: ImageView)
     {
         val saveRef = FirebaseDatabase.getInstance().reference
@@ -356,17 +477,5 @@ class PostAdapter(private val mContext: Context,
         })
 
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
 
