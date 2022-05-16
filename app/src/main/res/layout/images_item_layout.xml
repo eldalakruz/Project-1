@@ -13,7 +13,6 @@
         android:src="@drawable/profile"
         android:scaleType="centerCrop">
 
-
     </ImageView>
 
 </androidx.cardview.widget.CardView>

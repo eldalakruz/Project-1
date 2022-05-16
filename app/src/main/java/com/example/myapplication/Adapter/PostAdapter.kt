@@ -65,6 +65,8 @@ class PostAdapter(private val mContext: Context,
         var pollquestion : TextView
         var contestantone : TextView
         var contestanttwo : TextView
+//        var seekBar1 : SeekBar
+//        var seekBar2: SeekBar
 
         init {
             profileImage = itemView.findViewById(R.id.user_profile_image_post)
@@ -104,8 +106,6 @@ class PostAdapter(private val mContext: Context,
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
         val post = mPost[position]
-
-       // val modelVideo = videoArrayList!![position]
 
         Picasso.get().load(post.getPostimage()).into(holder.postImage)
 
@@ -243,7 +243,7 @@ class PostAdapter(private val mContext: Context,
             }
         }
 
-        seekBar1.setOnTouchListener(object : View.OnTouchListener {
+       seekBar1.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean { return  true }
         })
 
@@ -253,8 +253,8 @@ class PostAdapter(private val mContext: Context,
                 if (flag2)
                 {
                     // when flag two is true
-                    count1 = 1
-                    count2++
+                    count1++
+                    count2 = 1
                     flag1 = true
                     flag2 = false
                     // calculate percentage
@@ -275,8 +275,8 @@ class PostAdapter(private val mContext: Context,
                 if (flag1)
                 {
                     // when flag two is true
-                    count1++
-                    count2 = 1
+                    count1 = 1
+                    count2++
                     flag1 = false
                     flag2 = true
                     // calculate percentage

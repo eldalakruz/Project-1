@@ -1,16 +1,22 @@
 package com.example.myapplication.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.AccountSettingsActivity
 import com.example.myapplication.Adapter.PostAdapter
+import com.example.myapplication.AddPostActivity
 import com.example.myapplication.Model.Post
+import com.example.myapplication.PostActivity
 import com.example.myapplication.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -32,6 +38,11 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val btnpost = view.findViewById<FloatingActionButton>(R.id.pickVideoFab_video)
+        btnpost.setOnClickListener {
+            startActivity(Intent(context, AddPostActivity::class.java))
+        }
 
         var recyclerView: RecyclerView? = null
         recyclerView = view.findViewById(R.id.recycler_view_home)
@@ -90,52 +101,35 @@ class HomeFragment : Fragment() {
 
     private fun retrievePosts() {
         val postsRef = FirebaseDatabase.getInstance().reference.child("Posts")
-        Log.e("retrievePostsHomeFragment","check 10")
+
         postsRef.addValueEventListener(object : ValueEventListener
         {
 
             override fun onDataChange(pO: DataSnapshot) {
-                Log.e("retrievePostsHomeFragment","check 11")
                 postList?.clear()
-
-                Log.e("retrievePostsHomeFragment","check 12")
                 for (snapshot in pO.children)
                 {
-                    Log.e("retrievePostsHomeFragment","check 13")
                     val post = snapshot.getValue(Post::class.java)
-                    Log.e("retrievePostsHomeFragment","check 14")
                     for (id in (followingList as ArrayList<String>))
                     {
-                        Log.e("retrievePostsHomeFragment","check 15")
                         if (post!!.getPublisher() == id)
                         {
-                            Log.e("retrievePostsHomeFragment","check 16")
                             postList!!.add(post)
-                            Log.e("retrievePostsHomeFragment","check 17")
                         }
-                        Log.e("retrievePostsHomeFragment","check 18")
                         postAdapter!!.notifyDataSetChanged()
                     }
 
-                    Log.e("retrievePostsHomeFragment","check 19")
-
                 }
-                Log.e("retrievePostsHomeFragment","check 20")
 
                 for (snapshot in pO.children)
                 {
-                    Log.e("HomeFragment","check 19")
                     val post = snapshot.getValue(Post::class.java)
-                    Log.e("HomeFragment","check 20")
-
                     postList!!.add(post!!)
                     postAdapter!!.notifyDataSetChanged()
-                    Log.e("HomeFragment","check 21")
                 }
 
             }
             override fun onCancelled(error: DatabaseError) {
-                Log.e("retrievePostsHomeFragment","check 21")
             }
         })
     }
@@ -145,30 +139,24 @@ class HomeFragment : Fragment() {
 
     private fun retrievePoststwo() {
         val postsRef = FirebaseDatabase.getInstance().reference.child("Posts")
-        Log.e("retrievePostsHomeFragment","check 10")
         postsRef.addValueEventListener(object : ValueEventListener
         {
-
             override fun onDataChange(pO: DataSnapshot) {
-                Log.e("HomeFragment","check 11")
                 postList?.clear()
-
-                Log.e("HomeFragment","check 12")
                 for (snapshot in pO.children)
                 {
-                    Log.e("HomeFragment","check 13")
                     val post = snapshot.getValue(Post::class.java)
-                    Log.e("HomeFragment","check 14")
 
                     postList!!.add(post!!)
                     postAdapter!!.notifyDataSetChanged()
-                    Log.e("HomeFragment","check 19")
+
                 }
-                Log.e("HomeFragment","check 20")
             }
             override fun onCancelled(error: DatabaseError) {
-                Log.e("HomeFragment","check 21")
+
             }
         })
     }
+
 }
+

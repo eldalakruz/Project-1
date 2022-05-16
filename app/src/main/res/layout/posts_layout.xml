@@ -39,13 +39,22 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/post_image_home"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:scaleType="centerCrop"
             android:src="@drawable/profile" />
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -73,7 +82,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_toStartOf="@+id/post_save_comment_btn"
-                android:text="Campaign Page" />
+                android:text="Campaign Page"
+                android:textSize="10dp"/>
 
             <ImageView
                 android:id="@+id/post_save_comment_btn"
@@ -122,16 +132,6 @@
             android:text=""
             android:textColor="@color/black"
             android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/tv_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -35,8 +35,8 @@ class PostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
-        savenewpostbutton = findViewById(R.id.save_new_post_button)
 
+        savenewpostbutton = findViewById(R.id.save_new_post_button)
 
         descriptionpostuser = findViewById(R.id.description_post_user)
 
@@ -44,14 +44,15 @@ class PostActivity : AppCompatActivity() {
         savenewpostbutton.setOnClickListener { uploadImage() }
 
 
-        CropImage.activity()
-            .setAspectRatio(2, 1)
-            .start(this@PostActivity)
+//        CropImage.activity()
+//            .setAspectRatio(1, 1)
+//            .start(this@PostActivity)
 
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             val result = CropImage.getActivityResult(data)
             imageUri = result.uri
@@ -73,8 +74,7 @@ class PostActivity : AppCompatActivity() {
                 progressDialog.setMessage("Please wait, we are adding your picture post...")
                 progressDialog.show()
 
-                val fileRef =
-                    storagePostPicRef!!.child(System.currentTimeMillis().toString() + "jpg")
+                val fileRef = storagePostPicRef!!.child(System.currentTimeMillis().toString() + "jpg")
                 var uploadTask: StorageTask<*>
                 uploadTask = fileRef.putFile(imageUri!!)
 
@@ -103,8 +103,7 @@ class PostActivity : AppCompatActivity() {
 
                             ref.child(postId).updateChildren(postMap)
 
-                            Toast.makeText(this, "Post uploaded successfully.", Toast.LENGTH_LONG)
-                                .show()
+                            Toast.makeText(this, "Post uploaded successfully.", Toast.LENGTH_LONG).show()
 
                             val intent = Intent(this@PostActivity, MainActivity::class.java)
                             startActivity(intent)
