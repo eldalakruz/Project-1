@@ -107,7 +107,14 @@ class PostAdapter(private val mContext: Context,
 
         val post = mPost[position]
 
-        Picasso.get().load(post.getPostimage()).into(holder.postImage)
+        if (post.getPostimage().isEmpty()) {
+           holder.postImage.setImageResource(R.drawable.profile)
+        } else{
+            Picasso.get()
+                .load(post.getPostimage())
+                .into(holder.postImage)
+        }
+//        Picasso.get().load(post.getPostimage()).into(holder.postImage)
 
         //description
         if (post.getDescription().equals(""))
@@ -353,17 +360,15 @@ class PostAdapter(private val mContext: Context,
         pollingRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(pO: DataSnapshot)
             {
-               if (pO.exists())
-                {
+               if (pO.exists()) {
 
-                    tvPercent1.text = pO
-                        .child(firebaseUser!!.uid)
-                        .child("tvPercent1").value.toString()
+                   tvPercent1.text = pO
+                       .child(firebaseUser!!.uid)
+                       .child("tvPercent1").value.toString()
 
                     tvPercent2.text = pO
                         .child(firebaseUser!!.uid)
                         .child("tvPercent2").value.toString()
-
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -434,7 +439,13 @@ class PostAdapter(private val mContext: Context,
                {
                    val user = snapshot.getValue<User>(User::class.java)
 
-                   Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
+                   if (user!!.getImage().isEmpty()) {
+                       profileImage.setImageResource(R.drawable.profile)
+                   } else{
+                       Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
+                   }
+
+//                   Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
                    userName.text = user!!.getUsername()
                    publisher.text = user!!.getFullname()
 
@@ -475,5 +486,6 @@ class PostAdapter(private val mContext: Context,
         })
 
     }
+
 }
 

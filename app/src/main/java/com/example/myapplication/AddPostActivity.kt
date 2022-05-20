@@ -61,6 +61,7 @@ class AddPostActivity : AppCompatActivity() {
           .start(this@AddPostActivity)
     }
 
+
     private fun uploadImage()
     {
     when{

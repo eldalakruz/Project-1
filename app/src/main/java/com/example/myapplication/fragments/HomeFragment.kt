@@ -7,15 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.AccountSettingsActivity
+import com.example.myapplication.*
 import com.example.myapplication.Adapter.PostAdapter
-import com.example.myapplication.AddPostActivity
 import com.example.myapplication.Model.Post
-import com.example.myapplication.PostActivity
-import com.example.myapplication.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -30,7 +28,7 @@ class HomeFragment : Fragment() {
     private var postList: MutableList<Post>? = null
     private var followingList: MutableList<Post>? = null
 
-    private var followingLis: MutableList<Post>? = null
+   // private var followingLis: MutableList<Post>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +42,12 @@ class HomeFragment : Fragment() {
             startActivity(Intent(context, AddPostActivity::class.java))
         }
 
+        val rightarrow = view.findViewById<ImageView>(R.id.Move_to_poll_page)
+        rightarrow.setOnClickListener {
+            startActivity(Intent(context,PollingActivity::class.java))
+        }
+
+
         var recyclerView: RecyclerView? = null
         recyclerView = view.findViewById(R.id.recycler_view_home)
         val linearLayoutManager = LinearLayoutManager(context)
@@ -52,7 +56,7 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
 
 
-        followingLis = ArrayList()
+    //    followingLis = ArrayList()
 
         postList = ArrayList()
         postAdapter = context?.let { PostAdapter(it, postList as ArrayList<Post>) }
@@ -71,32 +75,33 @@ class HomeFragment : Fragment() {
             .child("Follow").child(FirebaseAuth.getInstance().currentUser!!.uid)
             .child("Following")
 
-        Log.e("checkFollowingsHomeFragment","check 1")
+
         followingRef.addValueEventListener(object : ValueEventListener
         {
             override fun onDataChange(pO: DataSnapshot)
             {
-                Log.e("checkFollowingsHomeFragment","check 2")
+
                 if (pO.exists())
                 {
-                    Log.e("checkFollowingsHomeFragment","check 3")
+
                     (followingList as ArrayList<String>).clear()
-                    Log.e("checkFollowingsHomeFragment","check 4")
+
                     for (snapshot in pO.children)
                     {
-                        Log.e("checkFollowingsHomeFragment","check 5")
+
                         snapshot.key?.let { (followingList as ArrayList<String>).add(it) }
                     }
-                    Log.e("checkFollowingsHomeFragment","check 6")
+
                     retrievePosts()
-                    Log.e("checkFollowingsHomeFragment","check 7")
+
                 }
-                Log.e("checkFollowingsHomeFragment","check 8")
+
             }
             override fun onCancelled(pO: DatabaseError) {
-                Log.e("checkFollowingsHomeFragment","check 9")
+
             }
         })
+
     }
 
     private fun retrievePosts() {
