@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = postAdapter
 
         retrievePoststwo()
-        checkFollowings()
+
 
         MobileAds.initialize(context){
 

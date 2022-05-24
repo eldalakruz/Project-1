@@ -13,11 +13,9 @@ import android.widget.*
 
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.myapplication.*
 import com.example.myapplication.Model.Post
 import com.example.myapplication.Model.User
-
 import com.example.myapplication.CommentsActivity
 import com.example.myapplication.R
 import com.example.myapplication.UserProfileActivity
@@ -29,7 +27,6 @@ import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdOptions
 import com.google.android.gms.ads.nativead.NativeAdView
-
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -63,8 +60,7 @@ class PostAdapter(private val mContext: Context,
     lateinit var tvPercent1 : TextView
     lateinit var tvPercent2 : TextView
 
-    inner class Posts(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView)
-    {
+    inner class Posts(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
         var profileImage: CircleImageView
         var postImage: ImageView
         var likeButton: ImageView
@@ -77,13 +73,13 @@ class PostAdapter(private val mContext: Context,
         var comments: TextView
         var campaign_btn: Button
 
-        var pollquestion : TextView
-        var contestantone : TextView
-        var contestanttwo : TextView
+        var pollquestion: TextView
+        var contestantone: TextView
+        var contestanttwo: TextView
 
         init {
             profileImage = itemView.findViewById(R.id.user_profile_image_post)
-            postImage =  itemView.findViewById(R.id.post_image_home)
+            postImage = itemView.findViewById(R.id.post_image_home)
             likeButton = itemView.findViewById(R.id.post_image_like_btn)
             commentButton = itemView.findViewById(R.id.post_image_comment_btn)
             saveButton = itemView.findViewById(R.id.post_save_comment_btn)
@@ -104,17 +100,34 @@ class PostAdapter(private val mContext: Context,
             tvPercent2 = itemView.findViewById(R.id.tv_percent2)
 
         }
-
     }
+        inner class HolderNativeAd(itemView: View): RecyclerView.ViewHolder(itemView){
+            //init UI Views
+            val ad_app_icon :ImageView =itemView.findViewById(R.id.ad_app_icon)
+            val ad_headline:TextView=itemView.findViewById(R.id.ad_headline)
+            val ad_advertiser:TextView=itemView.findViewById(R.id.ad_advertiser)
+            val ad_stars: RatingBar =itemView.findViewById(R.id.ad_stars)
+            val ad_body:TextView=itemView.findViewById(R.id.ad_body)
+            val media_view: MediaView =itemView.findViewById(R.id.media_view)
+            val ad_price:TextView=itemView.findViewById(R.id.ad_price)
+            val ad_store:TextView=itemView.findViewById(R.id.ad_store)
+            val ad_call_to_action: Button =itemView.findViewById(R.id.ad_call_to_action)
+            val native_Ad_View: NativeAdView =itemView.findViewById(R.id.nativeAdView)
+
+        }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int):RecyclerView.ViewHolder {
         val view: View
+
         if (viewType == VIEW_TYPE_CONTENT) {
              view = LayoutInflater.from(mContext).inflate(R.layout.posts_layout, parent, false)
             return Posts(view)
-        } else {
+        }
+        else{
             //inflate/return row_native_ad.xml
-            view = LayoutInflater.from(mContext).inflate(R.layout.row_native_ad, parent, false)
+            view = LayoutInflater.from(mContext).inflate(R.layout.native_ads,parent,false)
             return HolderNativeAd(view)
 
         }
@@ -309,7 +322,7 @@ class PostAdapter(private val mContext: Context,
                     //Ad is loaded,show it
 
                     //instance of our HolderNativeAd to access UI views of row_Native_ad.xml
-                    val holderNativeAd = holder as NewpostAdapter.HolderNativeAd
+                    val holderNativeAd = holder as HolderNativeAd
                     displayNativeAd(holderNativeAd,nativeAd)
                 }
                 .withAdListener(object : AdListener() {
@@ -481,7 +494,7 @@ class PostAdapter(private val mContext: Context,
         })
     }
 
-    private fun displayNativeAd(holderNativeAd: NewpostAdapter.HolderNativeAd, nativeAd: NativeAd) {
+    private fun displayNativeAd(holderNativeAd:PostAdapter.HolderNativeAd, nativeAd: NativeAd) {
         /*------Get Ad assets from the NativeAd Object-----*/
 
         val headLine = nativeAd.headline
@@ -674,19 +687,5 @@ class PostAdapter(private val mContext: Context,
 
     }
 
-    inner class HolderNativeAd(itemView: View): RecyclerView.ViewHolder(itemView){
-        //init UI Views
-        val ad_app_icon :ImageView =itemView.findViewById(R.id.ad_app_icon)
-        val ad_headline:TextView=itemView.findViewById(R.id.ad_headline)
-        val ad_advertiser:TextView=itemView.findViewById(R.id.ad_advertiser)
-        val ad_stars: RatingBar =itemView.findViewById(R.id.ad_stars)
-        val ad_body:TextView=itemView.findViewById(R.id.ad_body)
-        val media_view: MediaView =itemView.findViewById(R.id.media_view)
-        val ad_price:TextView=itemView.findViewById(R.id.ad_price)
-        val ad_store:TextView=itemView.findViewById(R.id.ad_store)
-        val ad_call_to_action: Button =itemView.findViewById(R.id.ad_call_to_action)
-        val native_Ad_View: NativeAdView =itemView.findViewById(R.id.nativeAdView)
-
-    }
 }
 
