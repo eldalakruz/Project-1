@@ -298,20 +298,7 @@ class PostAdapter(private val mContext: Context,
 
 
             seekBar2.setOnTouchListener(object : View.OnTouchListener {
-                override fun onTouch(v: View?, event: MotionEvent?): Boolean { return true  }
-
-                if (flag2)
-                {
-                    // when flag two is true
-                    count1++
-                    count2 = 1
-                    flag1 = true
-                    flag2 = false
-                    // calculate percentage
-                    calculatePecent()
-                    PollingSaveData(post.getPostid())
-
-                }
+                override fun onTouch(v: View?, event: MotionEvent?): Boolean { return true }
             })
 
             holder.contestanttwo.setOnClickListener(object : View.OnClickListener {

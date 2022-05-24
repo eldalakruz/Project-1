@@ -15,15 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".PollingActivity"
-            android:exported="false" />
+       
         <activity
             android:name=".PostDetailsActivity"
             android:exported="false" />
-        <activity
-            android:name=".NewAds"
-            android:exported="false" />
+
         <activity
             android:name=".PostActivity"
             android:exported="false" />

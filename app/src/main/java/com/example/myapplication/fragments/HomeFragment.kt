@@ -50,10 +50,10 @@ class HomeFragment : Fragment() {
             startActivity(Intent(context, AddPostActivity::class.java))
         }
 
-        val rightarrow = view.findViewById<ImageView>(R.id.Move_to_poll_page)
-        rightarrow.setOnClickListener {
-            startActivity(Intent(context,PollingActivity::class.java))
-        }
+//        val rightarrow = view.findViewById<ImageView>(R.id.Move_to_poll_page)
+//        rightarrow.setOnClickListener {
+//            startActivity(Intent(context,PollingActivity::class.java))
+//        }
 
 
         var recyclerView: RecyclerView? = null
