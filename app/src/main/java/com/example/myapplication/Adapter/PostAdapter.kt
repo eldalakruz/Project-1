@@ -8,13 +8,9 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 
-import android.widget.Button
 
-
-import android.widget.ImageView
-import android.widget.SeekBar
-import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 
@@ -32,7 +28,7 @@ import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class PostAdapter(private val mContext: Context, 
+class PostAdapter(private val mContext: Context,
                   private val mPost: List<Post>) : RecyclerView.Adapter<PostAdapter.ViewHolder>()
 
 {
@@ -108,7 +104,7 @@ class PostAdapter(private val mContext: Context,
         val post = mPost[position]
 
         if (post.getPostimage().isEmpty()) {
-           holder.postImage.setImageResource(R.drawable.profile)
+            holder.postImage.setImageResource(R.drawable.profile)
         } else{
             Picasso.get()
                 .load(post.getPostimage())
@@ -129,21 +125,21 @@ class PostAdapter(private val mContext: Context,
 
         }
         // 1
-       if (post.getPollquestion().equals(""))
-       {
-           holder.pollquestion.visibility = View.GONE
+        if (post.getPollquestion().equals(""))
+        {
+            holder.pollquestion.visibility = View.GONE
 
         }
-       else
-      {
+        else
+        {
             holder.pollquestion.visibility = View.VISIBLE
             holder.pollquestion.setText(post.getPollquestion())
-       }
+        }
 
         //2
         if (post.getContestantone().equals(""))
         {
-           holder.contestantone.visibility = View.GONE
+            holder.contestantone.visibility = View.GONE
 
         }
         else
@@ -250,7 +246,7 @@ class PostAdapter(private val mContext: Context,
             }
         }
 
-       seekBar1.setOnTouchListener(object : View.OnTouchListener {
+        seekBar1.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean { return  true }
         })
 
@@ -307,10 +303,10 @@ class PostAdapter(private val mContext: Context,
         // set percent on text view
         tvPercent1.text = String.format("%.0f%%", percent1)
         // Set progress on seekbar
-          seekBar1.progress = percent1.toInt()
+        seekBar1.progress = percent1.toInt()
 
         tvPercent2.text = String.format("%.0f%%", percent2)
-           seekBar2.progress = percent2.toInt()
+        seekBar2.progress = percent2.toInt()
 
     }
 
@@ -331,8 +327,8 @@ class PostAdapter(private val mContext: Context,
 
     private fun numberOfLikes(likes: TextView, postid: String)
     {
-     val LikesRef = FirebaseDatabase.getInstance().reference
-         .child("Likes").child(postid)
+        val LikesRef = FirebaseDatabase.getInstance().reference
+            .child("Likes").child(postid)
 
         LikesRef.addValueEventListener(object : ValueEventListener
         {
@@ -351,20 +347,20 @@ class PostAdapter(private val mContext: Context,
         })
     }
 
-      private fun getTotalPolling(postid: String, tvPercent1: TextView, tvPercent2: TextView)
+    private fun getTotalPolling(postid: String, tvPercent1: TextView, tvPercent2: TextView)
     {
         val pollingRef = FirebaseDatabase.getInstance().reference
             .child("Polling")
             .child(postid)
-        
+
         pollingRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(pO: DataSnapshot)
             {
-               if (pO.exists()) {
+                if (pO.exists()) {
 
-                   tvPercent1.text = pO
-                       .child(firebaseUser!!.uid)
-                       .child("tvPercent1").value.toString()
+                    tvPercent1.text = pO
+                        .child(firebaseUser!!.uid)
+                        .child("tvPercent1").value.toString()
 
                     tvPercent2.text = pO
                         .child(firebaseUser!!.uid)
@@ -435,21 +431,21 @@ class PostAdapter(private val mContext: Context,
         userRef.addValueEventListener(object  : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot)
             {
-               if (snapshot.exists())
-               {
-                   val user = snapshot.getValue<User>(User::class.java)
+                if (snapshot.exists())
+                {
+                    val user = snapshot.getValue<User>(User::class.java)
 
-                   if (user!!.getImage().isEmpty()) {
-                       profileImage.setImageResource(R.drawable.profile)
-                   } else{
-                       Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
-                   }
+                    if (user!!.getImage().isEmpty()) {
+                        profileImage.setImageResource(R.drawable.profile)
+                    } else{
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
+                    }
 
 //                   Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
-                   userName.text = user!!.getUsername()
-                   publisher.text = user!!.getFullname()
+                    userName.text = user!!.getUsername()
+                    publisher.text = user!!.getFullname()
 
-               }
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -482,10 +478,7 @@ class PostAdapter(private val mContext: Context,
             override fun onCancelled(error: DatabaseError) {
 
             }
-
         })
-
     }
-
 }
 
