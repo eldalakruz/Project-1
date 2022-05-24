@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapter.MyImagesAdapter
+import com.example.myapplication.Adapter.MyImagesAdapter2
 import com.example.myapplication.Model.Post
 import com.example.myapplication.Model.User
 import com.google.firebase.auth.FirebaseAuth
@@ -43,9 +44,9 @@ class UserProfileActivity : AppCompatActivity() {
 
 
     var userprofilepostList : List<Post>? = null
-    var userprofilemyImagesAdapter : MyImagesAdapter? = null
+    var userprofilemyImagesAdapter : MyImagesAdapter2? = null
 
-    var userprofilemyImagesAdapterSavedImg : MyImagesAdapter? = null
+    var userprofilemyImagesAdapterSavedImg : MyImagesAdapter2? = null
     var userprofilepostListSaved : List<Post>? = null
     var userprofilemySavesImg : List<String>? = null
 
@@ -69,7 +70,7 @@ class UserProfileActivity : AppCompatActivity() {
 
 
         userprofilepostList = ArrayList()
-        userprofilemyImagesAdapter = let { MyImagesAdapter(it, userprofilepostList as ArrayList<Post>) }
+        userprofilemyImagesAdapter = MyImagesAdapter2(this, userprofilepostList as ArrayList<Post>)
         recyclerViewUploadImages.adapter = userprofilemyImagesAdapter
 
 
@@ -82,7 +83,7 @@ class UserProfileActivity : AppCompatActivity() {
 
 
         userprofilepostListSaved = ArrayList()
-        userprofilemyImagesAdapterSavedImg = let { MyImagesAdapter(it, userprofilepostListSaved as ArrayList<Post>) }
+        userprofilemyImagesAdapterSavedImg = MyImagesAdapter2(this, userprofilepostListSaved as ArrayList<Post>)
         recyclerViewSavedImages.adapter = userprofilemyImagesAdapterSavedImg
 
 

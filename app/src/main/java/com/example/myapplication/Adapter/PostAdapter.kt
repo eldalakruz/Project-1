@@ -73,9 +73,13 @@ class PostAdapter(private val mContext: Context,
         var comments: TextView
         var campaign_btn: Button
 
-        var pollquestion: TextView
-        var contestantone: TextView
-        var contestanttwo: TextView
+
+        var pollquestion : TextView
+        var contestantone : TextView
+        var contestanttwo : TextView
+//        var seekBar1 : SeekBar
+//        var seekBar2: SeekBar
+
 
         init {
             profileImage = itemView.findViewById(R.id.user_profile_image_post)
@@ -142,7 +146,16 @@ class PostAdapter(private val mContext: Context,
             val posts = holder as Posts
             // val modelVideo = videoArrayList!![position]
 
-            Picasso.get().load(post.getPostimage()).into(holder.postImage)
+      
+        if (post.getPostimage().isEmpty()) {
+           holder.postImage.setImageResource(R.drawable.profile)
+        } else{
+            Picasso.get()
+                .load(post.getPostimage())
+                .into(holder.postImage)
+        }
+//        Picasso.get().load(post.getPostimage()).into(holder.postImage)
+
 
             //description
             if (post.getDescription().equals("")) {
@@ -238,8 +251,6 @@ class PostAdapter(private val mContext: Context,
 
             }
 
-
-
             holder.comments.setOnClickListener {
                 val intentComment = Intent(mContext, CommentsActivity::class.java)
                 intentComment.putExtra("postId", post.getPostid())
@@ -266,9 +277,7 @@ class PostAdapter(private val mContext: Context,
             }
 
             seekBar1.setOnTouchListener(object : View.OnTouchListener {
-                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                    return true
-                }
+                override fun onTouch(v: View?, event: MotionEvent?): Boolean { return true}
             })
 
             holder.contestantone.setOnClickListener(object : View.OnClickListener {
@@ -284,13 +293,24 @@ class PostAdapter(private val mContext: Context,
                         calculatePecent()
                         PollingSaveData(post.getPostid())
                     }
-
                 }
             })
 
+
             seekBar2.setOnTouchListener(object : View.OnTouchListener {
-                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                    return true
+                override fun onTouch(v: View?, event: MotionEvent?): Boolean { return true  }
+
+                if (flag2)
+                {
+                    // when flag two is true
+                    count1++
+                    count2 = 1
+                    flag1 = true
+                    flag2 = false
+                    // calculate percentage
+                    calculatePecent()
+                    PollingSaveData(post.getPostid())
+
                 }
             })
 
@@ -313,7 +333,6 @@ class PostAdapter(private val mContext: Context,
             })
         }
         if (getItemViewType(position)== VIEW_TYPE_AD) {
-
 
             val adLoader  = AdLoader.Builder(mContext ,mContext.getString(R.string.native_ad_id_test))
                 .forNativeAd { nativeAd ->
@@ -428,17 +447,15 @@ class PostAdapter(private val mContext: Context,
         pollingRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(pO: DataSnapshot)
             {
-               if (pO.exists())
-                {
+               if (pO.exists()) {
 
-                    tvPercent1.text = pO
-                        .child(firebaseUser!!.uid)
-                        .child("tvPercent1").value.toString()
+                   tvPercent1.text = pO
+                       .child(firebaseUser!!.uid)
+                       .child("tvPercent1").value.toString()
 
                     tvPercent2.text = pO
                         .child(firebaseUser!!.uid)
                         .child("tvPercent2").value.toString()
-
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -645,7 +662,13 @@ class PostAdapter(private val mContext: Context,
                {
                    val user = snapshot.getValue<User>(User::class.java)
 
-                   Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
+                   if (user!!.getImage().isEmpty()) {
+                       profileImage.setImageResource(R.drawable.profile)
+                   } else{
+                       Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
+                   }
+
+//                   Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
                    userName.text = user!!.getUsername()
                    publisher.text = user!!.getFullname()
 

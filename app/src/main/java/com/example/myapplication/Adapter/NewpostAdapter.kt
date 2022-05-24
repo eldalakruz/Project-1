@@ -145,7 +145,6 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     }
 
 
-
     private fun publisherInfo(profileImage: CircleImageView, userName: TextView, publisher: TextView, publisherID: String) {
       val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherID)
         userRef.addValueEventListener(object :ValueEventListener{

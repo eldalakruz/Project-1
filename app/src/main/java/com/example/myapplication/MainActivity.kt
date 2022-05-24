@@ -48,11 +48,11 @@ class MainActivity : AppCompatActivity() {
 
                     val view = layoutInflater.inflate(R.layout.fragment_add, null)
                     val dialog = BottomSheetDialog(this)
-                    val btnClose = view.findViewById<Button>(R.id.item_1)
-                    btnClose.setOnClickListener {
-                  //      Toast.makeText(this,"you pressed on button", Toast.LENGTH_LONG).show()
-                        startActivity(Intent(this@MainActivity, AddPostActivity::class.java))
-                    }
+//                    val btnClose = view.findViewById<Button>(R.id.item_1)
+//                    btnClose.setOnClickListener {
+//                        Toast.makeText(this,"you pressed on button", Toast.LENGTH_LONG).show()
+//                        startActivity(Intent(this@MainActivity, AddPostActivity::class.java))
+//                    }
 
                     val btnpost = view.findViewById<TextView>(R.id.item_2)
                     btnpost.setOnClickListener {
@@ -76,14 +76,26 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
-
     }
 
     private fun setThatFragment(fragment : Fragment) =
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.frame,fragment)
+     //       addToBackStack(null)
             commit()
         }
+
+    override fun onBackPressed() {
+        if (bottomNavView.selectedItemId == R.id.miHome)
+        {
+            super.onBackPressed()
+            finish()
+        }
+        else
+        {
+            bottomNavView.selectedItemId = R.id.miHome
+        }
+
+    }
 
 }
