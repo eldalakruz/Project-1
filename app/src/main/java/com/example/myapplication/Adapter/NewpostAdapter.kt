@@ -357,7 +357,7 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val ad_price:TextView=itemView.findViewById(R.id.ad_price)
         val ad_store:TextView=itemView.findViewById(R.id.ad_store)
         val ad_call_to_action: Button =itemView.findViewById(R.id.ad_call_to_action)
-        val native_Ad_View: NativeAdView =itemView.findViewById(R.id.native_Ad_View)
+        val native_Ad_View: NativeAdView =itemView.findViewById(R.id.nativeAdView)
 
     }
 

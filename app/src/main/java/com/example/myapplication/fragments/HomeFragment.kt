@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.*
 import com.example.myapplication.Adapter.PostAdapter
 import com.example.myapplication.Model.Post
+import com.example.myapplication.R
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -23,6 +26,11 @@ import com.google.firebase.database.ValueEventListener
 import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
+
+    private companion object{
+        //TAG for debugging
+        private const val TAG = "NATIVE_AD_TAG"
+    }
 
     private var postAdapter: PostAdapter? = null
     private var postList: MutableList<Post>? = null
@@ -62,9 +70,22 @@ class HomeFragment : Fragment() {
         postAdapter = context?.let { PostAdapter(it, postList as ArrayList<Post>) }
         recyclerView.adapter = postAdapter
 
-        //checkFollowings()
         retrievePoststwo()
 
+
+        MobileAds.initialize(context){
+
+            Log.d(TAG, "onCreate: onInitCompleted")
+
+            //set your test devices .check your logcat for the hashed device ID to
+            // get test ads on a physical device e.g.
+            Log.d(TAG, "onCreate: first")
+            MobileAds.setRequestConfiguration(
+                RequestConfiguration.Builder().setTestDeviceIds(listOf("TEST_DEVICE_ID_HERE"," TEST_DEVICE_ID_HERE")).build()
+            )
+            Log.d(TAG, "onCreate: end")
+
+        }
         return view
     }
 

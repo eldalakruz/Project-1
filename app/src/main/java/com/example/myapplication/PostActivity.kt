@@ -44,9 +44,10 @@ class PostActivity : AppCompatActivity() {
         savenewpostbutton.setOnClickListener { uploadImage() }
 
 
-//        CropImage.activity()
-//            .setAspectRatio(1, 1)
-//            .start(this@PostActivity)
+
+        CropImage.activity()
+            //.setAspectRatio(2,1 )
+            .start(this@PostActivity)
 
     }
 
