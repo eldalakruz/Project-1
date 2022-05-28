@@ -7,9 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="colorGray">#eee</color>
     <color name="pinkeyorange">#F89880</color>
     <color name="milkgreen">#99ff99</color>
     <color name="pinkeygreen">#CEFA05</color>
     <color name="deeppurple_50">#FFCDD2</color>
+
+    <color name="BEBEBE">#BEBEBE</color>
+    <color name="green">#00ff00</color>
+
 </resources>

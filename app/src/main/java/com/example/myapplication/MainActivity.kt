@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val homeFragment = HomeFragment()
-        val notificationsFragment = NotificationsFragment()
+        val newpostFragment = NewpostFragment()
         val addFragment = AddFragment()
         val profileFragment = ProfileFragment()
         val searchFragment = SearchFragment()
@@ -40,19 +40,25 @@ class MainActivity : AppCompatActivity() {
                 R.id.miHome ->{
                     setThatFragment(homeFragment)
                 }
-                R.id.miNotifications ->{
-                    setThatFragment(notificationsFragment)
+                R.id.miPost ->{
+                    setThatFragment(newpostFragment)
                 }
                 R.id.miadd ->{
                     it.isChecked = false
 
                     val view = layoutInflater.inflate(R.layout.fragment_add, null)
                     val dialog = BottomSheetDialog(this)
-                    val btnClose = view.findViewById<Button>(R.id.item_1)
-                    btnClose.setOnClickListener {
-                  //      Toast.makeText(this,"you pressed on button", Toast.LENGTH_LONG).show()
-                        startActivity(Intent(this@MainActivity, AddPostActivity::class.java))
+//                    val btnClose = view.findViewById<Button>(R.id.item_1)
+//                    btnClose.setOnClickListener {
+//                        Toast.makeText(this,"you pressed on button", Toast.LENGTH_LONG).show()
+//                        startActivity(Intent(this@MainActivity, AddPostActivity::class.java))
+//                    }
+
+                    val btnpost = view.findViewById<TextView>(R.id.item_2)
+                    btnpost.setOnClickListener {
+                        startActivity(Intent(this@MainActivity, PostActivity::class.java))
                     }
+
                     dialog.setContentView(view)
                     dialog.show()
 
@@ -70,14 +76,26 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
-
     }
 
     private fun setThatFragment(fragment : Fragment) =
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.frame,fragment)
+     //       addToBackStack(null)
             commit()
         }
+
+    override fun onBackPressed() {
+        if (bottomNavView.selectedItemId == R.id.miHome)
+        {
+            super.onBackPressed()
+            finish()
+        }
+        else
+        {
+            bottomNavView.selectedItemId = R.id.miHome
+        }
+
+    }
 
 }

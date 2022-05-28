@@ -117,7 +117,7 @@ class SignUpActivity : AppCompatActivity() {
         userMap["username"] = userName.toLowerCase()
         userMap["email"] = emailSignUp
         userMap["bio"] = "hay i am using this app i am cool....."
-        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/my-application-7d428.appspot.com/o/Default%20Images%2Favatar3.png?alt=media&token=d717aed0-88e1-4cd4-a0b2-0c736360db62"
+        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/social-media-61e24.appspot.com/o/Default%20Images%2Fprofile-user.png?alt=media&token=1335e24b-a093-4e05-8ed7-977a571495e2"
 
         usersRef.child(currentUserID).setValue(userMap)
             .addOnCompleteListener { task ->
@@ -130,10 +130,10 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this,"Account has been created successfully.",Toast.LENGTH_LONG).show()
 
 
-                    FirebaseDatabase.getInstance().reference
-                        .child("Follow").child(currentUserID)
-                        .child("Following").child(currentUserID)
-                        .setValue(true)
+//                    FirebaseDatabase.getInstance().reference
+//                        .child("Follow").child(currentUserID)
+//                        .child("Following").child(currentUserID)
+//                        .setValue(true)
 
                     val intent = Intent(this@SignUpActivity, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

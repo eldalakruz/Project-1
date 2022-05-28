@@ -21,26 +21,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content"
+                    android:text="Poll Play"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/green"/>
 
-                    android:layout_centerInParent="true"
-
-                    android:layout_marginRight="45dp"
-                    android:src="@drawable/iconadd" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-
-                    android:src="@drawable/ic_send" />
+                    android:id="@+id/Move_to_poll_page"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
-
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -50,15 +49,27 @@
         android:id="@+id/recycler_view_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar_layout">
+
+       
 
         android:layout_below="@+id/app_bar_layout"
         android:layout_marginTop="-64dp"
         tools:listitem="@layout/posts_layout">
 
+
         android:layout_below="@+id/app_bar_layout">
 
-
     </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/pickVideoFab_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/iconadd"
+        android:backgroundTint="@color/BEBEBE"/>
 
 </RelativeLayout>

@@ -15,15 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".VideoPostAnswer"
-            android:exported="false" />
+       
+        
+
+   
         <activity
             android:name=".ImagePostAnswer"
             android:exported="false" />
-        <activity
-            android:name=".newTry"
-            android:exported="false" />
+      
         <activity
             android:name=".Add_answer"
             android:exported="false" />
@@ -32,12 +31,16 @@
             android:exported="false" />
         <activity
             android:name=".Add_questiom"
+
+            android:name=".PostDetailsActivity"
+
+            android:exported="false" />
+
+        <activity
+            android:name=".PostActivity"
             android:exported="false" />
         <activity
-            android:name=".sample"
-            android:exported="false" />
-        <activity
-            android:name=".Sample"
+            android:name=".SheetBottomItem"
             android:exported="false" />
         <activity
             android:name=".CompaignComments2"
@@ -56,11 +59,9 @@
             android:exported="false"
             android:noHistory="false" />
         <activity
-
             android:name=".UserProfileActivity"
             android:exported="false" />
         <activity
-
             android:name=".CommentsActivity"
             android:exported="false" />
         <activity
@@ -82,11 +83,19 @@
             android:name=".AccountSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ForgotPasswordActivity"
             android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/App_ID" />
     </application>
 
 </manifest>

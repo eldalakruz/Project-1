@@ -5,16 +5,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
     app:cardElevation="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:id="@+id/linear1"
@@ -42,13 +39,22 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/post_image_home"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:scaleType="centerCrop"
             android:src="@drawable/profile" />
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -72,12 +78,12 @@
                 android:src="@drawable/comment" />
 
             <Button
+                android:id="@+id/campaign_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginStart="258dp"
-                android:layout_marginTop="5dp"
                 android:layout_toStartOf="@+id/post_save_comment_btn"
-                android:text="Campaign Page" />
+                android:text="Campaign Page"
+                android:textSize="10dp"/>
 
             <ImageView
                 android:id="@+id/post_save_comment_btn"
@@ -126,16 +132,6 @@
             android:text=""
             android:textColor="@color/black"
             android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/tv_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -220,6 +216,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
 
+
             <Button
                 android:id="@+id/campaign_btn"
                 android:layout_width="wrap_content"
@@ -228,17 +225,13 @@
                 android:layout_marginTop="1dp"
                 android:text="Campaign" />
 
-            <Button
-                android:id="@+id/Discusion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_percent2"
-                android:layout_marginTop="0dp"
-                android:layout_alignParentEnd="true"
-                android:text="Discussion"/>
 
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
     </LinearLayout>
 

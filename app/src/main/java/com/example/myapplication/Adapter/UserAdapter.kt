@@ -2,22 +2,16 @@ package com.example.myapplication.Adapter
 
 import android.content.Context
 import android.content.Intent
-import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.NonNull
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.CommentsActivity
 import com.example.myapplication.Model.User
 import com.example.myapplication.R
 import com.example.myapplication.UserProfileActivity
-import com.example.myapplication.fragments.ProfileFragment
-import com.example.myapplication.fragments.SearchUserFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -46,7 +40,7 @@ class UserAdapter (private var mContext: Context,
         holder.userfullNameTextView.text = user.getFullname()
         Picasso.get().load(user.getImage()).placeholder(R.drawable.ic_profile).into(holder.userProfileImage)
 
-        checkFollowingStatus(user.getUID(),holder.followButton)
+  //      checkFollowingStatus(user.getUID(),holder.followButton)
 
 
         holder.itemView.setOnClickListener {
@@ -69,7 +63,7 @@ class UserAdapter (private var mContext: Context,
 //            mContext.startActivity(intentComment)
 //        }
 
-        holder.followButton.setOnClickListener{
+     /*   holder.followButton.setOnClickListener{
             if(holder.followButton.text.toString() == "Follow") {
                 firebaseUser?.uid.let { it1 ->
                     FirebaseDatabase.getInstance().reference
@@ -113,7 +107,8 @@ class UserAdapter (private var mContext: Context,
                         }
                 }
             }
-        }
+        }      */
+
     }
 
     override fun getItemCount(): Int {
@@ -125,7 +120,7 @@ class UserAdapter (private var mContext: Context,
         var userNameTextView: TextView = itemView.findViewById(R.id.user_name_search)
         var userfullNameTextView: TextView = itemView.findViewById(R.id.user_full_name_search)
         var userProfileImage: CircleImageView = itemView.findViewById(R.id.user_profile_image_search)
-        var followButton: Button = itemView.findViewById(R.id.follow_btn_search)
+//        var followButton: Button = itemView.findViewById(R.id.follow_btn_search)
 
     }
 

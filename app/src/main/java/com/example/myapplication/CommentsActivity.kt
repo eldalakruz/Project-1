@@ -34,6 +34,7 @@ class CommentsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comments)
+        supportActionBar?.hide()
 
         addcomment = findViewById(R.id.add_comment)
 

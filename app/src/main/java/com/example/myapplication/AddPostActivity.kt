@@ -38,10 +38,10 @@ class AddPostActivity : AppCompatActivity() {
     private lateinit var contestanttwo : EditText
     //
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_post)
+        supportActionBar?.hide()
 
         descriptionpost = findViewById(R.id.description_post)
         savenewpostbtn = findViewById(R.id.save_new_post_btn)
@@ -56,12 +56,11 @@ class AddPostActivity : AppCompatActivity() {
 
         savenewpostbtn.setOnClickListener { uploadImage() }
 
-
            CropImage.activity()
           .setAspectRatio(2,1)
           .start(this@AddPostActivity)
-
     }
+
 
     private fun uploadImage()
     {

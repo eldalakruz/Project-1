@@ -2,4 +2,13 @@
     <string name="app_name">My Application</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Test id-->
+    <string name="App_ID">ca-app-pub-3940256099942544~3347511713</string>
+
+
+    <string name="native_ad_id_test">ca-app-pub-3940256099942544/2247696110</string>
+    <!--Live id-->
+    <string name="native_ad_id_live">ca-app-pub-3608644720594211/5711867772</string>
+    <string name="Text">Text</string>
 </resources>

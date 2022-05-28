@@ -44,7 +44,6 @@ class ProfileFragment : Fragment() {
     private lateinit var editaccountsettingsbtn: Button
     private lateinit var totalposts : TextView
 
-
     var postList : List<Post>? = null
     var myImagesAdapter : MyImagesAdapter? = null
 
@@ -67,7 +66,7 @@ class ProfileFragment : Fragment() {
             this.profileId = pref.getString("profileId","none").toString()
         }
 
-        if (profileId == firebaseUser.uid)
+      /*  if (profileId == firebaseUser.uid)
         {
             editaccountsettingsbtn = view!!.findViewById(R.id.edit_account_settings_btn)
             editaccountsettingsbtn.text = "Edit Profile"
@@ -75,7 +74,7 @@ class ProfileFragment : Fragment() {
         else if (profileId != firebaseUser.uid)
         {
             checkFollowAndFollowingButtonStatus()
-        }
+        }  */
 
         // recycler View for upload  Images
         var recyclerViewUploadImages : RecyclerView
@@ -126,8 +125,10 @@ class ProfileFragment : Fragment() {
 
         editaccountsettingsbtn = view.findViewById(R.id.edit_account_settings_btn)
         editaccountsettingsbtn.setOnClickListener {
-            val getButtonText = editaccountsettingsbtn.text.toString()
+            startActivity(Intent(context, AccountSettingsActivity::class.java))
 
+
+           /* val getButtonText = editaccountsettingsbtn.text.toString()
             when
             {
                 getButtonText == "Edit Profile"  ->
@@ -165,7 +166,7 @@ class ProfileFragment : Fragment() {
                         .removeValue()
                 }
             }
-        }
+        }    */
 
         }
 
