@@ -77,11 +77,16 @@ class PostAdapter(private val mContext: Context,
         var pollquestion : TextView
         var contestantone : TextView
         var contestanttwo : TextView
+
+     
+
 //        var seekBar1 : SeekBar
 //        var seekBar2: SeekBar
 
 
+
         init {
+            Discusion = itemView.findViewById(R.id.Discusion)
             profileImage = itemView.findViewById(R.id.user_profile_image_post)
             postImage = itemView.findViewById(R.id.post_image_home)
             likeButton = itemView.findViewById(R.id.post_image_like_btn)
@@ -195,6 +200,14 @@ class PostAdapter(private val mContext: Context,
 
             //
 
+
+        holder.campaign_btn.setOnClickListener {
+            val intent = Intent(mContext, CompaignPage::class.java)
+            intent.putExtra("postId", post.getPostid())
+            intent.putExtra("publisherId", post.getPublisher())
+            intent.putExtra("contestantone", post.getContestantone())
+            Log.e("sample","test")
+
             publisherInfo(
                 holder.profileImage,
                 holder.userName,
@@ -208,8 +221,7 @@ class PostAdapter(private val mContext: Context,
             getTotalPolling(post.getPostid(), tvPercent1, tvPercent2)
 
 
-
-            holder.likeButton.setOnClickListener {
+            holder.likeButton.setOnClickListener {    
 
                 if (holder.likeButton.tag == "Like") {
                     FirebaseDatabase.getInstance().reference
@@ -223,6 +235,7 @@ class PostAdapter(private val mContext: Context,
                         .child(post.getPostid())
                         .child(firebaseUser!!.uid)
                         .removeValue()
+
 
 //                val intent = Intent(mContext, MainActivity::class.java)
 //                mContext.startActivity(intent)

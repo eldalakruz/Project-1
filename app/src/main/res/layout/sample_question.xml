@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:orientation="vertical"
+    android:layout_marginTop="12dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    app:cardMaxElevation="5dp"
+    app:cardCornerRadius="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/liner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_person_black" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="14dp"
+                    android:text="User Name"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/show_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/liner"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="Roboto italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/show_question"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                app:cardCornerRadius="25dp">
+
+
+
+            <ImageView
+                android:id="@+id/imageretrivequestion"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"/>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <RelativeLayout
+                android:id="@+id/like_commont_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/thumps_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_thumbs_up" />
+
+                <TextView
+                    android:id="@+id/like_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:layout_toEndOf="@+id/thumps_btn"/>
+
+                <ImageView
+                    android:id="@+id/thumbsdown_Btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_toEndOf="@+id/like_count"
+                    android:src="@drawable/ic_thumbs_down"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="10dp"/>
+                <TextView
+                    android:id="@+id/dislike_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:layout_toEndOf="@+id/thumbsdown_Btn"/>
+
+                <ImageView
+                    android:id="@+id/commentAnswer_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_toEndOf="@+id/dislike_count"
+                    android:src="@drawable/comment2" />
+
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/answer_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:layout_below="@+id/like_commont_layout"/>
+            
+            
+<!--            <ScrollView-->
+<!--                android:id="@+id/scroll"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/answer_count">-->
+
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/answerText"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:layout_marginStart="60dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:background="@drawable/textview_round_cornor"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:backgroundTint="@color/white" />-->
+
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/deeppurple_50"-->
+<!--                    android:scaleX="0.9"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    android:layout_marginStart="50dp">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/answerImage"-->
+<!--                        android:layout_width="400dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/profile"-->
+<!--                        android:visibility="gone" />-->
+
+<!--                </androidx.cardview.widget.CardView>-->
+
+<!--            </RelativeLayout>-->
+
+<!--            </ScrollView>-->
+
+
+
+
+            <!--            <TextView-->
+<!--                android:id="@+id/timeTv_question"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/answer_count"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:shadowColor="@color/black"-->
+<!--                android:shadowDx="1"-->
+<!--                android:shadowDy="1"-->
+<!--                android:shadowRadius="2"-->
+<!--                android:text="dd/MM/yyyy hh:mm"-->
+<!--                android:textColor="@color/teal_200" />-->
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

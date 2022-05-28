@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Add_answer">
+
+    <TextView
+        android:id="@+id/write_question_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"/>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageonanswer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:layout_below="@+id/write_question_answer" />-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/answerRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/answerRelative"
+        android:layout_below="@+id/write_question_answer"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        tools:listitem="@layout/sample_answer">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/write_question_answer"-->
+<!--        android:layout_above="@+id/answerRelative"-->
+<!--        tools:listitem="@layout/row_video"-->
+<!--        android:visibility="gone"/>-->
+
+
+    <RelativeLayout
+        android:id="@+id/answerRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:padding="4dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_answer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="2dp"
+            android:src="@drawable/ic_person_black">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <EditText
+            android:id="@+id/add_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toLeftOf="@+id/share_link"
+            android:layout_toRightOf="@+id/profile_image_answer"
+            android:hint="Write Your answer......."
+            android:padding="8dp">
+
+        </EditText>
+
+        <ImageView
+            android:id="@+id/postBtn_answer"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/send" />
+
+        <ImageView
+            android:id="@+id/share_link"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="40dp"
+            android:layout_toLeftOf="@+id/postBtn_answer"
+            android:src="@drawable/galery" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/postBtn_answer"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginEnd="5dp"-->
+<!--            android:text="Post"-->
+<!--            android:textColor="@color/purple_700"-->
+<!--            android:textSize="18dp"-->
+<!--            android:textStyle="bold">-->
+
+<!--        </TextView>-->
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
