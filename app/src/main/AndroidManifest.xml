@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".mani"
+            android:exported="false" />
+        <activity
             android:name=".VideoPostAnswer"
             android:exported="false" />
         <activity

@@ -39,9 +39,7 @@
         android:id="@+id/recycler_view_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar_layout"
-        android:layout_marginTop="-64dp"
-        tools:listitem="@layout/posts_layout">
+        android:layout_below="@+id/app_bar_layout">
 
     </androidx.recyclerview.widget.RecyclerView>
 

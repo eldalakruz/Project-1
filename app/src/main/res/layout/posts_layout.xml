@@ -216,9 +216,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_percent2"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="1dp"
                 android:text="Campaign" />
+
+            <Button
+                android:id="@+id/Discusion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_percent2"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentEnd="true"
+                android:text="Discussion"/>
 
 
         </RelativeLayout>

@@ -107,7 +107,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun saveUserInfo(fullName: String, userName: String, emailSignUp: String , progressDialog: ProgressDialog)
     {
         val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
-        val usersRef: DatabaseReference = FirebaseDatabase.getInstance("https://my-application-7d428-default-rtdb.firebaseio.com/").reference.child("Users")
+        val usersRef: DatabaseReference = FirebaseDatabase.getInstance("https://my-application-9988e-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users")
 
         Log.e(TAG," A_LOG  i am user Data")
 

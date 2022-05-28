@@ -47,10 +47,12 @@ class PostAdapter(private val mContext: Context,
         var pollquestion : TextView
         var contestantone : TextView
         var contestanttwo : TextView
+        var Discusion : Button
 
 
 
         init {
+            Discusion = itemView.findViewById(R.id.Discusion)
             profileImage = itemView.findViewById(R.id.user_profile_image_post)
             postImage =  itemView.findViewById(R.id.post_image_home)
             likeButton = itemView.findViewById(R.id.post_image_like_btn)
@@ -175,7 +177,7 @@ class PostAdapter(private val mContext: Context,
         }
 
         holder.campaign_btn.setOnClickListener {
-            val intent = Intent(mContext, sample::class.java)
+            val intent = Intent(mContext, CompaignPage::class.java)
             intent.putExtra("postId", post.getPostid())
             intent.putExtra("publisherId", post.getPublisher())
             intent.putExtra("contestantone", post.getContestantone())
@@ -187,6 +189,10 @@ class PostAdapter(private val mContext: Context,
 
             mContext.startActivity(intent)
 
+        }
+        holder.Discusion.setOnClickListener {
+            val intent = Intent(mContext, sample::class.java)
+            mContext.startActivity(intent)
         }
 
 

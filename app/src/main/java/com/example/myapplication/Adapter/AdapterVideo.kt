@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +57,8 @@ class AdapterVideo(
         val title: String? = modelVideo.title
         val timestamp: String? = modelVideo.timestamp
         val videoUri: String? = modelVideo.videoUri
+
+        Log.e("sample","test:$videoUri")
 
         //format date e.g. 16/03/2022 11:38am
         val calendar = Calendar.getInstance()
@@ -214,6 +217,8 @@ class AdapterVideo(
 
         //get video uri
         val videoUrl: String? = modelVideo.videoUri
+
+        Log.e("sample","test:$videoUrl")
 
         //MediaController for play/pause/time etc
         val mediaController = MediaController(context)

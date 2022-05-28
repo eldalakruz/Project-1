@@ -42,6 +42,7 @@
         <entry key="..\:/Project-1.2/app/src/main/res/layout/posts_layout.xml" value="0.25" />
         <entry key="..\:/Project-1.2/app/src/main/res/layout/user_item_layout.xml" value="0.25" />
         <entry key="..\:/Project-1.2/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable-v24/grid.xml" value="0.176" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable-v24/ic_profile.xml" value="0.144" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable-v24/ic_send.xml" value="0.1325" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/comment.xml" value="0.187" />
@@ -49,11 +50,15 @@
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/ic_add_white.xml" value="0.187" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/ic_attachment.xml" value="0.1325" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/ic_comment.xml" value="0.187" />
+        <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/ic_heart.xml" value="0.176" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/ic_person_black.xml" value="0.187" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/ic_send_btn.xml" value="0.1325" />
+        <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/ic_thumbs_down_color.xml" value="0.176" />
+        <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/ic_thumbs_up_color.xml" value="0.176" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/ic_video_library_white.xml" value="0.187" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/profile.xml" value="0.144" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/profile_icons.xml" value="0.144" />
+        <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/drawable/textview_round_cornor.xml" value="0.176" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_account_settings.xml" value="0.17" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_add_answer.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_add_post.xml" value="0.15806159420289856" />
@@ -66,6 +71,7 @@
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_compaign_page.xml" value="0.15806159420289856" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_image_post_answer.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_main.xml" value="0.15806159420289856" />
+        <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_mani.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_new_try.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_sample.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/activity_sign_in.xml" value="0.20416666666666666" />
@@ -89,7 +95,7 @@
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/posts_layout.xml" value="0.15806159420289856" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/row_video.xml" value="0.15806159420289856" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/row_video2.xml" value="0.15806159420289856" />
-        <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/sample_answer.xml" value="0.33" />
+        <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/sample_answer.xml" value="0.22" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/sample_question.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/user_item_layout.xml" value="0.15806159420289856" />
         <entry key="..\:/Users/Kishore/AndroidStudioProjects/Project-1/app/src/main/res/layout/video_post.xml" value="0.20416666666666666" />
