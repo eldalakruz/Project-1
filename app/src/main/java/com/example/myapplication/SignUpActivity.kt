@@ -119,8 +119,6 @@ class SignUpActivity : AppCompatActivity() {
         userMap["bio"] = "hay i am using this app i am cool....."
         userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/my-application-7d428.appspot.com/o/Default%20Images%2Favatar3.png?alt=media&token=d717aed0-88e1-4cd4-a0b2-0c736360db62"
 
-        Log.e(TAG," A_LOG  i am login")
-
         usersRef.child(currentUserID).setValue(userMap)
             .addOnCompleteListener { task ->
 
@@ -144,7 +142,6 @@ class SignUpActivity : AppCompatActivity() {
                 }
                 else
                 {
-                    Log.w(TAG," A_LOG   i am in ELSE  case")
                     val message = task.exception!!.toString()
                     Toast.makeText(this,"Error: $message",Toast.LENGTH_LONG)
                     FirebaseAuth.getInstance().signOut()

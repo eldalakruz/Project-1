@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
 
@@ -58,23 +58,31 @@
 
             <ImageView
                 android:id="@+id/post_image_like_btn"
-                android:layout_width="41dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/heart_not_clicked" />
 
             <ImageView
                 android:id="@+id/post_image_comment_btn"
-                android:layout_width="40dp"
-                android:layout_height="34dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="3dp"
                 android:layout_toEndOf="@+id/post_image_like_btn"
                 android:src="@drawable/comment" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="258dp"
+                android:layout_marginTop="5dp"
+                android:layout_toStartOf="@+id/post_save_comment_btn"
+                android:text="Campaign Page" />
+
             <ImageView
                 android:id="@+id/post_save_comment_btn"
-                android:layout_width="40dp"
-                android:layout_height="39dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="0dp"
                 android:layout_marginRight="3dp"
@@ -88,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="10dp"
             android:textStyle="bold" />
 
         <TextView
@@ -97,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="10dp"
             android:textStyle="bold" />
 
         <TextView
@@ -106,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="10dp" />
 
         <TextView
             android:id="@+id/comments"
@@ -117,14 +125,14 @@
             android:layout_marginBottom="5dp"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:textSize="10dp" />
 
         <TextView
             android:id="@+id/tv_question"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -136,7 +144,7 @@
             <SeekBar
                 android:id="@+id/seek_bar1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="29dp"
                 android:layout_marginTop="16dp"
                 android:max="100"
                 android:progress="25"
@@ -147,7 +155,7 @@
             <TextView
                 android:id="@+id/tv_option1"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
@@ -158,7 +166,7 @@
             <TextView
                 android:id="@+id/tv_percent1"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="5dp"
@@ -177,7 +185,7 @@
             <SeekBar
                 android:id="@+id/seek_bar2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="29dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="0dp"
@@ -190,7 +198,7 @@
             <TextView
                 android:id="@+id/tv_option2"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:paddingStart="32dp"
@@ -201,7 +209,7 @@
             <TextView
                 android:id="@+id/tv_percent2"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
@@ -210,6 +218,7 @@
                 android:paddingEnd="32dp"
                 android:text="0%"
                 app:layout_constraintEnd_toEndOf="parent" />
+
 
             <Button
                 android:id="@+id/campaign_btn"
@@ -230,10 +239,6 @@
 
 
         </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
 
     </LinearLayout>
 
