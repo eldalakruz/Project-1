@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Add_questiom">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addimageFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:contentDescription="TODO"
+        android:src="@drawable/ic_video_library_white">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+
+    <EditText
+        android:id="@+id/write_question"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="Enter Question Here"
+        android:background="@drawable/textview_round_cornor"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#D1C4E9">
+
+    </EditText>
+
+    <ImageView
+        android:id="@+id/imageforquestion"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/write_question"
+        android:layout_marginTop="10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageforquestion"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/uploadquestionBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/upload" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

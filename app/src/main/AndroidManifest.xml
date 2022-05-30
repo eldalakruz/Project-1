@@ -16,8 +16,24 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
        
+        
+
+   
         <activity
+            android:name=".ImagePostAnswer"
+            android:exported="false" />
+      
+        <activity
+            android:name=".Add_answer"
+            android:exported="false" />
+        <activity
+            android:name=".Answer"
+            android:exported="false" />
+        <activity
+            android:name=".Add_questiom"
+
             android:name=".PostDetailsActivity"
+
             android:exported="false" />
 
         <activity

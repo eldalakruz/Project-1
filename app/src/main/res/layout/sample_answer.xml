@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@color/white"
+    app:cardCornerRadius="25dp"
+    app:layout_goneMarginTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/Relative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_profile_post_answer"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_person_black" />
+
+
+            <TextView
+                android:id="@+id/user_name_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/user_profile_post_answer"
+                android:text="user name"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Relative">
+
+       <TextView
+            android:id="@+id/answerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+           android:layout_marginStart="60dp"
+           android:layout_alignParentEnd="true"
+           android:layout_marginEnd="10dp"
+           android:background="@drawable/textview_round_cornor"
+           android:visibility="gone"
+           android:backgroundTint="@color/white"/>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/deeppurple_50"
+                android:scaleX="0.9"
+                app:cardCornerRadius="10dp"
+                android:layout_marginStart="50dp">
+
+                <ImageView
+                    android:id="@+id/answerImage"
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/profile"
+                    android:visibility="gone" />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/linear1">-->
+<!--        -->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="answer">-->
+<!--            -->
+<!--        </TextView>-->
+<!--        -->
+<!--        -->
+<!--    </RelativeLayout>-->
+
+
+</androidx.cardview.widget.CardView>
