@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapter.NewpostAdapter
 import com.example.myapplication.Model.Newpost
+import com.example.myapplication.Model.Post
 import com.example.myapplication.R
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
@@ -27,8 +28,8 @@ class NewpostFragment : Fragment() {
         private const val TAG = "NATIVE_AD_TAG"
     }
     //UI view
-      var newpostAdapter : NewpostAdapter? = null
-        var postList: MutableList<Newpost>? = null
+         var newpostAdapter : NewpostAdapter? = null
+         var postList: MutableList<Newpost>? = null
          var followingList: MutableList<Newpost>? = null
 
     override fun onCreateView(
@@ -49,7 +50,8 @@ class NewpostFragment : Fragment() {
         newpostAdapter = context?.let { NewpostAdapter(it, postList as ArrayList<Newpost>) }
         recyclerView.adapter = newpostAdapter
 
-        checkFollowings()
+//        checkFollowings()
+        retrievePoststwo()
 
         MobileAds.initialize(context){
 
@@ -59,7 +61,8 @@ class NewpostFragment : Fragment() {
             // get test ads on a physical device e.g.
             Log.d(TAG, "onCreate: first")
             MobileAds.setRequestConfiguration(
-                RequestConfiguration.Builder().setTestDeviceIds(listOf("TEST_DEVICE_ID_HERE"," TEST_DEVICE_ID_HERE")).build()
+                RequestConfiguration.Builder()
+                    .setTestDeviceIds(listOf("TEST_DEVICE_ID_HERE"," TEST_DEVICE_ID_HERE")).build()
             )
             Log.d(TAG, "onCreate: end")
 
@@ -131,8 +134,27 @@ class NewpostFragment : Fragment() {
 
             }
         })
+    }
 
+    private fun retrievePoststwo() {
+        val postsRef = FirebaseDatabase.getInstance().reference.child("NewPost")
+        postsRef.addValueEventListener(object : ValueEventListener
+        {
+            override fun onDataChange(pO: DataSnapshot) {
+                postList?.clear()
+                for (snapshot in pO.children)
+                {
+                    val Newpost = snapshot.getValue(Newpost::class.java)
 
+                    postList!!.add(Newpost!!)
+                    newpostAdapter!!.notifyDataSetChanged()
+
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 
 }

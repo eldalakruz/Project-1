@@ -151,6 +151,38 @@
         <entry key="..\:/Project-2.0/app/src/main/res/layout/row_video.xml" value="0.20416666666666666" />
         <entry key="..\:/Project-2.0/app/src/main/res/layout/row_video2.xml" value="0.20416666666666666" />
         <entry key="..\:/Project-2.0/app/src/main/res/layout/user_item_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/drawable/comment.xml" value="0.171" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_account_settings.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_add_post.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_add_video.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_comments.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_compaign_comments1.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_compaign_page.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_forgot_password.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_new_ads.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_post.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_post_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_sign_in.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_sign_up.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/activity_user_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/fragment_add.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/fragment_person1.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/fragment_person2.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/fragment_post.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/fragment_post_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/fragment_search.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/images_item_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/native_ads.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/new_post.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/posts_layout.xml" value="0.25" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/row_native_ad.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/row_video.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/row_video2.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/layout/user_item_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project-2.4/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

@@ -10,6 +10,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 
 import com.example.myapplication.databinding.ActivitySignUpBinding
@@ -21,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase
 class SignUpActivity : AppCompatActivity() {
 
 
-    private lateinit var signinlinkbtn : Button
+    private lateinit var signinlinkbtn : TextView
     private lateinit var signupbtn : Button
     private lateinit var fullnamesignup : EditText
     private lateinit var usernamesignup : EditText
@@ -107,7 +108,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun saveUserInfo(fullName: String, userName: String, emailSignUp: String , progressDialog: ProgressDialog)
     {
         val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
-        val usersRef: DatabaseReference = FirebaseDatabase.getInstance("https://my-application-7d428-default-rtdb.firebaseio.com/").reference.child("Users")
+        val usersRef: DatabaseReference = FirebaseDatabase.getInstance("https://my-application-9988e-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users")
 
         Log.e(TAG," A_LOG  i am user Data")
 
@@ -117,7 +118,7 @@ class SignUpActivity : AppCompatActivity() {
         userMap["username"] = userName.toLowerCase()
         userMap["email"] = emailSignUp
         userMap["bio"] = "hay i am using this app i am cool....."
-        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/social-media-61e24.appspot.com/o/Default%20Images%2Fprofile-user.png?alt=media&token=1335e24b-a093-4e05-8ed7-977a571495e2"
+        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/my-application-9988e.appspot.com/o/Default%20Images%2Favatar3.png?alt=media&token=17c1e7f0-d994-49eb-8762-45614d2457e6"
 
         usersRef.child(currentUserID).setValue(userMap)
             .addOnCompleteListener { task ->

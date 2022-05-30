@@ -16,6 +16,7 @@
         android:src="@drawable/ic_add_white"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/BEBEBE"
         android:layout_margin="10dp"
         android:contentDescription="TODO">
 

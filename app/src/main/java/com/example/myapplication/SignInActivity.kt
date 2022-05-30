@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : AppCompatActivity() {
 
-    private lateinit var signuplinkbtn : Button
+    private lateinit var signuplinkbtn : TextView
     private lateinit var loginbtn : Button
     private lateinit var emaillogin : EditText
     private lateinit var passwordlogin : EditText

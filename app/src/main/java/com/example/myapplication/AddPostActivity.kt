@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.myapplication.fragments.AddFragment
+import com.example.myapplication.fragments.HomeFragment
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -37,6 +38,7 @@ class AddPostActivity : AppCompatActivity() {
     private lateinit var contestantone : EditText
     private lateinit var contestanttwo : EditText
     //
+    private lateinit var closeaddpostbtn : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +56,15 @@ class AddPostActivity : AppCompatActivity() {
 
         storagePostPicRef = FirebaseStorage.getInstance().reference.child("posts Pictures")
 
+        closeaddpostbtn = findViewById(R.id.close_add_post_btn)
+        closeaddpostbtn.setOnClickListener {
+            startActivity(Intent(this@AddPostActivity,MainActivity::class.java))
+        }
+
         savenewpostbtn.setOnClickListener { uploadImage() }
 
            CropImage.activity()
-          .setAspectRatio(2,1)
+//          .setAspectRatio(4,5)
           .start(this@AddPostActivity)
     }
 

@@ -3,6 +3,7 @@ package com.example.myapplication.Adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -12,6 +13,8 @@ import android.widget.*
 
 
 import androidx.annotation.NonNull
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.res.TypedArrayUtils.getText
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.*
 import com.example.myapplication.Model.Post
@@ -66,12 +69,14 @@ class PostAdapter(private val mContext: Context,
         var likeButton: ImageView
         var commentButton: ImageView
         var saveButton: ImageView
+        var sharebtn : ImageView
+
         var userName: TextView
         var likes: TextView
         var publisher: TextView
         var description: TextView
         var comments: TextView
-        var campaign_btn: Button
+        var campaign_btn: TextView
 
 
         var pollquestion : TextView
@@ -93,6 +98,7 @@ class PostAdapter(private val mContext: Context,
             description = itemView.findViewById(R.id.description)
             comments = itemView.findViewById(R.id.comments)
             campaign_btn = itemView.findViewById(R.id.campaign_btn)
+            sharebtn = itemView.findViewById(R.id.post_image_share_btn)
 
             pollquestion = itemView.findViewById(R.id.tv_question)
             contestantone = itemView.findViewById(R.id.tv_option1)
@@ -143,12 +149,12 @@ class PostAdapter(private val mContext: Context,
         if (getItemViewType(position)== VIEW_TYPE_CONTENT) {
 
             val post = mPost[position]
-            val posts = holder as Posts
+            val Posts = holder as Posts
             // val modelVideo = videoArrayList!![position]
 
       
         if (post.getPostimage().isEmpty()) {
-           holder.postImage.setImageResource(R.drawable.profile)
+            holder.postImage.setImageResource(R.drawable.profile)
         } else{
             Picasso.get()
                 .load(post.getPostimage())
@@ -228,6 +234,18 @@ class PostAdapter(private val mContext: Context,
 //                mContext.startActivity(intent)
                 }
             }
+
+
+            // share button  ---------(1)
+            holder.sharebtn.setOnClickListener {
+                val intent= Intent()
+                intent.action=Intent.ACTION_SEND
+                intent.type="text/plain"
+                intent.putExtra(Intent.EXTRA_TEXT,"" )
+                mContext.startActivity(Intent.createChooser(intent,"Share To:"))
+            }
+
+
             holder.commentButton.setOnClickListener {
                 val intentComment = Intent(mContext, CommentsActivity::class.java)
                 intentComment.putExtra("postId", post.getPostid())
@@ -241,12 +259,7 @@ class PostAdapter(private val mContext: Context,
                 intent.putExtra("postId", post.getPostid())
                 intent.putExtra("publisherId", post.getPublisher())
                 intent.putExtra("contestantone", post.getContestantone())
-                Log.e("sample", "test")
-
                 intent.putExtra("contestanttwo", post.getContestanttwo())
-
-                Log.e("sample", "test")
-
                 mContext.startActivity(intent)
 
             }

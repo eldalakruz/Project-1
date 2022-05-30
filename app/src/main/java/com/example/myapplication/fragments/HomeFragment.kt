@@ -72,7 +72,6 @@ class HomeFragment : Fragment() {
 
         retrievePoststwo()
 
-
         MobileAds.initialize(context){
 
             Log.d(TAG, "onCreate: onInitCompleted")

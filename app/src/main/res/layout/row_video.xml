@@ -55,16 +55,17 @@
                 android:id="@+id/titleTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_above="@+id/timeTv"
                 android:layout_marginStart="10dp"
                 android:fontFamily="sans-serif-condensed"
                 android:shadowColor="@color/black"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
-                android:layout_above="@+id/timeTv"
                 android:text="The title of the video"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/timeTv"
                 android:layout_width="match_parent"
@@ -72,12 +73,12 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="10dp"
-                android:shadowRadius="2"
+                android:shadowColor="@color/black"
                 android:shadowDx="1"
                 android:shadowDy="1"
-                android:shadowColor="@color/black"
-                android:textColor="@color/white"
-                android:text="dd/MM/yyyy hh:mm"/>
+                android:shadowRadius="2"
+                android:text="dd/MM/yyyy hh:mm"
+                android:textColor="@color/white" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

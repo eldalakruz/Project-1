@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,8 +15,8 @@ class CompaignPage : AppCompatActivity() {
 
     private var postId   = ""
      var publisherId = ""
-    var contestantone = ""
-    var contestanttwo = ""
+     var contestantone = ""
+     var contestanttwo = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

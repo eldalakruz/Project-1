@@ -46,15 +46,16 @@
             android:layout_marginStart="10dp"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/post_image_home"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:src="@drawable/profile" />
+            android:src="@drawable/profile"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -73,17 +74,26 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="6dp"
-                android:layout_marginTop="3dp"
                 android:layout_toEndOf="@+id/post_image_like_btn"
                 android:src="@drawable/comment" />
 
-            <Button
+            <ImageView
+                android:id="@+id/post_image_share_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="6dp"
+                android:layout_toEndOf="@+id/post_image_comment_btn"
+                android:src="@drawable/share" />
+
+            <TextView
                 android:id="@+id/campaign_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_toStartOf="@+id/post_save_comment_btn"
                 android:text="Campaign Page"
-                android:textSize="10dp"/>
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/post_save_comment_btn"
