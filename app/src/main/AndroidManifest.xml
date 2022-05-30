@@ -26,14 +26,13 @@
         <activity
             android:name=".Add_answer"
             android:exported="false" />
-        <activity
-            android:name=".Answer"
-            android:exported="false" />
+
         <activity
             android:name=".Add_questiom"
+            android:exported="false" />
 
+        <activity
             android:name=".PostDetailsActivity"
-
             android:exported="false" />
 
         <activity
