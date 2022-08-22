@@ -100,9 +100,14 @@ class CompaignComments2 : AppCompatActivity() {
 
                     profileimagecomment = findViewById(R.id.profile_image_comment)
 
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimagecomment)
 
+                    if (user!!.getImage().isEmpty()) {
+                        profileimagecomment.setImageResource(R.drawable.profile)
+                    } else {
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimagecomment)
+                    }
 
+//                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimagecomment)
 
                 }
             }

@@ -76,9 +76,10 @@ class person1 : Fragment() {
         videoArrayList = ArrayList()
 
         //reference of firebase db
-        val ref = FirebaseDatabase.getInstance()
-            .reference.child("Posts").child("CampaignPage")
-            .child("CampageVideo1").child(connt)
+        val ref = FirebaseDatabase.getInstance().reference
+            .child("CampaignPage")
+            .child("CampageVideo1")
+            .child(connt)
         Log.e("sample","sam:$ref")
 
 

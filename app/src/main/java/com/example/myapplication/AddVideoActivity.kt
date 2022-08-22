@@ -128,7 +128,7 @@ class AddVideoActivity : AppCompatActivity() {
                 val downloadUri = uriTask.result
                 if (uriTask.isSuccessful){
                     //video url is received successfully
-                    val dbReference = FirebaseDatabase.getInstance().reference.child("Posts")
+                    val dbReference = FirebaseDatabase.getInstance().reference
                         .child("CampaignPage").child("CampageVideo1").child(connt)
                     //now we can add video details to firebase db
                     val hashMap = HashMap<String, Any>()

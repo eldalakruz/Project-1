@@ -72,7 +72,7 @@ class person2 : Fragment() {
 
         //reference of firebase db
         val ref = FirebaseDatabase.getInstance()
-            .reference.child("Posts").child("CampaignPage")
+            .reference.child("CampaignPage")
             .child("CampaignVideo2").child(connt)
         ref.addValueEventListener(object : ValueEventListener {
 

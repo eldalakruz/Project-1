@@ -1,7 +1,10 @@
 package com.example.myapplication.Model
 
+
 class Post {
 
+
+    var videoUri: String = ""
     private var postid : String = ""
     private var postimage : String = ""
     private var publisher : String = ""
@@ -11,7 +14,8 @@ class Post {
     private var contestantone : String = ""
     private var contestanttwo : String = ""
 
-    constructor()
+
+
 
     constructor(
         postid: String,
@@ -21,7 +25,6 @@ class Post {
         pollquestion: String,
         contestantone: String,
         contestanttwo: String
-
     )
 
     {

@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Adapter.AllPostsAdapter
 import com.example.myapplication.Adapter.PostAdapter
+import com.example.myapplication.Model.AllPost
 import com.example.myapplication.Model.Post
 import com.example.myapplication.R
 import com.google.firebase.database.DataSnapshot
@@ -19,9 +21,8 @@ import com.google.firebase.database.ValueEventListener
 class PostDetailsFragment : Fragment() {
 
     private var postAdapter: PostAdapter? = null
-    private var postList: MutableList<Post>? = null
+    private var postList: MutableList<AllPost>? = null
     private var postId : String = ""
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,6 @@ class PostDetailsFragment : Fragment() {
          postId = preferences.getString("postId", "none").toString()
         }
 
-
         var recyclerView : RecyclerView
         recyclerView = view.findViewById(R.id.recycler_view_post_details)
         recyclerView.setHasFixedSize(true)
@@ -44,9 +44,8 @@ class PostDetailsFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
 
         postList = ArrayList()
-        postAdapter = context?.let { PostAdapter(it, postList as ArrayList<Post>) }
+        postAdapter = context?.let { PostAdapter(it, postList as ArrayList<AllPost>) }
         recyclerView.adapter = postAdapter
-
 
         retrievePosts()
 
@@ -54,16 +53,15 @@ class PostDetailsFragment : Fragment() {
     }
 
     private fun retrievePosts() {
-        val postsRef = FirebaseDatabase.getInstance().reference
-            .child("Posts")
-            .child(postId)
+
+        val postsRef = FirebaseDatabase.getInstance().reference.child("Posts").child(postId)
 
         postsRef.addValueEventListener(object : ValueEventListener
         {
             override fun onDataChange(pO: DataSnapshot) {
                 postList?.clear()
 
-                val post = pO.getValue(Post::class.java)
+                val post = pO.getValue(AllPost::class.java)
 
                 postList!!.add(post!!)
 
@@ -75,5 +73,4 @@ class PostDetailsFragment : Fragment() {
             }
         })
     }
-
 }

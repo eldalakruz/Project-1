@@ -119,7 +119,7 @@ class AddVideoActivity2 : AppCompatActivity() {
                 val downloadUri2 = uriTask.result
                 if (uriTask.isSuccessful){
                     //video url is received successfully
-                    val dbReference = FirebaseDatabase.getInstance().reference.child("Posts")
+                    val dbReference = FirebaseDatabase.getInstance().reference
                         .child("CampaignPage").child("CampaignVideo2").child(connt)
                     //now we can add video details to firebase db
                     val hashMap = HashMap<String, Any>()
@@ -183,7 +183,6 @@ class AddVideoActivity2 : AppCompatActivity() {
     private fun videoPickDialog() {
         //option to display in dialog
         val options = arrayOf("Camere", "Gallery")
-
         //alart dialog
         val builder = AlertDialog.Builder(this)
         //title
@@ -204,8 +203,7 @@ class AddVideoActivity2 : AppCompatActivity() {
                     //gallery clicked
                     videoPickGallery()
                 }
-            }
-            .show()
+            }.show()
     }
 
     private fun requestCameraPermission(){

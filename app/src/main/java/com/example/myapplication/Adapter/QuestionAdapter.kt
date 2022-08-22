@@ -27,14 +27,11 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlin.collections.ArrayList
 
-class QuestionAdapter(
-    private var context: Context,
-    private var questionArrayList: ArrayList<question>,
-) : RecyclerView.Adapter<QuestionAdapter.Holderquestion>() {
+class QuestionAdapter(private var context: Context, private var questionArrayList: ArrayList<question>,
+                                ) : RecyclerView.Adapter<QuestionAdapter.Holderquestion>() {
 
 
     private var firebaseUser : FirebaseUser? = null
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holderquestion {
@@ -293,7 +290,14 @@ class QuestionAdapter(
                 if (pO.exists())
                 {
                     val user = pO.getValue(User::class.java)
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.ic_person_black).into(user_image)
+
+                    if (user!!.getImage().isEmpty()) {
+                        user_image.setImageResource(R.drawable.profile)
+                    } else {
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(user_image)
+                    }
+
+//                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.ic_person_black).into(user_image)
 
                     user_name.text = user!!.getUsername()
                 }

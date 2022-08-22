@@ -153,7 +153,13 @@ class AccountSettingsActivity : AppCompatActivity() {
                     fullnameprofilefrag = findViewById(R.id.full_name_profile_frag)
                     bioprofilefrag = findViewById(R.id.bio_profile_frag)
 
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimageviewprofilefrag)
+                    if (user!!.getImage().isEmpty()) {
+                        profileimageviewprofilefrag.setImageResource(R.drawable.profile)
+                    } else {
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimageviewprofilefrag)
+                    }
+
+//                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimageviewprofilefrag)
                     usernameprofilefrag.setText(user!!.getUsername())
                     fullnameprofilefrag.text = user!!.getFullname()
                     bioprofilefrag.text = user!!.getBio()

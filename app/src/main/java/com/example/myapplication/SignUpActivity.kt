@@ -3,15 +3,11 @@ package com.example.myapplication
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 
 import com.example.myapplication.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -29,6 +25,10 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var emailsignup : EditText
     private lateinit var passwordsignup : EditText
 
+    private lateinit var rg_gender : RadioGroup
+    private lateinit var rv_male : RadioButton
+    private lateinit var rv_female : RadioButton
+    private lateinit var txt_gender : TextView
 
     lateinit var binding : ActivitySignUpBinding
 
@@ -47,8 +47,8 @@ class SignUpActivity : AppCompatActivity() {
             CreatAccount()
         }
     }
-    private fun CreatAccount()
-    {
+
+    private fun CreatAccount() {
 
         Toast.makeText(this,"A_LOG entring create Account:",Toast.LENGTH_LONG)
         Log.e(TAG," A_LOG entring create Account")
@@ -62,7 +62,20 @@ class SignUpActivity : AppCompatActivity() {
         passwordsignup = findViewById(R.id.password_signup)
         val passwordSignUp = passwordsignup.text.toString()
 
+ /*       rg_gender = findViewById(R.id.rg_gender)
+        rv_male = findViewById(R.id.btn_male)
+        rv_female = findViewById(R.id.btn_female)
+
+
+        rg_gender.setOnCheckedChangeListener { radioGroup, i ->
+            when(i){
+                R.id.btn_male ->
+                R.id.btn_female ->
+            }
+        }      */
+
         when{
+
             TextUtils.isEmpty(fullName) -> Toast.makeText(this,"Full Name is required",Toast.LENGTH_LONG).show()
             TextUtils.isEmpty(userName) -> Toast.makeText(this,"User Name is required",Toast.LENGTH_LONG).show()
             TextUtils.isEmpty(emailSignUp) -> Toast.makeText(this,"Email is required",Toast.LENGTH_LONG).show()
@@ -105,10 +118,10 @@ class SignUpActivity : AppCompatActivity() {
 
     }
 
-    private fun saveUserInfo(fullName: String, userName: String, emailSignUp: String , progressDialog: ProgressDialog)
-    {
+    private fun saveUserInfo(fullName: String, userName: String, emailSignUp: String, progressDialog: ProgressDialog,) {
+
         val currentUserID = FirebaseAuth.getInstance().currentUser!!.uid
-        val usersRef: DatabaseReference = FirebaseDatabase.getInstance("https://my-application-9988e-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users")
+        val usersRef: DatabaseReference = FirebaseDatabase.getInstance("https://my-application-4aa96-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users")
 
         Log.e(TAG," A_LOG  i am user Data")
 
@@ -118,7 +131,7 @@ class SignUpActivity : AppCompatActivity() {
         userMap["username"] = userName.toLowerCase()
         userMap["email"] = emailSignUp
         userMap["bio"] = "hay i am using this app i am cool....."
-        userMap["image"] = "https://firebasestorage.googleapis.com/v0/b/my-application-9988e.appspot.com/o/Default%20Images%2Favatar3.png?alt=media&token=17c1e7f0-d994-49eb-8762-45614d2457e6"
+        userMap["image"] = ""
 
         usersRef.child(currentUserID).setValue(userMap)
             .addOnCompleteListener { task ->

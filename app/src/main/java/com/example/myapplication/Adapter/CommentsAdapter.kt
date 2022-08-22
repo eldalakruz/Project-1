@@ -59,7 +59,15 @@ class CommentAdapter (private  val mContext: Context,
                if (pO.exists())
                {
                    val user = pO.getValue(User::class.java)
-                   Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(imageProfile)
+
+
+                   if (user!!.getImage().isEmpty()) {
+                       imageProfile.setImageResource(R.drawable.profile)
+                   } else {
+                       Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(imageProfile)
+                   }
+
+//                   Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(imageProfile)
 
                    userNameTV.text = user!!.getUsername()
                }

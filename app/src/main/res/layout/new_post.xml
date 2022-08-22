@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -41,21 +42,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Relative1">
 
-            <TextView
-                android:id="@+id/text1"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="3dp"
-                android:text="  Text"
-                android:textSize="20dp"
-                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text1"
                 android:background="@color/black"
                 android:scaleX="0.9"
                 android:scaleY="0.9"
@@ -66,7 +57,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/post_image_home2"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="wrap_content"
                     android:scaleType="centerCrop" />
 
             </androidx.cardview.widget.CardView>

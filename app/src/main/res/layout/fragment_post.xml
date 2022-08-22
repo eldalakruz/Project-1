@@ -46,4 +46,47 @@
     </androidx.recyclerview.widget.RecyclerView>
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/pick_or_image_or_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/BEBEBE"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/iconadd" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/pag_two_imagebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/pick_or_image_or_video"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="85dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/crop_image_menu_flip"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/pag_two_videobtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/pag_two_imagebtn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="140dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_video_library_white"
+        android:visibility="invisible" />
+
+
+
 </RelativeLayout>

@@ -2,15 +2,18 @@ package com.example.myapplication.Adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.media.MediaPlayer
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
+import android.widget.*
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.CommentsActivity
+import com.example.myapplication.Model.AllPost
 import com.example.myapplication.Model.Newpost
 import com.example.myapplication.Model.User
 import com.example.myapplication.R
@@ -30,22 +33,102 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlin.math.roundToInt
 
-class NewpostAdapter(
-    val context: Context,
-    val Post: ArrayList<Newpost>): RecyclerView.Adapter<RecyclerView.ViewHolder>()
-{
+class NewpostAdapter(private val mContext: Context,
+                    private val mPost: ArrayList<Newpost>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     private var firebaseUser:FirebaseUser? =null
 
     companion object{
         //TAG
         private const val TAG ="PRODUCT_TAG"
+        private const val VIEW_TYPE_VIDEO = 0
+        private const val VIEW_TYPE_CONTENT = 1
+        private const val VIEW_TYPE_AD = 2
 
-        //there will be 2 view type 1 for the actual content and 2 for the native ad
+    }
 
-        private const val VIEW_TYPE_CONTENT =0
-        private const val VIEW_TYPE_AD=1
 
+    private var item_type = 0
+
+    inner class HolderProduct( itemView: View): RecyclerView.ViewHolder(itemView) {
+
+        val profileImage: CircleImageView = itemView.findViewById(R.id.user_profile_image_newPost)
+        val postImage: ImageView = itemView.findViewById(R.id.post_image_home2)
+        val likeButton: ImageView = itemView.findViewById(R.id.post_image_like_button)
+        val commentButton: ImageView = itemView.findViewById(R.id.post_image_comment_button)
+        val saveButton: ImageView = itemView.findViewById(R.id.post_save_comment_button)
+        val userName: TextView = itemView.findViewById(R.id.user_name_search)
+        val likesuser: TextView = itemView.findViewById(R.id.likes_user)
+        val publisheruser: TextView = itemView.findViewById(R.id.publisher_user)
+        val descriptionuser: TextView = itemView.findViewById(R.id.description_user)
+        val commentsuser: TextView = itemView.findViewById(R.id.comments_user)
+
+    }
+
+    inner class VideoPosts(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+
+        val profileImage: CircleImageView = itemView.findViewById(R.id.user_profile_image_newPost)
+        val videoView: VideoView = itemView.findViewById(R.id.post_image_home2)
+        var progressBar: ProgressBar = itemView.findViewById(R.id.progressBar)
+        val likeButton: ImageView = itemView.findViewById(R.id.post_image_like_button)
+        val commentButton: ImageView = itemView.findViewById(R.id.post_image_comment_button)
+        val saveButton: ImageView = itemView.findViewById(R.id.post_save_comment_button)
+        val userName: TextView = itemView.findViewById(R.id.user_name_search)
+        val likesuser: TextView = itemView.findViewById(R.id.likes_user)
+        val publisheruser: TextView = itemView.findViewById(R.id.publisher_user)
+        val descriptionuser: TextView = itemView.findViewById(R.id.description_user)
+        val commentsuser: TextView = itemView.findViewById(R.id.comments_user)
+
+
+    }
+
+
+    inner class HolderNativeAd(itemView: View): RecyclerView.ViewHolder(itemView){
+
+        val ad_app_icon :ImageView =itemView.findViewById(R.id.ad_app_icon)
+        val ad_headline:TextView=itemView.findViewById(R.id.ad_headline)
+        val ad_advertiser:TextView=itemView.findViewById(R.id.ad_advertiser)
+        val ad_stars: RatingBar =itemView.findViewById(R.id.ad_stars)
+        val ad_body:TextView=itemView.findViewById(R.id.ad_body)
+        val media_view: MediaView =itemView.findViewById(R.id.media_view)
+        val ad_price:TextView=itemView.findViewById(R.id.ad_price)
+        val ad_store:TextView=itemView.findViewById(R.id.ad_store)
+        val ad_call_to_action: Button =itemView.findViewById(R.id.ad_call_to_action)
+        val native_Ad_View: NativeAdView =itemView.findViewById(R.id.nativeAdView)
+
+    }
+
+    override fun getItemCount(): Int {
+
+        if (mPost.size > 0) {
+            val size =  mPost.size + (mPost.size / 5).toDouble().roundToInt()
+            Log.d("TAG","getItemCount_${size}")
+            return size
+        }
+        return mPost.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        //logic to display Native Ad between content
+        if ((position + 1) % 5 == 0){
+            //after 5 items .show native ad
+            item_type = VIEW_TYPE_AD
+        }
+        else{
+            val index = position - (position / 5).toDouble().roundToInt()
+            if (mPost[index].getPostimage() == ""){
+
+                item_type = VIEW_TYPE_VIDEO
+            }else{
+                //return the view type VIEW_TYPE_CONTENT to show content
+                item_type = VIEW_TYPE_CONTENT
+
+            }
+        }
+        return item_type
     }
 
 
@@ -55,13 +138,17 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.V
     val view :View
 
       if (viewType == VIEW_TYPE_CONTENT){
-        view = LayoutInflater.from(context).inflate(R.layout.new_post,parent,false)
+        view = LayoutInflater.from(mContext).inflate(R.layout.new_post,parent,false)
           return HolderProduct(view)
-      }
 
-      else{
-          //inflate/return row_native_ad.xml
-          view = LayoutInflater.from(context).inflate(R.layout.row_native_ad,parent,false)
+      }
+      else if(viewType == VIEW_TYPE_VIDEO){
+          view = LayoutInflater.from(mContext).inflate(R.layout.new_post_video_page_two, parent, false)
+          return VideoPosts(view)
+
+      } else{
+
+          view = LayoutInflater.from(mContext).inflate(R.layout.row_native_ad,parent,false)
          return HolderNativeAd(view)
 
       }
@@ -73,27 +160,150 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
     firebaseUser = FirebaseAuth.getInstance().currentUser
 
-      if (getItemViewType(position)== VIEW_TYPE_CONTENT) {
+      if (item_type == VIEW_TYPE_CONTENT) {
 
-           val post = Post[position]
+           val post = mPost[position]
 
-            val holderProduct =holder as HolderProduct
+           holder as HolderProduct
 
-            Picasso.get().load(post.getPostimage()).into(holderProduct.postImage)
+          //    Picasso.get().load(post.getPostimage()).into(holder.postImage)
+          if (post.getPostimage().isEmpty()) {
+              holder.postImage.setImageResource(R.drawable.profile)
+          } else {
+              Picasso.get().load(post.getPostimage()).into(holder.postImage)
+          }
 
-            publisherInfo(
-                holderProduct.profileImage,
-                holderProduct.userName,
-                holderProduct.publisheruser,
-                    post.getPublisher()
-            )
+          publisherInfo(holder.profileImage, holder.userName, holder.publisheruser, post.getPublisher())
+          isLikes(post.getPostid(), holder.likeButton)
+          numberOfLikes(holder.likesuser, post.getPostid())
+          getTotalComments(holder.commentsuser, post.getPostid())
+          checkSavedStatus(post.getPostid(), holder.saveButton)
+
+          if (post.getDescription() == "") {
+              holder.descriptionuser.visibility = View.GONE
+
+          } else {
+              holder.descriptionuser.visibility = View.VISIBLE
+              holder.descriptionuser.text = post.getDescription()
+          }
+
+          holder.likeButton.setOnClickListener {
+
+              if (holder.likeButton.tag == "Like") {
+                  FirebaseDatabase.getInstance().reference
+                      .child("Likes")
+                      .child(post.getPostid())
+                      .child(firebaseUser!!.uid)
+                      .setValue(true)
+              } else {
+                  FirebaseDatabase.getInstance().reference
+                      .child("Likes")
+                      .child(post.getPostid())
+                      .child(firebaseUser!!.uid)
+                      .removeValue()
+              }
+          }
+
+          holder.commentButton.setOnClickListener {
+              val intentComment = Intent(mContext, CommentsActivity::class.java)
+              intentComment.putExtra("postId", post.getPostid())
+              intentComment.putExtra("publisherId", post.getPublisher())
+              mContext.startActivity(intentComment)
+          }
+
+          holder.commentsuser.setOnClickListener {
+              val intentComment = Intent(mContext, CommentsActivity::class.java)
+              intentComment.putExtra("postId", post.getPostid())
+              intentComment.putExtra("publisherId", post.getPublisher())
+              mContext.startActivity(intentComment)
+          }
+
+          holder.saveButton.setOnClickListener {
+              if (holder.saveButton.tag == "Save") {
+                  FirebaseDatabase.getInstance().reference
+                      .child("Saves").child(firebaseUser!!.uid)
+                      .child(post.getPostid()).setValue(true)
+              } else {
+                  FirebaseDatabase.getInstance().reference
+                      .child("Saves").child(firebaseUser!!.uid)
+                      .child(post.getPostid()).removeValue()
+              }
+          }
 
         }
 
-          if (getItemViewType(position)== VIEW_TYPE_AD) {
+    if (item_type == VIEW_TYPE_VIDEO){
+
+        val post = mPost[position]
+
+        holder as VideoPosts
+
+        setVideoUrl(post, holder)
+        publisherInfo(holder.profileImage, holder.userName, holder.publisheruser, post.getPublisher())
+        isLikes(post.getPostid(), holder.likeButton)
+        numberOfLikes(holder.likesuser, post.getPostid())
+        getTotalComments(holder.commentsuser, post.getPostid())
+        checkSavedStatus(post.getPostid(), holder.saveButton)
+
+        if (post.getDescription() == "") {
+            holder.descriptionuser.visibility = View.GONE
+
+        } else {
+            holder.descriptionuser.visibility = View.VISIBLE
+            holder.descriptionuser.text = post.getDescription()
+        }
+
+        holder.likeButton.setOnClickListener {
+
+            if (holder.likeButton.tag == "Like") {
+                FirebaseDatabase.getInstance().reference
+                    .child("Likes")
+                    .child(post.getPostid())
+                    .child(firebaseUser!!.uid)
+                    .setValue(true)
+            } else {
+                FirebaseDatabase.getInstance().reference
+                    .child("Likes")
+                    .child(post.getPostid())
+                    .child(firebaseUser!!.uid)
+                    .removeValue()
+            }
+        }
+
+        holder.commentButton.setOnClickListener {
+            val intentComment = Intent(mContext, CommentsActivity::class.java)
+            intentComment.putExtra("postId", post.getPostid())
+            intentComment.putExtra("publisherId", post.getPublisher())
+            mContext.startActivity(intentComment)
+        }
+
+        holder.commentsuser.setOnClickListener {
+            val intentComment = Intent(mContext, CommentsActivity::class.java)
+            intentComment.putExtra("postId", post.getPostid())
+            intentComment.putExtra("publisherId", post.getPublisher())
+            mContext.startActivity(intentComment)
+        }
+
+        holder.saveButton.setOnClickListener {
+            if (holder.saveButton.tag == "Save") {
+                FirebaseDatabase.getInstance().reference
+                    .child("Saves").child(firebaseUser!!.uid)
+                    .child(post.getPostid()).setValue(true)
+            } else {
+                FirebaseDatabase.getInstance().reference
+                    .child("Saves").child(firebaseUser!!.uid)
+                    .child(post.getPostid()).removeValue()
+            }
+        }
+
+    }
 
 
-            val adLoader  = AdLoader.Builder(context ,context.getString(R.string.native_ad_id_test))
+
+          if (item_type == VIEW_TYPE_AD) {
+
+
+            val adLoader  = AdLoader.Builder(mContext ,mContext.getString(R.string.native_ad_id_test))
                 .forNativeAd { nativeAd ->
                     Log.d(TAG, "onNativeAdLoaded: ")
 
@@ -144,6 +354,88 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     }
 
 
+    private fun isLikes(postid: String, likeButton: ImageView) {
+
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        val LikesRef = FirebaseDatabase.getInstance().reference
+            .child("Likes")
+            .child(postid)
+        LikesRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(pO: DataSnapshot) {
+                if (pO.child(firebaseUser!!.uid).exists()) {
+                    likeButton.setImageResource(R.drawable.heart_clicked)
+                    likeButton.tag = "Liked"
+                } else {
+                    likeButton.setImageResource(R.drawable.heart_not_clicked)
+                    likeButton.tag = "Like"
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+    }
+
+
+    private fun numberOfLikes(likes: TextView, postid: String) {
+        val LikesRef = FirebaseDatabase.getInstance().reference
+            .child("Likes").child(postid)
+
+        LikesRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(pO: DataSnapshot) {
+                if (pO.exists()) {
+                    likes.text = pO.childrenCount.toString() + " likes"
+                } else {
+                    likes.text = pO.childrenCount.toString() + " likes"
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+
+    private fun getTotalComments(comments: TextView, postid: String) {
+        val commentsRef = FirebaseDatabase.getInstance().reference
+            .child("Comments").child(postid)
+
+        commentsRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(pO: DataSnapshot) {
+                if (pO.exists()) {
+                    comments.text = "view all " + pO.childrenCount.toString() + " comments"
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+    private fun checkSavedStatus(postid: String, imageView: ImageView) {
+        val saveRef = FirebaseDatabase.getInstance().reference.child("Saves").child(firebaseUser!!.uid)
+
+        saveRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.child(postid).exists()) {
+                    imageView.setImageResource(R.drawable.save_large_icon)
+                    imageView.tag = "Saved"
+                } else {
+                    imageView.setImageResource(R.drawable.save_unfilled_large_icon)
+                    imageView.tag = "Save"
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+
     private fun publisherInfo(profileImage: CircleImageView, userName: TextView, publisher: TextView, publisherID: String) {
       val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherID)
         userRef.addValueEventListener(object :ValueEventListener{
@@ -152,21 +444,21 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
                 if (snapshot.exists())
 
                 {
-                    val user = snapshot.getValue<User>(User::class.java)
+                    val user = snapshot.getValue(User::class.java)
 
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
+                   // Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
+                    if (user!!.getImage().isEmpty()) {
+                        profileImage.setImageResource(R.drawable.profile)
+                    } else {
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
+                    }
                     userName.text = user!!.getUsername()
                     publisher.text = user!!.getFullname()
 
-
                 }
-
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
-
         })
     }
 
@@ -294,70 +586,58 @@ override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holderNativeAd.native_Ad_View.setNativeAd(nativeAd)
     }
 
+    private fun setVideoUrl(post: Newpost, holder: VideoPosts) {
 
-    override fun getItemCount(): Int {
-    return  Post.size
-}
+        //show progress
+        holder.progressBar.visibility = View.VISIBLE
 
-    override fun getItemViewType(position: Int): Int {
-        //logic to display Native Ad between content
-        if (position % 5 == 0){
-            //after 5 items .show native ad
-            return VIEW_TYPE_AD
+        //get video uri
+        val videoUrl: String? = post.videoUri
+
+//        Log.e("sample","test:$videoUrl")
+
+        //MediaController for play/pause/time etc
+        val mediaController = MediaController(mContext)
+        mediaController.setAnchorView(holder.videoView)
+        val videoUri = Uri.parse(videoUrl)
+
+        holder.videoView.setMediaController(mediaController)
+        holder.videoView.setVideoURI(videoUri)
+        holder.videoView.requestFocus()
+
+        holder.videoView.setOnPreparedListener {mediaPlayer ->
+            //video is prepared to play
+            mediaPlayer.start()
         }
-        else{
-            //return the view type VIEW_TYPE_CONTENT to show content
-            return  VIEW_TYPE_CONTENT
-        }
+        holder.videoView.setOnInfoListener(MediaPlayer.OnInfoListener{ mp, what, extra->
+            //check if buffering/rendering etc
+            when(what){
+                MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START ->{
+                    //rendering started
+                    holder.progressBar.visibility = View.GONE
+                    return@OnInfoListener true
+                }
+                MediaPlayer.MEDIA_INFO_BUFFERING_START ->{
+                    //buffering started
+                    holder.progressBar.visibility = View.VISIBLE
+                    return@OnInfoListener true
+                }
+                MediaPlayer.MEDIA_INFO_BUFFERING_END ->{
+                    //buffering ended
+                    holder.progressBar.visibility = View.GONE
+                    return@OnInfoListener true
+                }
+            }
 
+            false
+        })
+
+        holder.videoView.setOnCompletionListener {mediaPlayer ->
+            //restart video when completed | loop video
+            mediaPlayer.start()
+
+        }
     }
 
-
-
-    inner class HolderProduct( itemView: View): RecyclerView.ViewHolder(itemView) {
-
-
-       val profileImage: CircleImageView
-       val postImage: ImageView
-       val likeButton: ImageView
-       val commentButton: ImageView
-       val saveButton: ImageView
-       val userName: TextView
-       val likesuser: TextView
-       val publisheruser: TextView
-       val descriptionuser: TextView
-       val commentsuser: TextView
-
-       init {
-           profileImage = itemView.findViewById(R.id.user_profile_image_newPost)
-           postImage = itemView.findViewById(R.id.post_image_home2)
-           likeButton = itemView.findViewById(R.id.post_image_like_button)
-           commentButton = itemView.findViewById(R.id.post_image_comment_button)
-           saveButton = itemView.findViewById(R.id.post_save_comment_button)
-           userName = itemView.findViewById(R.id.user_name_search)
-           likesuser = itemView.findViewById(R.id.likes_user)
-           publisheruser = itemView.findViewById(R.id.publisher_user)
-           descriptionuser = itemView.findViewById(R.id.description_user)
-           commentsuser = itemView.findViewById(R.id.comments_user)
-       }
-
-
-   }
-    //ViewHolder class for row_native_ad.xml
-
-    inner class HolderNativeAd(itemView: View): RecyclerView.ViewHolder(itemView){
-        //init UI Views
-        val ad_app_icon :ImageView =itemView.findViewById(R.id.ad_app_icon)
-        val ad_headline:TextView=itemView.findViewById(R.id.ad_headline)
-        val ad_advertiser:TextView=itemView.findViewById(R.id.ad_advertiser)
-        val ad_stars: RatingBar =itemView.findViewById(R.id.ad_stars)
-        val ad_body:TextView=itemView.findViewById(R.id.ad_body)
-        val media_view: MediaView =itemView.findViewById(R.id.media_view)
-        val ad_price:TextView=itemView.findViewById(R.id.ad_price)
-        val ad_store:TextView=itemView.findViewById(R.id.ad_store)
-        val ad_call_to_action: Button =itemView.findViewById(R.id.ad_call_to_action)
-        val native_Ad_View: NativeAdView =itemView.findViewById(R.id.nativeAdView)
-
-    }
 
 }

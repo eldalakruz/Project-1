@@ -79,7 +79,7 @@ class CompaignComments1 : AppCompatActivity() {
 
     private fun addComment()
     {
-        val commentsRef = FirebaseDatabase.getInstance().getReference()
+        val commentsRef = FirebaseDatabase.getInstance().reference
             .child("CompaignComments1")
             .child(postId!!)
 
@@ -95,7 +95,7 @@ class CompaignComments1 : AppCompatActivity() {
 
     private fun userInfo()
     {
-        val usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser!!.uid)
+        val usersRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
 
         usersRef.addValueEventListener(object : ValueEventListener
         {
@@ -107,7 +107,15 @@ class CompaignComments1 : AppCompatActivity() {
 
                     profileimagecomment = findViewById(R.id.profile_image_comment)
 
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimagecomment)
+                    if (user!!.getImage().isEmpty()) {
+                        profileimagecomment.setImageResource(R.drawable.profile)
+                    } else {
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimagecomment)
+                    }
+
+
+
+ //                   Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profileimagecomment)
 
 
 

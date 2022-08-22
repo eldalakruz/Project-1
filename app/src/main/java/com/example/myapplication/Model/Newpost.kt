@@ -1,42 +1,34 @@
 package com.example.myapplication.Model
 
-import android.accounts.AuthenticatorDescription
-
 class Newpost {
 
 
-
-
-
-
-
     private var postid : String = ""
-    private var postimage : String = ""
     private var publisher : String = ""
     private var description : String = ""
+    private var postimage : String = ""
+    var videoUri: String = ""
 
-     var icon :Int = 0
+
 
     constructor()
 
-
     constructor(
-
-        postid: String,
+        videoUri: String,
         postimage: String,
+        postid: String,
         publisher: String,
-        description: String,
+        description: String)
 
-        icon : Int
-
-        )
     {
-        this.postid = postid
+        this.videoUri = videoUri
         this.postimage = postimage
+        this.postid = postid
         this.publisher = publisher
         this.description = description
-
     }
+
+
     fun getPostid() : String{
         return  postid
     }

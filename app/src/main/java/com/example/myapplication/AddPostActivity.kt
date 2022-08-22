@@ -69,9 +69,9 @@ class AddPostActivity : AppCompatActivity() {
     }
 
 
-    private fun uploadImage()
-    {
-    when{
+    private fun uploadImage() {
+
+        when{
         imageUri == null -> Toast.makeText(this,"Please select image first.", Toast.LENGTH_LONG).show()
         TextUtils.isEmpty(descriptionpost.text.toString()) -> Toast.makeText(this, "please write full name first", Toast.LENGTH_LONG).show()
 
@@ -116,7 +116,6 @@ class AddPostActivity : AppCompatActivity() {
                         postMap["description"] = descriptionpost.text.toString().toLowerCase()
                         postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
                         postMap["postimage"] = myUrl
-
                         //
                         postMap["pollquestion"] = pollquestion.text.toString().toLowerCase()
                         postMap["contestantone"] = contestantone.text.toString().toLowerCase()

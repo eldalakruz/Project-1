@@ -228,7 +228,6 @@
 
             </LinearLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_upload_pic"
                 android:layout_width="match_parent"
@@ -243,7 +242,6 @@
                 android:visibility="gone">
 
             </androidx.recyclerview.widget.RecyclerView>
-
 
         </LinearLayout>
 

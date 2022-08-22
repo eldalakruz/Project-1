@@ -3,12 +3,12 @@ package com.example.myapplication
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -20,13 +20,11 @@ import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import com.theartofdev.edmodo.cropper.CropImage
 
-class PostActivity : AppCompatActivity() {
+class Post_Page_Two : AppCompatActivity() {
 
     private var myUrl = ""
     private var imageUri: Uri? = null
     private var storagePostPicRef: StorageReference? = null
-
-
     private lateinit var savenewpostbutton: ImageView
     private lateinit var imagepostuaer: ImageView
     private lateinit var descriptionpostuser: EditText
@@ -34,20 +32,15 @@ class PostActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_post)
+        setContentView(R.layout.activity_post_page_two)
 
         savenewpostbutton = findViewById(R.id.save_new_post_button)
-
         descriptionpostuser = findViewById(R.id.description_post_user)
-
-        storagePostPicRef = FirebaseStorage.getInstance().reference.child("Post Pictures")
+        storagePostPicRef = FirebaseStorage.getInstance().reference.child("Post page two Pictures")
         savenewpostbutton.setOnClickListener { uploadImage() }
 
-
-
         CropImage.activity()
-            //.setAspectRatio(2,1 )
-            .start(this@PostActivity)
+            .start(this@Post_Page_Two)
 
     }
 
@@ -88,25 +81,27 @@ class PostActivity : AppCompatActivity() {
                     }
                     return@Continuation fileRef.downloadUrl
                 })
-                    .addOnCompleteListener(OnCompleteListener<Uri> { task ->
+                    .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val downloadUrl = task.result
                             myUrl = downloadUrl.toString()
 
-                            val ref = FirebaseDatabase.getInstance().reference.child("NewPost")
+                            val ref = FirebaseDatabase.getInstance().reference.child("Post_page_two")
                             val postId = ref.push().key
 
                             val postMap = HashMap<String, Any>()
                             postMap["postid"] = postId!!
-                            postMap["description"] = descriptionpostuser.text.toString().toLowerCase()
+                            postMap["description"] =
+                                descriptionpostuser.text.toString().toLowerCase()
                             postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
                             postMap["postimage"] = myUrl
 
                             ref.child(postId).updateChildren(postMap)
 
-                            Toast.makeText(this, "Post uploaded successfully.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "Post uploaded successfully.", Toast.LENGTH_LONG)
+                                .show()
 
-                            val intent = Intent(this@PostActivity, MainActivity::class.java)
+                            val intent = Intent(this@Post_Page_Two, MainActivity::class.java)
                             startActivity(intent)
                             finish()
 
@@ -114,9 +109,9 @@ class PostActivity : AppCompatActivity() {
                         } else {
                             progressDialog.dismiss()
                         }
-                    })
+                    }
             }
         }
     }
 
-    }
+}

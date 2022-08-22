@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Poll Play</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -11,4 +11,7 @@
     <!--Live id-->
     <string name="native_ad_id_live">ca-app-pub-3608644720594211/5711867772</string>
     <string name="Text">Text</string>
+
+    <string name="client_ID">1026488156095-aoje2pg443ral4kihmid3dm1om5ddngn.apps.googleusercontent.com</string>
+
 </resources>

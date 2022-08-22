@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapter.MyImagesAdapter
 import com.example.myapplication.Adapter.MyImagesAdapter2
+import com.example.myapplication.Model.Newpost
 import com.example.myapplication.Model.Post
 import com.example.myapplication.Model.User
 import com.google.firebase.auth.FirebaseAuth
@@ -37,17 +38,16 @@ class UserProfileActivity : AppCompatActivity() {
     private lateinit var userprofilefullnameactivity : TextView
     private lateinit var userprofilebioprofileactivity : TextView
 
-    private lateinit var userprofileprofileId: String
-    private lateinit var firebaseUser: FirebaseUser
-    private lateinit var userprofileeditaccountsettingsbtn: Button
+    private lateinit var userprofileprofileId : String
+    private lateinit var firebaseUser : FirebaseUser
+    private lateinit var userprofileeditaccountsettingsbtn : Button
     private lateinit var userprofiletotalposts : TextView
 
-
-    var userprofilepostList : List<Post>? = null
+    var userprofilepostList : List<Newpost>? = null
     var userprofilemyImagesAdapter : MyImagesAdapter2? = null
 
     var userprofilemyImagesAdapterSavedImg : MyImagesAdapter2? = null
-    var userprofilepostListSaved : List<Post>? = null
+    var userprofilepostListSaved : List<Newpost>? = null
     var userprofilemySavesImg : List<String>? = null
 
 
@@ -70,7 +70,7 @@ class UserProfileActivity : AppCompatActivity() {
 
 
         userprofilepostList = ArrayList()
-        userprofilemyImagesAdapter = MyImagesAdapter2(this, userprofilepostList as ArrayList<Post>)
+        userprofilemyImagesAdapter = MyImagesAdapter2(this, userprofilepostList as ArrayList<Newpost>)
         recyclerViewUploadImages.adapter = userprofilemyImagesAdapter
 
 
@@ -83,7 +83,7 @@ class UserProfileActivity : AppCompatActivity() {
 
 
         userprofilepostListSaved = ArrayList()
-        userprofilemyImagesAdapterSavedImg = MyImagesAdapter2(this, userprofilepostListSaved as ArrayList<Post>)
+        userprofilemyImagesAdapterSavedImg = MyImagesAdapter2(this, userprofilepostListSaved as ArrayList<Newpost>)
         recyclerViewSavedImages.adapter = userprofilemyImagesAdapterSavedImg
 
 
@@ -300,8 +300,8 @@ class UserProfileActivity : AppCompatActivity() {
         })
     }
 
-    private fun mySaves()
-    {
+    private fun mySaves() {
+
         userprofilemySavesImg = ArrayList()
 
         val savedRef = FirebaseDatabase.getInstance().reference
@@ -328,8 +328,8 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
 
-    private fun readSavedImagesData()
-    {
+    private fun readSavedImagesData() {
+        
         val postsRef = FirebaseDatabase.getInstance().reference.child("Posts")
 
         postsRef.addValueEventListener(object  : ValueEventListener
@@ -362,16 +362,15 @@ class UserProfileActivity : AppCompatActivity() {
         })
     }
     
-    private fun UserProfileCheckFollowAndFollowingButtonStatus()
-    {
+    private fun UserProfileCheckFollowAndFollowingButtonStatus() {
+
         val followingRef = firebaseUser?.uid.let { it1 ->
             FirebaseDatabase.getInstance().reference
-                .child("Follow").child(it1.toString())
-                .child("Following")
+                .child("Follow").child(it1)
+                .child("Following") }
 
-        }
-        if (followingRef != null)
-        {
+        if (followingRef != null) {
+
             followingRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -391,5 +390,4 @@ class UserProfileActivity : AppCompatActivity() {
             })
         }
     }
-
 }

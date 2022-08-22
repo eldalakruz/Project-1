@@ -34,6 +34,4 @@ class ModelVideo
         return  postid
     }
 
-
-
 }

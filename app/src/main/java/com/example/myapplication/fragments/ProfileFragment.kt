@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.AccountSettingsActivity
 import com.example.myapplication.Adapter.MyImagesAdapter
+import com.example.myapplication.Model.AllPost
 import com.example.myapplication.Model.Post
 import com.example.myapplication.Model.User
 import com.example.myapplication.R
@@ -44,11 +45,11 @@ class ProfileFragment : Fragment() {
     private lateinit var editaccountsettingsbtn: Button
     private lateinit var totalposts : TextView
 
-    var postList : List<Post>? = null
+    var postList : List<AllPost>? = null
     var myImagesAdapter : MyImagesAdapter? = null
 
     var myImagesAdapterSavedImg : MyImagesAdapter? = null
-    var postListSaved : List<Post>? = null
+    var postListSaved : List<AllPost>? = null
     var mySavesImg : List<String>? = null
 
     override fun onCreateView(
@@ -85,7 +86,7 @@ class ProfileFragment : Fragment() {
 
 
         postList = ArrayList()
-        myImagesAdapter = context?.let { MyImagesAdapter(it, postList as ArrayList<Post>) }
+        myImagesAdapter = context?.let { MyImagesAdapter(it, postList as ArrayList<AllPost>) }
         recyclerViewUploadImages.adapter = myImagesAdapter
 
 
@@ -99,7 +100,7 @@ class ProfileFragment : Fragment() {
 
 
         postListSaved = ArrayList()
-        myImagesAdapterSavedImg = context?.let { MyImagesAdapter(it, postListSaved as ArrayList<Post>) }
+        myImagesAdapterSavedImg = context?.let { MyImagesAdapter(it, postListSaved as ArrayList<AllPost>) }
         recyclerViewSavedImages.adapter = myImagesAdapterSavedImg
 
 
@@ -268,14 +269,14 @@ class ProfileFragment : Fragment() {
             {
                 if (pO.exists())
                 {
-                    (postList as ArrayList<Post>).clear()
+                    (postList as ArrayList<AllPost>).clear()
 
                     for (snapshot in pO.children)
                     {
-                        val post = snapshot.getValue(Post::class.java)!!
+                        val post = snapshot.getValue(AllPost::class.java)!!
                         if (post.getPublisher().equals(profileId))
                         {
-                            (postList as ArrayList<Post>).add(post)
+                            (postList as ArrayList<AllPost>).add(post)
                         }
 
                         Collections.reverse(postList)
@@ -291,8 +292,8 @@ class ProfileFragment : Fragment() {
         })
     }
 
-    private fun userInfo()
-    {
+    private fun userInfo() {
+
         val usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(profileId)
 
         usersRef.addValueEventListener(object : ValueEventListener
@@ -313,17 +314,21 @@ class ProfileFragment : Fragment() {
                     fullnameprofilefrag = view!!.findViewById(R.id.full_name_profile_frag)
                     bioprofilefrag = view!!.findViewById(R.id.bio_profile_frag)
 
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(proimageprofilefrag)
+
+                    if (user!!.getImage().isEmpty()) {
+                        proimageprofilefrag.setImageResource(R.drawable.profile)
+                    } else {
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(proimageprofilefrag)
+                    }
+
+
+///                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(proimageprofilefrag)
                     profilefragmentusername?.text = user!!.getUsername()
                     fullnameprofilefrag?.text = user!!.getFullname()
                     bioprofilefrag?.text = user!!.getBio()
-
-
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
         })
     }
@@ -367,7 +372,7 @@ class ProfileFragment : Fragment() {
 
                  for (snapShot in dataSnapshot.children)
                  {
-                     val post = snapShot.getValue(Post::class.java)!!
+                     val post = snapShot.getValue(AllPost::class.java)!!
                      if (post.getPublisher() == profileId)
                      {
                          postCounter++
@@ -420,17 +425,17 @@ class ProfileFragment : Fragment() {
             {
              if (dataSnapshot.exists())
              {
-                 (postListSaved as ArrayList<Post>).clear()
+                 (postListSaved as ArrayList<AllPost>).clear()
 
                  for (snapshot in dataSnapshot.children)
                  {
-                     val post = snapshot.getValue(Post::class.java)
+                     val post = snapshot.getValue(AllPost::class.java)
 
                      for (key in mySavesImg!!)
                      {
                          if (post!!.getPostid() == key)
                          {
-                             (postListSaved as ArrayList<Post>).add(post!!)
+                             (postListSaved as ArrayList<AllPost>).add(post!!)
                          }
                      }
                  }

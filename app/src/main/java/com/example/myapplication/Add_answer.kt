@@ -380,7 +380,16 @@ class Add_answer : AppCompatActivity() {
 
                     profile_image_answer = findViewById(R.id.profile_image_answer)
 
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.ic_person_black).into(profile_image_answer)
+
+                    if (user!!.getImage().isEmpty()) {
+                        profile_image_answer.setImageResource(R.drawable.profile)
+                    } else {
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(profile_image_answer)
+                    }
+
+
+//                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.ic_person_black).into(profile_image_answer)
+
 
 
 

@@ -50,12 +50,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <ImageView
             android:id="@+id/post_image_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile"/>
+            android:scaleType="centerCrop"/>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -143,17 +144,41 @@
             android:textColor="@color/black"
             android:textSize="10dp" />
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/btn_contestantone1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="16dp" />
+
+                <RadioButton
+                    android:id="@+id/btn_contestanttwo2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/heart_not_clicked" />
+
+            </RadioGroup>
+
             <SeekBar
                 android:id="@+id/seek_bar1"
                 android:layout_width="match_parent"
-                android:layout_height="29dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="16dp"
                 android:max="100"
-                android:progress="25"
+                android:progress="0"
                 android:progressDrawable="@drawable/progress_track"
                 android:thumb="@android:color/transparent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -162,11 +187,11 @@
                 android:id="@+id/tv_option1"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
-                android:paddingStart="32dp"
+                android:paddingStart="30dp"
                 android:paddingEnd="0dp"
-                app:layout_constraintEnd_toStartOf="@id/tv_percent1"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
@@ -182,21 +207,16 @@
                 android:text="0%"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <SeekBar
                 android:id="@+id/seek_bar2"
                 android:layout_width="match_parent"
-                android:layout_height="29dp"
-                android:layout_alignParentEnd="true"
+                android:layout_height="30dp"
+                android:layout_below="@+id/seek_bar1"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="0dp"
                 android:max="100"
-                android:progress="25"
+                android:progress="0"
                 android:progressDrawable="@drawable/progress_track"
                 android:thumb="@android:color/transparent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -205,17 +225,19 @@
                 android:id="@+id/tv_option2"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_below="@+id/tv_option1"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
-                android:paddingStart="32dp"
+                android:paddingStart="30dp"
                 android:paddingEnd="0dp"
-                app:layout_constraintEnd_toStartOf="@id/tv_percent2"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/tv_percent2"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_below="@+id/tv_percent1"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"

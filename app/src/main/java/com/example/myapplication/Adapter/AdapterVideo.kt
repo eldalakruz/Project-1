@@ -27,11 +27,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class AdapterVideo(
-    private var context: Context,
-    private var videoArrayList: ArrayList<ModelVideo>,
-
-) : RecyclerView.Adapter<AdapterVideo.HolderVideo>(){
+class AdapterVideo(private var context: Context,
+                   private var videoArrayList: ArrayList<ModelVideo>) : RecyclerView.Adapter<AdapterVideo.HolderVideo>(){
 
     private var firebaseUser : FirebaseUser? = null
 
@@ -69,6 +66,7 @@ class AdapterVideo(
         holder.titleTv.text = title
         holder.timeTv.text = formattedDateTime
         setVideoUrl(modelVideo, holder)
+
 
         getUserInfo(holder.userimage, holder.username, modelVideo.getPublisher())
         isLikes(modelVideo.id!!, holder.like_btn)
@@ -197,7 +195,11 @@ class AdapterVideo(
                 {
                     val user = snapshot.getValue(User::class.java)
 
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.ic_person_black).into(userimage)
+                    if (user!!.getImage().isEmpty()) {
+                        userimage.setImageResource(R.drawable.ic_person_black)
+                    } else {
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.ic_person_black).into(userimage)
+                    }
 
                     username.text = user!!.getUsername()
                 }

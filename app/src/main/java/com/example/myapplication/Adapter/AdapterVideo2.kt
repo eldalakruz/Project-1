@@ -189,7 +189,15 @@ class AdapterVideo2 (
                 {
                     val user = snapshot.getValue(User::class.java)
 
-                    Picasso.get().load(user!!.getImage()).placeholder(R.drawable.ic_person_black).into(userimage)
+
+                    if (user!!.getImage().isEmpty()) {
+                        userimage.setImageResource(R.drawable.profile)
+                    } else {
+                        Picasso.get().load(user!!.getImage()).placeholder(R.drawable.profile).into(userimage)
+                    }
+
+
+  //                  Picasso.get().load(user!!.getImage()).placeholder(R.drawable.ic_person_black).into(userimage)
 
                     username.text = user!!.getUsername()
                 }

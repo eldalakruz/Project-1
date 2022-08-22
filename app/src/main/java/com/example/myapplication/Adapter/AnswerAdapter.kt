@@ -23,10 +23,8 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class AnswerAdapter(
-    private var context: Context,
-    private var list: ArrayList<ModelAnswer>,
-) : RecyclerView.Adapter<AnswerAdapter.ViewHolder>() {
+class AnswerAdapter(private var context: Context, private var list: ArrayList<ModelAnswer>,
+                        ) : RecyclerView.Adapter<AnswerAdapter.ViewHolder>() {
 
     private var firebaseUser : FirebaseUser? = null
 
